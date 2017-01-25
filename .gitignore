@@ -1,0 +1,5 @@
+*.sqlite*
+*.db
+local_settings.py
+.vscode
+__pycache__
