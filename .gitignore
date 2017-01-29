@@ -1,6 +1,6 @@
 *.sqlite*
 *.db
 local_settings.py
-.node_modules
+node_modules
 .vscode
 __pycache__

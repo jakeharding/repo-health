@@ -22,11 +22,11 @@ Both production and development environments use MySql for a DBMS and require a 
 #### Development
 For development, a subset of data is used for testing and provided by ghtorrent [here](http://ghtorrent.org/msr14.html).  Use this link to download the database, and after successful download, unpack the archive to your desired location.  Take note of the location.  The supplied data requires a database to hold so we need to create one using MySql.  The installation of MySql varies on the package manager being used, so it is assumed MySql is installed and running.
 
-Open the MySql interpreter with root access using: `mysql -u root -p`.  If you have a password setup for the root MySql user, you will be prompted to enter it.  Create a database to hold the data by running `create database msr;`.  This names the databae 'msr'. You can name it however you like.  Create a user for the database by running `create user 'msr'@'localhost' identified by password;`. The password will need to be added to the local_settings.py file for database connection, and please do not commit the password, or any passwords, to the repository.
+Open the MySql interpreter with root access using: `mysql -u root -p`.  If you have a password setup for the root MySql user, you will be prompted to enter it.  Create a database to hold the data by running `create database msr14;`.  This names the databae 'msr'. You can name it however you like.  Create a user for the database by running `create user 'msr14'@'localhost' identified by password;`. The password will need to be added to the local_settings.py file for database connection, and please do not commit the password, or any passwords, to the repository.
 
-The user needs to have access to the database. Run `grant all on msr.* to 'msr'@'localhost;`.  After commands have been run successfully, run `quit;` to exit the interpreter.  We can now load the data into the database by running `mysql -u root -p msr < path_to_extracted_data_file`.  The `path_to_extracted_data_file` is the absolute path noted earlier, and `msr` is the name of the database created.  Once this is successful, you can enter the information into the local_settings.py.
+The user needs to have access to the database. Run `grant all on msr.* to 'msr14'@'localhost;`.  After commands have been run successfully, run `quit;` to exit the interpreter.  We can now load the data into the database by running `mysql -u root -p msr < path_to_extracted_data_file`.  The `path_to_extracted_data_file` is the absolute path noted earlier, and `msr` is the name of the database created.  Once this is successful, you can enter the information into the local_settings.py.
 
-Located in the `repo_health` directory of this repository is a `local_settings.py.example` file. Save a copy of this file as `local_settings.py` to the same directory.  Please do not remove the example file from the repo.  If you created the database and user as `msr` then you will need insert the password for the user in the `PASSWORD` placeholder.  Otherwise enter the required information into the correct places and save the file.
+Located in the `repo_health` directory of this repository is a `local_settings.py.example` file. Save a copy of this file as `local_settings.py` to the same directory.  Please do not remove the example file from the repo.  If you created the database and user as `msr14` then you will need insert the password for the user in the `PASSWORD` placeholder.  Otherwise enter the required information into the correct places and save the file.
 
 #### Production
 Production database is configured in a similar fashion, but the project is not ready for a production setup so this will be revisited.
@@ -56,12 +56,11 @@ If this is successful, you will see the command prompt change to begin with `(<v
 To stop using the virtualenv, run `deactivate`.
 To start using the virtualenv, run `workon <virtualenv name>`.
 From inside the virtualenv and in the project root folder, run `pip install requirements.txt` to install the deps from the file.
-Once successful, run `cd project` to change dir and `python manage.py migrate` to create the database and all the default tables.
+Once successful, run `cd project` to change dir and `python manage.py migrate`.
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
 
 ### Frontend configuration
 Frontend confuration is yet to be determined.
-
 
 #### Some common commands to help determine what python is being used
 - `which python` or `which python3`

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Repo Health Assessment</title>
+        <!--Loading bootstrap CSS over a CDN for convienience.-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+    {% comment %}
+    This template is rendered within Django, and this comment won't get rendered in the browser because it is wrapped in Django's comment tag. Django's and Angular's template language share the same curly braces for variable names. Like: {{ variable }}.  Angular UI Router is used to get around this by rendering subsequent child templates in Angular only. This makes the frontend modular so it can be removed completely from the backend code, and not tied to Django specifically.
+
+    Angular variables can still be rendered in this page by wrapping them in Django's verbatim tag, similar to this comment.  All html is rendered as expected.
+    {% endcomment %}
+    <body class="container">
+        <h1>Hello World</h1>
+        <div ui-view></div>
+    </body>
+    
+    <!--Loading libs from node_modules for this example.  Will need to bundle them correctly.-->
+    <script type="text/javascript" src="/static/node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/static/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>    
+</html>
