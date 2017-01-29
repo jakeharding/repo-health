@@ -5,6 +5,10 @@
         <title>Repo Health Assessment</title>
         <!--Loading bootstrap CSS over a CDN for convienience.-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+        <!--Loading libs from node_modules for this example.  Will need to bundle them correctly.-->
+        <script type="text/javascript" src="/static/node_modules/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/static/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>  
     </head>
 
     {% comment %}
@@ -12,12 +16,17 @@
 
     Angular variables can still be rendered in this page by wrapping them in Django's verbatim tag, similar to this comment.  All html is rendered as expected.
     {% endcomment %}
-    <body class="container">
-        <h1>Hello World</h1>
-        <div ui-view></div>
+    <body class="container" >
+        <div class="col-sm-12 text-center">
+            <h1>Hello World</h1>
+        </div>
+        <div ng-app="app">
+            <div ui-view></div>
+        </div>
     </body>
     
-    <!--Loading libs from node_modules for this example.  Will need to bundle them correctly.-->
-    <script type="text/javascript" src="/static/node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/static/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>    
+    <!--Bundle these also.-->
+    <script type="text/javascript" src="/static/dist/app.js"></script>
+    <script type="text/javascript" src="/static/dist/HomeCtrl.js"></script>    
+        
 </html>

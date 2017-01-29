@@ -60,7 +60,7 @@ Once successful, run `cd project` to change dir and `python manage.py migrate`.
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
 
 ### Frontend configuration
-Frontend confuration is yet to be determined.
+From project root, `cd repo_health/index/static`.  Run `npm install`.  After successful install, [http://localhost:8000](http://localhost:8000) should display the Hello World page.
 
 #### Some common commands to help determine what python is being used
 - `which python` or `which python3`
