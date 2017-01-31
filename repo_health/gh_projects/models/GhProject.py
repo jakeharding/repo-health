@@ -7,7 +7,7 @@ from django.db import models as m
 
 class GhProject(m.Model):
     url = m.CharField(max_length=255, null=True)
-    owner = m.ForeignKey('repo_health.gh_users.GhUser', null=True)
+    owner = m.ForeignKey('gh_users.GhUser', null=True)
     name = m.CharField(max_length=255)
     description = m.CharField(max_length=255)
     language = m.CharField(max_length=255)
