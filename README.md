@@ -56,7 +56,8 @@ If this is successful, you will see the command prompt change to begin with `(<v
 To stop using the virtualenv, run `deactivate`.
 To start using the virtualenv, run `workon <virtualenv name>`.
 From inside the virtualenv and in the project root folder, run `pip install requirements.txt` to install the deps from the file.
-Once successful, run `cd project` to change dir and `python manage.py migrate`.
+Once successful, the database is ready to be migrated. Since we are using an existing database and structure we will need fake the initial migrations that normally created the tables and columns for each Django app using models that map the Github tables.  These are noted by packages beginning with `gh_`.  Run this command for every package in the `repo_health` folder: `python manage.py migrate <package_name> --fake-initial`.  After success run `python manage.py migrate` to run any other migrations.
+
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
 
 ### Frontend configuration
