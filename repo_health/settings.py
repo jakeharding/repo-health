@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'repo_health.gh_users',
+    'repo_health.gh_projects',
     'repo_health.index',
 ]
 
