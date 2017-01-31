@@ -1,0 +1,9 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'msr14',
+        'USER': 'msr14',
+        'PASSWORD': 'PASSWORD',
+        'HOST': 'localhost',
+    }
+}

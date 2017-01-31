@@ -1,0 +1,1 @@
+default_app_config = 'repo_health.gh_users.apps.GhUsersConfig'
