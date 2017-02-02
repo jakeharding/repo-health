@@ -79,3 +79,18 @@ Assumptions made about production:
 - Apache httpd server is used to serve app using mod_wsgi.
 - All static files are served from Apache using a redirect from url `/static/` to a static documents folder. This folder is created using `python manage.py collectstatic`.  This is not necessary in development.
 
+
+##Contributing
+External contributions are not being accepted at this time. For existing contributors, please use the following header documentation:
+
+```
+fileName.ext - (C) Copyright - 2017
+This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
+
+SPDX-License-Identifier: MIT
+
+Author(s) of this file:
+  Your name
+
+Brief description of the file.
+```
