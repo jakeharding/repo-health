@@ -1,6 +1,6 @@
-'''
+"""
 Hold a read only admin to be used across apps.
-'''
+"""
 
 from django.contrib import admin as a
 

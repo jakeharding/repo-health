@@ -1,4 +1,4 @@
-'''
+"""
 apps.py - (C) Copyright - 2017
 This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 
@@ -8,7 +8,7 @@ Author(s) of this file:
   J. Harding
   
 Setup app config for Django.
-'''
+"""
 
 from django.apps import AppConfig
 

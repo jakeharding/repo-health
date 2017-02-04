@@ -1,6 +1,6 @@
-'''
+"""
 GitHub Organization member.
-'''
+"""
 
 from django.db import models as m
 
