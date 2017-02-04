@@ -1,4 +1,4 @@
-'''
+"""
 GhIssue.py - (C) Copyright - 2017
 This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 
@@ -8,7 +8,7 @@ Author(s) of this file:
   J. Harding
  
  GitHub issue.
-'''
+"""
 
 from django.db import models
 
@@ -26,6 +26,9 @@ class GhIssue(models.Model):
         'gh_pull_requests.GhPullRequest', models.DO_NOTHING, db_column='pull_request_id', blank=True, null=True)  # Field renamed because of name conflict.
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
+
+    def __str__(self):
+        return "Issue for: %s" %self.repo.name
 
     class Meta:
         managed = False
