@@ -6,9 +6,8 @@ SPDX-License-Identifier: MIT
 
 Author(s) of this file:
   J. Harding
-  
+
 Configure app.
 '''
 
-
-default_app_config = 'repo_health.gh_users.apps.GhUsersConfig'
+default_app_config = 'repo_health.gh_commits.apps.GhCommitsConfig'

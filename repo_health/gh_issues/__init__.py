@@ -7,8 +7,7 @@ SPDX-License-Identifier: MIT
 Author(s) of this file:
   J. Harding
   
-Configure app.
+Set default app config.
 '''
 
-
-default_app_config = 'repo_health.gh_users.apps.GhUsersConfig'
+default_app_config = 'repo_health.gh_issues.apps.GhIssuesConfig'

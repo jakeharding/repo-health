@@ -7,8 +7,11 @@ SPDX-License-Identifier: MIT
 Author(s) of this file:
   J. Harding
   
-Configure app.
+Import all models from package here.
 '''
 
 
-default_app_config = 'repo_health.gh_users.apps.GhUsersConfig'
+from .GhIssue import GhIssue
+from .GhIssueComment import GhIssueComment
+from .GhIssueEvent import GhIssueEvent
+from. GhIssueLabel import GhIssueLabel

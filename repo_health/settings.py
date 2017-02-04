@@ -35,10 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
     'repo_health.gh_users',
     'repo_health.gh_projects',
+    'repo_health.gh_commits',
+    'repo_health.gh_issues',
+    'repo_health.gh_pull_requests',    
     'repo_health.index',
 ]
 
