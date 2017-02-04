@@ -31,7 +31,7 @@ class GhProject(m.Model):
         return self.name
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'projects'
         unique_together = (('name', 'owner'),)
         verbose_name="GitHub Project"
