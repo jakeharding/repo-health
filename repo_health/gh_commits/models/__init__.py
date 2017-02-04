@@ -6,9 +6,10 @@ SPDX-License-Identifier: MIT
 
 Author(s) of this file:
   J. Harding
-  
-Configure app.
+
+Import models here.
 '''
 
-
-default_app_config = 'repo_health.gh_users.apps.GhUsersConfig'
+from .GhCommit import GhCommit
+from .GhCommitComment import GhCommitComment
+from .GhCommitParent import GhCommitParent

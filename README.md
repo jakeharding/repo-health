@@ -51,7 +51,7 @@ Some environment variables need to be set and is explained [here](http://virtual
 Once this is configured, you are able to run commands such as `mkvirtualenv`, and `workon` with no errors (maybe a usage message).
 To create a virtualenv for our project:
 - Run `which python3` and copy the output
-- Run `mkvirtualenv <virtualenv name> -p <paste output of previous command>`.  The name of the virtualenv is of your choosing.
+- Run `mkvirtualenv <virtualenv name> -p <paste output of previous command>`.  The name of the virtualenv is of your choosing. The name of the project works well.
 If this is successful, you will see the command prompt change to begin with `(<virtualenv name>)`.  You are now working inside your virtualenv and running `which python` should result to a path in your `~/.envs` folder.
 To stop using the virtualenv, run `deactivate`.
 To start using the virtualenv, run `workon <virtualenv name>`.
@@ -81,7 +81,7 @@ Assumptions made about production:
 
 
 ##Contributing
-External contributions are not being accepted at this time. For existing contributors, please use the following header documentation:
+External contributions are not being accepted at this time. For existing contributors, please use the following header documentation at the top of each file:
 
 ```
 fileName.ext - (C) Copyright - 2017
@@ -90,7 +90,7 @@ This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 SPDX-License-Identifier: MIT
 
 Author(s) of this file:
-  Your name
+  Your name or github username
 
 Brief description of the file.
 ```
