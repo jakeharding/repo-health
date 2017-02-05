@@ -15,8 +15,8 @@ from django.db import models
 
 
 class GhCommitComment(models.Model):
-    commit = models.ForeignKey('gh_commits.GhCommit', models.DO_NOTHING)
-    user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
+    commit = models.ForeignKey('gh_commits.GhCommit', models.DO_NOTHING, related_name='comments')
+    user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING, related_name='commit_comments')
     body = models.CharField(max_length=256, blank=True, null=True)
     line = models.IntegerField(blank=True, null=True)
     position = models.IntegerField(blank=True, null=True)

@@ -8,6 +8,8 @@ Author(s) of this file:
   J. Harding
 
 GitHub project model.
+A Github project has two relationships to commits. A many to many and a foreign key.
+Unsure the intention of the dual reltionship.
 """
 
 
@@ -27,11 +29,26 @@ class GhProject(m.Model):
     )
     deleted = m.IntegerField()
 
+    #M2M fields added
+    commits_m2m = m.ManyToManyField(
+        'gh_commits.GhCommit', 
+        through='gh_projects.GhProjectCommit',
+    )
+
+    maintainers = m.ManyToManyField(
+        'gh_users.GhUser',
+        through='gh_users.GhProjectMember'
+    )
+    watchers = m.ManyToManyField(
+        'gh_users.GhUser',
+        through='gh_users.GhWatcher'
+    )
+
     def __str__(self):
         return self.name
 
     class Meta:
-        # managed = False
+        managed = False
         db_table = 'projects'
         unique_together = (('name', 'owner'),)
         verbose_name="GitHub Project"
