@@ -28,3 +28,5 @@ class TestGhIssue(TestCase):
     def test_m2m(self):
         self.assertTrue(self.issue_user.comment_issues.all())
         self.assertTrue(self.issue.comment_users.all())
+
+        self.assertTrue(self.issue.labels.all())
