@@ -7,7 +7,7 @@ SPDX-License-Identifier: MIT
 Author(s) of this file:
   J. Harding
  
- GitHub issue.
+ GitHub issue. 
 """
 
 from django.db import models
@@ -29,7 +29,7 @@ class GhIssue(models.Model):
         models.DO_NOTHING, 
         db_column='pull_request_id', 
         blank=True, null=True
-    ) .
+    )
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
 

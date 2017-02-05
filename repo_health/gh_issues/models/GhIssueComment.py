@@ -17,7 +17,7 @@ from django.db import models
 class GhIssueComment(models.Model):
     issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING, related_name='comments')
     user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING, related_name='issue_comments')
-    comment_id = models.TextField()
+    comment_id = models.TextField(primary_key=True)
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
 
