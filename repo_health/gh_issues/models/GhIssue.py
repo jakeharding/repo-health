@@ -39,6 +39,11 @@ class GhIssue(models.Model):
         through='gh_issues.GhIssueComment'
     )
 
+    labels = models.ManyToManyField(
+        'gh_projects.GhRepoLabels',
+        through='gh_issues.GhIssueLabel'
+    )
+
     def __str__(self):
         return "Issue for: %s" %self.repo.name
 

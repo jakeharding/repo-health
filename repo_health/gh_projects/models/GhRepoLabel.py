@@ -19,6 +19,12 @@ class GhRepoLabel(models.Model):
     name = models.CharField(max_length=24)
     ext_ref_id = models.CharField(max_length=24)
 
+    #Add m2m
+    issues = models.ManyToManyField(
+        'gh_issues.GhIssue',
+        through='gh_issues.GhIssueLabel'
+    )
+
     def __str__(self):
         return "Label name: '%s' for repo: %s" % (self.name, self.repo.name)
 
