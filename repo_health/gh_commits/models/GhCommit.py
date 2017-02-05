@@ -40,7 +40,7 @@ class GhCommit(models.Model):
         'gh_projects.GhProject', 
         through='gh_projects.GhProjectCommit'
     )
-    parents = models.ManyToManyFields(
+    parents = models.ManyToManyField(
         'gh_commits.GhCommit',
         through='gh_commits.GhCommitParent'
     )

@@ -21,7 +21,7 @@ class TestGhCommit(TestCase):
 
     def setUp(self):
         self.commit = GhCommit.objects.filter(
-            parent__isnull=False
+            parents__isnull=False
         ).first()
 
     def test_get_commit(self):
@@ -35,19 +35,20 @@ class TestGhCommit(TestCase):
 class TestGhCommitComment(TestCase):
     
     comment = None
-    _user = None
+    commment_user = None
     commit = None
 
     def setUp(self):
         self.comment = GhCommitComment.objects.first()
-        self._user = self.comment.user
+        self.user = self.comment.user
         self.commit = self.comment.commit
 
     def test_get_user_comments(self):
         #All the users comments.
-        self.assertTrue(self._user.comments.all())
+        self.assertTrue(self.user.commit_comments.all())
+        
         #all the commits the user has commented.
-        self.assertTrue(self._user.comment_commits.all())
+        self.assertTrue(self.user.comment_commits.all())
 
     def test_get_commit(self):
         #Comments for a commit

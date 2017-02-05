@@ -34,5 +34,5 @@ class TestGhUser(TestCase):
     
     def test_get_m2m(self):
         self.assertTrue(self.orgs_user.organizations.all())
-        self.assertTrue(self.watcher_user.organizations.all())
-        self.assertTrue(self.maintain_user.organizations.all())        
+        self.assertTrue(self.watcher_user.watched_repos.all())
+        self.assertTrue(self.maintain_user.maintain_repos.all())        

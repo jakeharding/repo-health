@@ -28,7 +28,7 @@ class GhUser(m.Model):
         'gh_projects.GhProject',
         through='gh_users.GhWatcher'
     )
-    maintain_projects = m.ManyToManyField(
+    maintain_repos = m.ManyToManyField(
         'gh_projects.GhProject',
         through='gh_users.GhProjectMember'
     )
