@@ -24,7 +24,9 @@ For development, a subset of data is used for testing and provided by ghtorrent 
 
 Open the MySql interpreter with root access using: `mysql -u root -p`.  If you have a password setup for the root MySql user, you will be prompted to enter it.  Create a database to hold the data by running `create database msr14;`.  This names the databae 'msr'. You can name it however you like.  Create a user for the database by running `create user 'msr14'@'localhost' identified by password;`. The password will need to be added to the local_settings.py file for database connection, and please do not commit the password, or any passwords, to the repository.
 
-The user needs to have access to the database. Run `grant all on msr.* to 'msr14'@'localhost;`.  After commands have been run successfully, run `quit;` to exit the interpreter.  We can now load the data into the database by running `mysql -u root -p msr < path_to_extracted_data_file`.  The `path_to_extracted_data_file` is the absolute path noted earlier, and `msr` is the name of the database created.  Once this is successful, you can enter the information into the local_settings.py.
+The user needs to have access to the database. Run `grant all on msr14.* to 'msr14'@'localhost;`.  After commands have been run successfully, run `quit;` to exit the interpreter.  We can now load the data into the database by running `mysql -u root -p msr14 < path_to_extracted_data_file`.  The `path_to_extracted_data_file` is the absolute path noted earlier, and `msr14` is the name of the database created.  Once this is successful, you can enter the information into the local_settings.py.
+
+If running unit tests, this process will need to be repeated with a test database name `test_msr14`.
 
 Located in the `repo_health` directory of this repository is a `local_settings.py.example` file. Save a copy of this file as `local_settings.py` to the same directory.  Please do not remove the example file from the repo.  If you created the database and user as `msr14` then you will need insert the password for the user in the `PASSWORD` placeholder.  Otherwise enter the required information into the correct places and save the file.
 
@@ -59,6 +61,8 @@ From inside the virtualenv and in the project root folder, run `pip install requ
 Once successful, the database is ready to be migrated. Since we are using an existing database and structure we will need fake the initial migrations that normally created the tables and columns for each Django app using models that map the Github tables.  These are noted by packages beginning with `gh_`.  Run this command for every package in the `repo_health` folder: `python manage.py migrate <package_name> --fake-initial`.  After success run `python manage.py migrate` to run any other migrations.
 
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
+
+Run `python manage.py test --keepdb` to run the tests.  The `--keepdb` is important so Django doesn't try to destroy the test database.
 
 ### Frontend configuration
 From project root, `cd repo_health/index/static`.  Run `npm install`.  After successful install, [http://localhost:8000](http://localhost:8000) should display the Hello World page.
