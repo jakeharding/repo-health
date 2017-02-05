@@ -25,10 +25,25 @@ class GhCommit(models.Model):
         blank=True, null=True, related_name="committer"
     )
     project = models.ForeignKey(
-        'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True
+        'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True,
+        related_name="commits_fk"
     )
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
+
+    #Added fields for many to many relationships
+    comment_users = models.ManyToManyField(
+        "gh_users.GhUser", 
+        through="gh_commits.GhCommitComment"
+    )
+    projects = models.ManyToManyField(
+        'gh_projects.GhProject', 
+        through='gh_projects.GhProjectCommit'
+    )
+    parents = models.ManyToManyFields(
+        'gh_commits.GhCommit',
+        through='gh_commits.GhCommitParent'
+    )
 
     def __str__(self):
         return "Project: %s Author: %s" %(self.project.name, self.author.login)

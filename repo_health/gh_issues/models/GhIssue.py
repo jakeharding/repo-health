@@ -22,10 +22,22 @@ class GhIssue(models.Model):
     assignee = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING, blank=True, null=True)
     issue_id = models.TextField()
     pull_request = models.IntegerField()
+
+    # Field renamed because of name conflict
     pull_request_0 = models.ForeignKey(
-        'gh_pull_requests.GhPullRequest', models.DO_NOTHING, db_column='pull_request_id', blank=True, null=True)  # Field renamed because of name conflict.
+        'gh_pull_requests.GhPullRequest', 
+        models.DO_NOTHING, 
+        db_column='pull_request_id', 
+        blank=True, null=True
+    ) .
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
+
+    #M2M fields add
+    comment_users = models.ManyToManyField(
+        'gh_users.GhUser', 
+        through='gh_issues.GhIssueComment'
+    )
 
     def __str__(self):
         return "Issue for: %s" %self.repo.name

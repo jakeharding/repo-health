@@ -15,8 +15,8 @@ from django.db import models
 
 
 class GhIssueComment(models.Model):
-    issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING)
-    user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
+    issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING, related_name='comments')
+    user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING, related_name='issue_comments')
     comment_id = models.TextField()
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)

@@ -8,6 +8,8 @@ Author(s) of this file:
   J. Harding
 
 GitHub project commit model.
+Represents the through table for a many to many relationship of projects to commits.
+Don't query this table directly.
 """
 
 from django.db import models as m
