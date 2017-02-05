@@ -14,4 +14,7 @@ from django.contrib import admin as a
 from repo_health.index.admin import ReadOnlyAdmin
 from .models import *
 
-a.site.register(GhUser, ReadOnlyAdmin)
+
+a.site.register(GhProject, ReadOnlyAdmin)
+a.site.register(GhRepoLabel, ReadOnlyAdmin)
+a.site.register(GhRepoMilestone, ReadOnlyAdmin)
