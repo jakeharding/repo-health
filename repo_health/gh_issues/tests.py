@@ -21,7 +21,8 @@ class TestGhIssue(TestCase):
 
     def setUp(self):
         self.issue = GhIssue.objects.filter(
-            comments__isnull=False
+            comments__isnull=False,
+            labels__isnull=False,
         ).first()
         self.issue_user = self.issue.comment_users.first()
     

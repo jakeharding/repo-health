@@ -40,7 +40,7 @@ class GhIssue(models.Model):
     )
 
     labels = models.ManyToManyField(
-        'gh_projects.GhRepoLabels',
+        'gh_projects.GhRepoLabel',
         through='gh_issues.GhIssueLabel'
     )
 
