@@ -31,8 +31,10 @@ class TestGhUser(TestCase):
         self.maintain_user = GhUser.objects.filter(
             maintain_repos__isnull = False
         ).first()
+        
     
     def test_get_m2m(self):
         self.assertTrue(self.orgs_user.organizations.all())
         self.assertTrue(self.watcher_user.watched_repos.all())
-        self.assertTrue(self.maintain_user.maintain_repos.all())        
+        self.assertTrue(self.maintain_user.maintain_repos.all())      
+        

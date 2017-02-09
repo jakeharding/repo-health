@@ -13,7 +13,7 @@ Specifically test database relationships to show no error thrown and a result is
 
 
 from django.test import TestCase
-from .models import GhProject
+from .models import GhProject, GhRepoLabel
 
 
 class TestGhProject(TestCase):
@@ -38,4 +38,8 @@ class TestGhProject(TestCase):
 
     def test_get_forked_from(self):
         self.assertTrue(self.project.forked_from)
+
+    def test_get_repo_labels(self):
+        labels = GhRepoLabel.objects.filter(repo__isnull=False)
+        self.assertTrue(labels)
         

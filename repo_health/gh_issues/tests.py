@@ -8,7 +8,7 @@ Author(s) of this file:
   J. Harding
 
 Test the generated models are functioning as expected.
-Specifically test database relationships to be sure an error is thrown and a result is returned.
+Specifically test database relationships to be sure an error is not thrown and a result is returned.
 """
 
 
@@ -31,3 +31,4 @@ class TestGhIssue(TestCase):
         self.assertTrue(self.issue.comment_users.all())
 
         self.assertTrue(self.issue.labels.all())
+        self.assertTrue(self.issue.labels.first().issues.all())
