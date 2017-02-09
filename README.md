@@ -65,6 +65,8 @@ Once successful, the database is ready to be migrated. Since we are using an exi
 
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
 
+An admin is available at [http://localhost:8000/admin/](http://localhost:8000/admin/) when the server is running. In order to login to the admin a user will need to be created. Run `python manage.py createsuperuser` and follow the instructions.
+
 Run `python manage.py test --keepdb` to run the tests.  The `--keepdb` is important so Django doesn't try to destroy the test database.
 
 ### Frontend configuration
