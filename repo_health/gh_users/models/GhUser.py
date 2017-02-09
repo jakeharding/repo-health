@@ -16,23 +16,11 @@ class GhUser(m.Model):
         'gh_commits.GhCommit', 
         through='gh_commits.GhCommitComment'
     )
-    # comment_issues = m.ManyToManyField(
-    #     'gh_issues.GhIssue',
-    #     through='gh_issues.GhIssueComment'
-    # )
+
     organizations = m.ManyToManyField(
-        'self', related_name='members',
+        'self', symmetrical=False, related_name='members',
         through='gh_users.GhOrgMember'
     )
-
-    # watched_repos = m.ManyToManyField(
-    #     'gh_projects.GhProject',
-    #     through='gh_users.GhWatcher'
-    # )
-    # maintain_repos = m.ManyToManyField(
-    #     'gh_projects.GhProject',
-    #     through='gh_users.GhProjectMember'
-    # )
 
     class Meta:
         managed = False

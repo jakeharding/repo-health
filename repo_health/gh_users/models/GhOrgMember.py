@@ -7,7 +7,7 @@ from django.db import models as m
 class GhOrgMember(m.Model):
     org = m.ForeignKey(
         'gh_users.GhUser', m.DO_NOTHING,
-        # related_name='members',
+        related_name='users',
     )
     user = m.ForeignKey(
         'gh_users.GhUser', m.DO_NOTHING,

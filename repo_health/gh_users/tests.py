@@ -37,4 +37,5 @@ class TestGhUser(TestCase):
         self.assertTrue(self.orgs_user.organizations.all())
         self.assertTrue(self.watcher_user.watched_repos.all())
         self.assertTrue(self.maintain_user.maintain_repos.all())      
+        self.assertTrue(self.orgs_user.organizations.first().members.all())
         
