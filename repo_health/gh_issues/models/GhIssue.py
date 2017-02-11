@@ -19,7 +19,8 @@ class GhIssue(models.Model):
         'gh_users.GhUser', models.DO_NOTHING, blank=True, null=True,
         related_name='reporter'
     )
-    assignee = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING, blank=True, null=True)
+    assignee = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING,
+        blank=True, null=True, related_name='assigned_issues')
     issue_id = models.TextField()
     pull_request = models.IntegerField()
 
@@ -36,7 +37,8 @@ class GhIssue(models.Model):
     #M2M fields add
     comment_users = models.ManyToManyField(
         'gh_users.GhUser', 
-        through='gh_issues.GhIssueComment'
+        through='gh_issues.GhIssueComment',
+        related_name='comment_issues'
     )
 
     labels = models.ManyToManyField(

@@ -37,11 +37,13 @@ class GhProject(m.Model):
 
     maintainers = m.ManyToManyField(
         'gh_users.GhUser',
-        through='gh_users.GhProjectMember'
+        through='gh_users.GhProjectMember',
+        related_name='maintain_repos'
     )
     watchers = m.ManyToManyField(
         'gh_users.GhUser',
-        through='gh_users.GhWatcher'
+        through='gh_users.GhWatcher',
+        related_name='watched_repos'
     )
 
     def __str__(self):
