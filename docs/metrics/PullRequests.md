@@ -10,4 +10,6 @@
 
 ###More ideas
  - organizational prs
- - prs from outside maintainers
+ - numbers prs from outside maintainers
+ - total number of comments
+ 
