@@ -5,12 +5,11 @@ Repos are retrieved using the owner's login and the repo's name and a GET reques
 URL:
  - `/api/v1/gh-projects?owner__login=<login>&name=<name>`
 
- Reponse will be a 404  if no project is found.
+ Reponse will be a 404 if no project is found.
 
  Response:
  ```
 {
-
     "id": int,
     "name": str,
     "description": str,
