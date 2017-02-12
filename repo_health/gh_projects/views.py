@@ -20,13 +20,12 @@ from rest_framework.serializers import ModelSerializer
 from .models import GhProject
 
 
-class ProjectSerializer(ModelSerializer):
+class GhProjectSerializer(ModelSerializer):
     class Meta:
         model = GhProject
         exclude = ['commits_m2m', 'maintainers', 'watchers',]
         
 
-
-class ProjectViewSet(RetrieveModelMixin, GenericViewSet):
+class GhProjectViewSet(RetrieveModelMixin, GenericViewSet):
     queryset = GhProject.objects.all()
-    serializer_class = ProjectSerializer
+    serializer_class = GhProjectSerializer

@@ -12,10 +12,10 @@ Configure urls for rest api.
 
 from django.conf.urls import url, include
 from rest_framework import routers
-from repo_health.gh_projects.views import ProjectViewSet
+from repo_health.gh_projects.views import GhProjectViewSet
 
 router = routers.DefaultRouter()
-router.register('projects', ProjectViewSet)
+router.register('gh-projects', GhProjectViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
