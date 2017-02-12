@@ -59,5 +59,21 @@ class GhProjectApiTest(APITestCase):
         self.assertTrue(status.is_success(r.status_code))
         self.assertEqual(r.data['name'], self.project.name)
         self.assertEqual(r.data['id'], self.project.id)
+
+    def test_api_get_project_not_found(self):
+        #Test with a bad owner login
+        r_with_bad_owner = self.client.get('/api/v1/gh-projects', {'owner__login':'incoherehnet giibbuusrish', 'name':self.project.name})
+        self.assertTrue(status.is_client_error(r_with_bad_owner.status_code))
+
+        #Test with a bad repo name
+        r_with_bad_repo = self.client.get('/api/v1/gh-projects', {'owner__login':self.project.owner.login, 'name':'gibiberishsh'})
+        self.assertTrue(status.is_client_error(r_with_bad_repo.status_code))
+
+        #Test with a bad param
+        r_with_bad_key = self.client.get('/api/v1/gh-projects', {'giibbier':self.project.owner.login, 'name':self.project.name})
+        self.assertTrue(status.is_client_error(r_with_bad_key.status_code))
+
         
         
+        
+              
