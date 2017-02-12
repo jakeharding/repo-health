@@ -3,8 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Repo Health Assessment</title>
-        <!--Loading bootstrap CSS over a CDN for convienience.-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="/static/assets/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/assets/css/styles.css">
     
         <!--Loading libs from node_modules for this example.  Will need to bundle them correctly.-->
         <script type="text/javascript" src="/static/node_modules/angular/angular.min.js"></script>
@@ -18,15 +19,20 @@
     {% endcomment %}
     <body class="container" >
         <div class="col-sm-12 text-center">
-            <h1>Hello World</h1>
+            <h1>Repo Health Assessment</h1>
         </div>
-        <div ng-app="app">
+        <div ng-app="repo-health">
             <div ui-view></div>
         </div>
     </body>
     
     <!--Bundle these also.-->
-    <script type="text/javascript" src="/static/dist/app.js"></script>
-    <script type="text/javascript" src="/static/dist/HomeCtrl.js"></script>    
+    <script type="text/javascript" src="/static/src/app.js"></script>
+    <script type="text/javascript" src="/static/src/components/components.module.js"></script>
+
+    <!-- Search Component -->
+    <script type="text/javascript" src="/static/src/components/search/search.module.js"></script>    
+    <script type="text/javascript" src="/static/src/components/search/search.component.js"></script>    
+    <script type="text/javascript" src="/static/src/components/search/search.controller.js"></script>    
         
 </html>
