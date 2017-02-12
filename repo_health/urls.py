@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='/app/'), name='go-to-app'),
     url(r'app/', include('repo_health.index')),
+    url(r'api/v1/', include('repo_health.rest_api'), name='api'),
 ]
