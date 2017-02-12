@@ -11,21 +11,29 @@ Author(s) of this file:
 Business logic for api endpoints.
 """
 
-
-
-
-from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.serializers import ModelSerializer
+from rest_framework.exceptions import NotFound
+from rest_framework.status import HTTP_404_NOT_FOUND
 from .models import GhProject
 
 
 class GhProjectSerializer(ModelSerializer):
     class Meta:
         model = GhProject
-        exclude = ['commits_m2m', 'maintainers', 'watchers',]
+        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url']
         
 
-class GhProjectViewSet(RetrieveModelMixin, GenericViewSet):
+class GhProjectViewSet(ListModelMixin, GenericViewSet):
     queryset = GhProject.objects.all()
     serializer_class = GhProjectSerializer
+    filter_fields = ('owner__login', 'name')
+
+    def list(self, r, *args, **kwargs):
+        response  = super().list(r, *args, **kwargs)
+        if len(response.data) is not 1:
+            raise NotFound('Repo not found', HTTP_404_NOT_FOUND)
+        else:
+            response.data = response.data[0]
+        return response

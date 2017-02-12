@@ -14,7 +14,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from repo_health.gh_projects.views import GhProjectViewSet
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register('gh-projects', GhProjectViewSet)
 
 urlpatterns = [

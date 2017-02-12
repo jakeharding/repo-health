@@ -52,10 +52,10 @@ class GhProjectApiTest(APITestCase):
 
     project = None
     def setUp(self):
-        self.project = GhProject.objects.first()
+        self.project = GhProject.objects.last()
 
     def test_api_get_project(self):
-        r = self.client.get(reverse('ghproject-detail', args=[self.project.id]))
+        r = self.client.get('/api/v1/gh-projects', {'owner__login':self.project.owner.login, 'name':self.project.name})
         self.assertTrue(status.is_success(r.status_code))
         self.assertEqual(r.data['name'], self.project.name)
         self.assertEqual(r.data['id'], self.project.id)
