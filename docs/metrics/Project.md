@@ -21,7 +21,7 @@ msr14 limitations
  - number of watchers who aren't contributors
  - organizations of contributors
   - project doesn't have an organization directly
- - labels
+ - number of labels
  - is a fork
  - number of commits
  - number of milestones
