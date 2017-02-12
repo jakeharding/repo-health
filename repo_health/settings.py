@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'rest_framework',
     'repo_health.gh_users',
     'repo_health.gh_projects',
     'repo_health.gh_commits',
