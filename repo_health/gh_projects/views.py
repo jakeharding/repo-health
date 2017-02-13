@@ -7,7 +7,6 @@ SPDX-License-Identifier: MIT
 Author(s) of this file:
   J. Harding
   
-
 Business logic for api endpoints.
 """
 
@@ -22,7 +21,7 @@ from .models import GhProject
 class GhProjectSerializer(ModelSerializer):
     class Meta:
         model = GhProject
-        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url']
+        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url', 'forked_from']
         
 
 class GhProjectViewSet(ListModelMixin, GenericViewSet):

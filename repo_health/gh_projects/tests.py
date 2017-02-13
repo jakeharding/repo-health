@@ -49,6 +49,9 @@ class TestGhProject(TestCase):
 
 
 class GhProjectApiTest(APITestCase):
+    """
+    Test the REST api to retrieve a project.
+    """
 
     project = None
     def setUp(self):
