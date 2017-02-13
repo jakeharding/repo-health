@@ -18,14 +18,14 @@ URL:
     "ext_ref_id": str,
     "deleted": int,
     "owner": int,
+    "forked_from": null or int,    
     "contribs_count": int,
     "watchers_count": int,
     "watch_not_contribs_counts: int,
     "orgs_of_contribs_count": int,
     "labels_count": int,
-    "is_fork": bool,
     "commits_count": int,
     "milestones_count": int,
-    "age_of_latest_commit": date str
+    "latest_commit": date str
 }
  ```

@@ -22,7 +22,7 @@ class GhCommit(models.Model):
     )
     committer = models.ForeignKey(
         'gh_users.GhUser', models.DO_NOTHING, 
-        blank=True, null=True, related_name="committer"
+        blank=True, null=True, related_name="commits"
     )
     project = models.ForeignKey(
         'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True,
