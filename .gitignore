@@ -1,6 +1,7 @@
 *.sqlite*
 *.db
 *.pyc
+*~
 .DS_Store
 local_settings.py
 node_modules

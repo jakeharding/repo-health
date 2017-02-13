@@ -61,7 +61,7 @@ To start using the virtualenv, run `workon <virtualenv name>`.
 From inside the virtualenv and in the project root folder, run `pip install -r requirements.txt` to install the deps from the file.
 Note for Linux users: `sudo apt-get install libmysqlclient-dev` may need to be ran from the terminal in order for MySQL to be used with the mysqlclient dependency. A mysql_config not found error will be present when running `pip install -r requirements.txt` to signify this.
 
-Once successful, the database is ready to be migrated. Since we are using an existing database and structure we will need fake the initial migrations that normally created the tables and columns for each Django app using models that map the Github tables.  These are noted by packages beginning with `gh_`.  Run this command for every package in the `repo_health` folder: `python manage.py migrate <package_name> --fake-initial`.  After success run `python manage.py migrate` to run any other migrations.
+Once successful, the database is ready to be migrated. Since we are using an existing database and structure we will need to fake the initial migrations that normally created the tables and columns for each Django app using models that map the Github tables.  These are noted by packages beginning with `gh_`.  Run this command for every package in the `repo_health` folder: `python manage.py migrate <package_name> --fake-initial`.  After success run `python manage.py migrate` to run any other migrations.
 
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
 
