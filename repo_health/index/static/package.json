@@ -1,0 +1,15 @@
+{
+  "name": "repo_health_frontend",
+  "version": "1.0.0",
+  "description": "Angular frontend for the repo health project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-ui-router": "^0.4.2"
+  }
+}

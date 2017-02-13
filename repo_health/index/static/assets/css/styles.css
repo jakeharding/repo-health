@@ -1,0 +1,14 @@
+.search-repo {
+  width: 75%;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.search-button {
+  margin-top: 15px;
+}
