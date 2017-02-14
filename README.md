@@ -88,6 +88,10 @@ Assumptions made about production:
 - Apache httpd server is used to serve app using mod_wsgi.
 - All static files are served from Apache using a redirect from url `/static/` to a static documents folder. This folder is created using `python manage.py collectstatic`.  This is not necessary in development.
 
+##License and Copyright
+All source code is covered by th MIT license.  This license is located in the LICENSE.txt file at the root of the project.
+
+All other material, such as documentation, is covered by the Creative Commons - Attribution, or the CC B,Y license.
 
 ##Contributing
 External contributions are not being accepted at this time. For existing contributors, please use the following header documentation at the top of each file:

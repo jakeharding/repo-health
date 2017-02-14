@@ -26,6 +26,6 @@ URL:
     "labels_count": int,
     "commits_count": int,
     "milestones_count": int,
-    "latest_commit": date str
+    "pull_requests_count": int
 }
  ```
