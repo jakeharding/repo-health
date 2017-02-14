@@ -72,6 +72,8 @@ Run `python manage.py test --keepdb` to run the tests.  The `--keepdb` is import
 ### Frontend configuration
 From project root, `cd repo_health/index/static`.  Run `npm install`.  After successful install, [http://localhost:8000](http://localhost:8000) should display the Hello World page.
 
+To run ui tests, run `npm test` in the `repo_health/index/static` folder.
+
 #### Some common commands to help determine what python is being used
 - `which python` or `which python3`
   - Shows path python version.
