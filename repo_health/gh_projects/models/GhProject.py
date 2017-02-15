@@ -17,6 +17,7 @@ from django.db import models as m
 
 
 class GhProject(m.Model):
+    
     url = m.CharField(max_length=255, blank=True, null=True)
     owner = m.ForeignKey('gh_users.GhUser', m.DO_NOTHING, blank=True, null=True)
     name = m.CharField(max_length=255)
@@ -46,8 +47,17 @@ class GhProject(m.Model):
         related_name='watched_repos'
     )
 
+    forks = m.ManyToManyField(
+        'gh_projects.GhProject',
+        through='gh_projects.GhFork',
+        related_name='parents'
+    )
+
     def __str__(self):
         return self.name
+
+    def is_owned_by_org(self):
+        return self.owner.is_org()
 
     class Meta:
         managed = False

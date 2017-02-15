@@ -7,8 +7,7 @@ SPDX-License-Identifier: MIT
 Author(s) of this file:
   J. Harding
 
-Test the generated models are functioning as expected.
-Specifically test database relationships to show no error thrown and a result is returned.
+Test projects
 """
 
 
@@ -20,6 +19,11 @@ from .models import GhProject, GhRepoLabel
 
 
 class TestGhProject(TestCase):
+    """
+    Test the generated models are functioning as expected.
+    Specifically test database relationships to show no error thrown and a result is returned.
+    """
+
     project = None
     client = None 
 

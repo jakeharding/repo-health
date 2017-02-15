@@ -21,11 +21,14 @@ URL:
     "forked_from": null or int,    
     "contribs_count": int,
     "watchers_count": int,
-    "watch_not_contribs_counts: int,
+    "maintainers_count": int,
+    "watch_not_contribs_counts": int,
     "orgs_of_contribs_count": int,
     "labels_count": int,
     "commits_count": int,
     "milestones_count": int,
-    "pull_requests_count": int
+    "pull_requests_count": int,
+    "owned_by_org": bool,
+    "forks_count": int
 }
  ```
