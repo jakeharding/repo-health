@@ -14,4 +14,8 @@
  - total number of comments on prs
  - total number of comments from maintainers
  - most contributing user (user with most accepted prs)
+ - avg size of pr?
+ - not maintainer pr past year?
+ - not orn member pr? past year?
+ - avg comments per pr
  
