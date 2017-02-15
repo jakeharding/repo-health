@@ -12,17 +12,12 @@ Business logic for api endpoints.
 
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.serializers import ModelSerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.status import HTTP_404_NOT_FOUND
+from repo_health.gh_users.models import GhUser
 from .models import GhProject
+from .serializers import GhProjectSerializer
 
-
-class GhProjectSerializer(ModelSerializer):
-    class Meta:
-        model = GhProject
-        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url', 'forked_from']
-        
 
 class GhProjectViewSet(ListModelMixin, GenericViewSet):
     queryset = GhProject.objects.all()

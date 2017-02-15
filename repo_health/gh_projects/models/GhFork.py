@@ -22,7 +22,7 @@ class GhFork(models.Model):
     forked_from = models.ForeignKey(
       'gh_projects.GhProject', models.DO_NOTHING,
     )
-    fork_id = models.IntegerField(unique=True)
+    fork_id = models.IntegerField(unique=True, primary_key=True)
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
 
