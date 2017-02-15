@@ -95,7 +95,7 @@ Assumptions made about production:
 ##License and Copyright
 All source code is covered by the MIT license.  This license is located in the LICENSE.txt file at the root of the project.
 
-All other material, such as documentation, is covered by the Creative Commons - Attribution, or the CC B,Y license.
+All other material, such as documentation, is covered by the Creative Commons - Attribution, or the CC BY license.
 
 ##Contributing
 External contributions are not being accepted at this time. For existing contributors, please use the following header documentation at the top of each file:
