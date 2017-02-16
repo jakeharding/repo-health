@@ -40,5 +40,5 @@ Brief description of the file.
 ##### Jake:
 Jake is responsible for implementation of connecting to the database, the web server for the REST API, and all related documentation. 
 
-#### Benji:
+##### Benji:
 Benji is responsible for the frontend implementation. This includes UI/UX Design and the display of information from the server on the UI. All documentation for the frontend will be written by Benji.
