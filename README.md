@@ -91,7 +91,7 @@ Assumptions made about production:
 - All static files are served from Apache using a redirect from url `/static/` to a static documents folder. This folder is created using `python manage.py collectstatic`.  This is not necessary in development.
 
 ##License and Copyright
-All source code is covered by th MIT license.  This license is located in the LICENSE.txt file at the root of the project.
+All source code is covered by the MIT license.  This license is located in the LICENSE.txt file at the root of the project.
 
 All other material, such as documentation, is covered by the Creative Commons - Attribution, or the CC B,Y license.
 
