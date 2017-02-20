@@ -60,6 +60,8 @@ class GhProjectApiTest(APITestCase):
     project = None
     def setUp(self):
         self.project = GhProject.objects.last()
+        #Django has a lot of pull requests
+        self.django = GhProject.objects.get(name='django', owner__login='django')
 
     def test_api_get_project(self):
         r = self.client.get('/api/v1/gh-projects', {'owner__login':self.project.owner.login, 'name':self.project.name})
@@ -79,6 +81,10 @@ class GhProjectApiTest(APITestCase):
         #Test with a bad param
         r_with_bad_key = self.client.get('/api/v1/gh-projects', {'giibbier':self.project.owner.login, 'name':self.project.name})
         self.assertTrue(status.is_client_error(r_with_bad_key.status_code))
+
+    def test_get_pr_stats(self):
+        r = self.client.get('/api/v1/gh-projects/%d/pull-requests'%self.django.id)
+        self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' %r.status_code)
 
         
         

@@ -18,20 +18,28 @@ from django.db import models
 class GhPullRequest(models.Model):
     head_repo = models.ForeignKey(
         'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True,
-        related_name='head_repo'
+        related_name='prs_from'
     )
     base_repo = models.ForeignKey(
         'gh_projects.GhProject', models.DO_NOTHING,
+        related_name='prs_to',        
     )
     head_commit = models.ForeignKey(
         'gh_commits.GhCommit', models.DO_NOTHING, blank=True, null=True,
-        related_name='head_commit'
+        related_name="commit_from"
     )
-    base_commit = models.ForeignKey('gh_commits.GhCommit', models.DO_NOTHING)
+    base_commit = models.ForeignKey('gh_commits.GhCommit', models.DO_NOTHING,
+        related_name="commit_to"        
+    )
     user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
     pullreq_id = models.IntegerField()
     intra_branch = models.IntegerField()
     merged = models.IntegerField()
+
+    #Added M2M
+    commits = models.ManyToManyField('gh_commits.GhCommit',
+        through = 'gh_pull_requests.GhPullRequestCommit'
+    )
 
     def __str__(self):
         return "PR base project: %s" % self.base_repo.name
