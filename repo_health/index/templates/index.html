@@ -7,9 +7,8 @@
         <link rel="stylesheet" href="/static/assets/vendor/bootstrap.min.css">
         <link rel="stylesheet" href="/static/assets/css/styles.css">
     
-        <!--Loading libs from node_modules for this example.  Will need to bundle them correctly.-->
-        <script type="text/javascript" src="/static/node_modules/angular/angular.min.js"></script>
-        <script type="text/javascript" src="/static/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>  
+        <script type="text/javascript" src="js/vendor.js"></script>    
+        <script type="text/javascript" src="js/app.js"></script> 
     </head>
 
     {% comment %}
@@ -25,16 +24,4 @@
             <div ui-view></div>
         </div>
     </body>
-    
-    <script type="text/javascript" src="js/vendor.js"></script>    
-    <script type="text/javascript" src="js/app.js"></script>
-
-    <!--Bundle these also.-->
-    <script type="text/javascript" src="/static/src/app.js"></script>
-    <script type="text/javascript" src="/static/src/components/components.module.js"></script>
-
-    <!-- Search Component -->
-    <script type="text/javascript" src="/static/src/components/search/search.module.js"></script>    
-    <script type="text/javascript" src="/static/src/components/search/search.component.js"></script>    
-    <script type="text/javascript" src="/static/src/components/search/search.controller.js"></script>
 </html>
