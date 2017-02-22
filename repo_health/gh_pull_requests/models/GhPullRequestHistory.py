@@ -14,7 +14,11 @@ from django.db import models
 
 
 class GhPullRequestHistory(models.Model):
-    pull_request = models.ForeignKey('gh_pull_requests.GhPullRequest', models.DO_NOTHING)
+    OPENED_ACTION = 'opened'
+    CLOSED_ACTION = 'closed'
+    pull_request = models.ForeignKey('gh_pull_requests.GhPullRequest', models.DO_NOTHING,
+        related_name='history'
+    )
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
     action = models.CharField(max_length=255)

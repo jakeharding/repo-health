@@ -5,10 +5,11 @@ A GET request is made to:
 - `/api/v1/gh-projects/<repo-id>/pull-requests`
 - Note the repo id embedded in the URL
 
+
 ```
 {
     "prs_count": int,
-    "prs_last_year: 12 element array,
+    "prs_last_year:  [int] //12 element array, number of prs per month,oldest first, one year from latest_pr_created_at
     "latest_pr_created_at": datetime str,
     "contrib_most_prs": str - login,
     "prs_no_maintainer_comments": int,

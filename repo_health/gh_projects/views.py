@@ -11,7 +11,7 @@ Business logic for api endpoints.
 """
 
 
-from datetime import timedelta
+import datetime, calendar
 from django.utils import timezone
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
@@ -20,8 +20,10 @@ from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from repo_health.gh_users.models import GhUser
+from repo_health.gh_pull_requests.models import GhPullRequestHistory
 from .models import GhProject
 from .serializers import GhProjectSerializer
+
 
 
 class GhProjectViewSet(ListModelMixin, GenericViewSet):
@@ -40,10 +42,25 @@ class GhProjectViewSet(ListModelMixin, GenericViewSet):
     @detail_route(url_path='pull-requests')
     def pull_requests(self, *args, **kwargs):
         repo = self.get_object()
-        now = timezone.now()
-        one_year_ago = now - timedelta(days=366)
-        print(repo.prs_to.distinct().count())        
-        print(repo.prs_to.filter(commits__created_at__lte=one_year_ago).distinct().count())
+        one_year = datetime.timedelta(days=366)
+        
+        opened_histories = GhPullRequestHistory.objects.filter(
+            pull_request__base_repo = repo, 
+            action = GhPullRequestHistory.OPENED_ACTION,
+        ).order_by('-created_at')
+        most_recent_history_created = opened_histories.first().created_at
+
+        opened_prev_year = opened_histories.filter(created_at__gte=most_recent_history_created - one_year).distinct()
+        dt_to_filter = opened_prev_year.last().created_at
+
+        opened_count_for_year = []
+        for m in range(12):
+            days_in_mon = calendar.monthrange(dt_to_filter.year, dt_to_filter.month)[1]
+            opened_count_for_year.append(opened_prev_year.filter(
+                created_at__year=dt_to_filter.year,                
+                created_at__month=dt_to_filter.month).count())
+            dt_to_filter += datetime.timedelta(days = days_in_mon)
+        print (opened_count_for_year)
         return Response(HTTP_200_OK)
 
         

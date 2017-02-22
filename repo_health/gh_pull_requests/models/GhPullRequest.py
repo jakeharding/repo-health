@@ -44,6 +44,13 @@ class GhPullRequest(models.Model):
     def __str__(self):
         return "PR base project: %s" % self.base_repo.name
 
+    @property
+    def created_at(self):
+        """Convenience method to determine when pull request was created.
+        For now use the head commit's created_at field.
+        """
+        return self.head_commit.created_at
+
     class Meta:
         managed = False
         db_table = 'pull_requests'
