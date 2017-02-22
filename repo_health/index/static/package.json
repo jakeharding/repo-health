@@ -4,6 +4,7 @@
   "description": "Angular frontend for the repo health project.",
   "main": "index.js",
   "scripts": {
+    "start": "gulp && node webpack.server.js",
     "test": "./node_modules/karma/bin/karma start"
   },
   "author": "",
@@ -26,7 +27,6 @@
     "css-loader": "^0.26.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-change": "~1.0.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.28.0",
     "jasmine-core": "^2.5.2",
