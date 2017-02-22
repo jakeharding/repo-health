@@ -10,6 +10,7 @@
 * This is where the angular app gets bootstraped.
 * It will set up all the global configuration.
 */
+import angular from 'angular';
 
 (function () {
   angular.module('repo-health', [
