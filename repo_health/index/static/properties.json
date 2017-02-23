@@ -1,4 +1,3 @@
 {
-  "RestHost": "localhost:8000",
-  "RestLocation": ""
+  "RestHost": "localhost:8000"
 }
