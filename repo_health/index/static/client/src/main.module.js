@@ -15,6 +15,9 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import components from 'components/components.module.js';
 
+//Styles
+import 'global.css';
+
 angular.module('repo-health', [
   uiRouter,
   components

@@ -32,7 +32,7 @@ const server = new WebpackDevServer(compiler, {
     },
     {
       context: (pathname, req) => pathname === '/' && req.method === 'GET',
-      target: `${serverUrl}:8000/app`
+      target: `${serverUrl}/app`
     }
   ]
 });

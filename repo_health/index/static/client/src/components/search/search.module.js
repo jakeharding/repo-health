@@ -16,7 +16,7 @@ const components = angular
     .component('search', searchComponent)
     .config($stateProvider => {
       'ngInject';
-      
+
       $stateProvider.state('search', {
         url: '/search',
         template: '<search></search>'

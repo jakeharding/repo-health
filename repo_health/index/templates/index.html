@@ -3,19 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Repo Health Assessment</title>
-
-        <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/styles.css">
-    
-        <script type="text/javascript" src="js/vendor.js"></script>    
-        <script type="text/javascript" src="js/app.js"></script> 
     </head>
-
-    {% comment %}
-    This template is rendered within Django, and this comment won't get rendered in the browser because it is wrapped in Django's comment tag. Django's and Angular's template language share the same curly braces for variable names. Like: {{ variable }}.  Angular UI Router is used to get around this by rendering subsequent child templates in Angular only. This makes the frontend modular so it can be removed completely from the backend code, and not tied to Django specifically.
-
-    Angular variables can still be rendered in this page by wrapping them in Django's verbatim tag, similar to this comment.  All html is rendered as expected.
-    {% endcomment %}
     <body class="container" >
         <div class="col-sm-12 text-center">
             <h1>Repo Health Assessment</h1>
@@ -24,4 +12,7 @@
             <div ui-view></div>
         </div>
     </body>
+
+    <script type="text/javascript" src="js/vendor.js"></script>    
+    <script type="text/javascript" src="js/app.js"></script> 
 </html>
