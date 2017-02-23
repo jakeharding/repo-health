@@ -9,6 +9,7 @@
 *
 * This is the module definition for the search component
 */
+
 import searchComponent from './search.component';
 
 const components = angular
