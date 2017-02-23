@@ -10,8 +10,12 @@
 * This is the definitions for all of the components used in this application.
 */
 
-(function () {
-  angular.module('components', [
-    'components.search'
-  ]);
-})();
+import search from './search/search.module';
+
+const components = angular
+  .module('components', [
+    search
+  ])
+  .name;
+
+export default components;

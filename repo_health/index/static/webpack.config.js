@@ -5,7 +5,7 @@ const { argv } = require('yargs');
 
 const baseConfig = {
   entry: {
-    app: ['./client/src/app.js']
+    app: ['./client/src/main.module.js']
   },
 
   output: {
@@ -20,7 +20,7 @@ const baseConfig = {
       path.resolve('./client/assets'),
       path.resolve('./node_modules')
     ],
-    extensions: ['.js']
+    extensions: ['.js', '.html']
   },
 
   module: {

@@ -10,14 +10,16 @@
 * This is where the angular app gets bootstraped.
 * It will set up all the global configuration.
 */
-import angular from 'angular';
 
-(function () {
-  angular.module('repo-health', [
-    'components'
-  ])
-  .config((function($locationProvider, $urlRouterProvider) {
-    $locationProvider.hashPrefix('');
-    $urlRouterProvider.otherwise('/search');
-  }));
-})();
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import components from 'components/components.module.js';
+
+angular.module('repo-health', [
+  uiRouter,
+  components
+])
+.config((function($locationProvider, $urlRouterProvider) {
+  $locationProvider.hashPrefix('');
+  $urlRouterProvider.otherwise('/search');
+}));

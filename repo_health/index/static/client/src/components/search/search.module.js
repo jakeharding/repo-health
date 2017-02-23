@@ -9,9 +9,19 @@
 *
 * This is the module definition for the search component
 */
+import searchComponent from './search.component';
 
-(function () {
-  angular.module('components.search', [
-    'ui.router'
-  ]);
-})();
+const components = angular
+  .module('components.search', [])
+    .component('search', searchComponent)
+    .config($stateProvider => {
+      'ngInject';
+      
+      $stateProvider.state('search', {
+        url: '/search',
+        template: '<search></search>'
+      })
+    })
+  .name;
+
+export default components;
