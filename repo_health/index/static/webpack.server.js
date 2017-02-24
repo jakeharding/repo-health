@@ -14,7 +14,7 @@ config.watch = true;
 const compiler = webpack(config);
 
 const server = new WebpackDevServer(compiler, {
-  publicPath: `/${config.output.publicPath}`,
+  publicPath: `${properties.PublicPath}${config.output.publicPath}`,
   contentBase: 'dist',
   hot: true,
   stats: {

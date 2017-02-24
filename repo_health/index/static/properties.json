@@ -1,3 +1,4 @@
 {
-  "RestHost": "localhost:8000"
+  "RestHost": "localhost:8000",
+  "PublicPath": "/static/dist/"
 }
