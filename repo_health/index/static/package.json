@@ -40,6 +40,7 @@
   "scripts": {
     "prestart": "npm prune && npm install",
     "start": "node webpack.server.js",
+    "dist": "node ./node_modules/webpack/bin/webpack --env prod -p --config webpack.config.js",
     "test": "./node_modules/karma/bin/karma start"
   }
 }
