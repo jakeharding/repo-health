@@ -1,5 +1,5 @@
 /*
-* app.js - (C) Copyright - 2017
+* main.module.js - (C) Copyright - 2017
 * This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 *
 * SPDX-License-Identifier: MIT
@@ -18,11 +18,14 @@ import components from 'components/components.module.js';
 //Styles
 import 'global.css';
 
-angular.module('repo-health', [
-  uiRouter,
-  components
-])
-.config((function($locationProvider, $urlRouterProvider) {
-  $locationProvider.hashPrefix('');
-  $urlRouterProvider.otherwise('/search');
-}));
+export const main = angular.module('repo-health', [
+    uiRouter,
+    components
+  ])
+  .config(($locationProvider, $urlRouterProvider) => {
+    'ngInject';
+    
+    $locationProvider.hashPrefix('');
+    $urlRouterProvider.otherwise('/search');
+  })
+  .name;

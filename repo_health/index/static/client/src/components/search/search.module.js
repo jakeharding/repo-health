@@ -10,10 +10,11 @@
 * This is the module definition for the search component
 */
 
+import uiRouter from 'angular-ui-router';
 import searchComponent from './search.component';
 
 const components = angular
-  .module('components.search', [])
+  .module('components.search', [uiRouter])
     .component('search', searchComponent)
     .config($stateProvider => {
       'ngInject';
