@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }]
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-assign",
+    "transform-object-rest-spread",
+    "angularjs-annotate"
+  ]
+}

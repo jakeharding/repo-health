@@ -8,7 +8,7 @@ The Django web framework is used in the project to leverage quick development an
 Python 3.5 is recommended for this project.  It can be downloaded and installed at [python.org](python.org).
 
 ## Frontend
-The frontend source is written using Angular and Angular UI-Router.  
+The frontend source is written in ES2015 using [Angular](https://angularjs.org/). We are using [Bootstrap](http://getbootstrap.com/) for our styles.   
 
 ## Development Environment
 A Unix dev environment is recommended because the setup instructions provided are known to work in these environments using a bash terminal.  The instructions may work in a Windows bash terminal but have not been tested.
@@ -70,7 +70,9 @@ An admin is available at [http://localhost:8000/admin/](http://localhost:8000/ad
 Run `python manage.py test --keepdb` to run the tests.  The `--keepdb` is important so Django doesn't try to destroy the test database.
 
 ### Frontend configuration
-From project root, `cd repo_health/index/static`.  Run `npm install`.  After successful install, [http://localhost:8000](http://localhost:8000) should display the Hello World page.
+From project root, `cd repo_health/index/static`.  
+
+Run `npm start` and go to [http://localhost:3000](http://localhost:3000) to view the application.
 
 To run ui tests, run `npm test` in the `repo_health/index/static` folder.
 

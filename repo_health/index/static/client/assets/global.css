@@ -7,11 +7,8 @@
 * Author(s) of this file:
 * @bparish628
 *
-* This is the definitions for all of the components used in this application.
+* This file will contain all of the styles imported in the order they need to be
 */
 
-(function () {
-  angular.module('components', [
-    'components.search'
-  ]);
-})();
+@import 'vendor/bootstrap.min.css';
+@import 'styles/styles.css';

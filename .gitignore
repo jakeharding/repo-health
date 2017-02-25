@@ -1,9 +1,12 @@
 *.sqlite*
 *.db
 *.pyc
+*.log
 *~
 .DS_Store
 local_settings.py
 node_modules
+dist
 .vscode
+.idea
 __pycache__

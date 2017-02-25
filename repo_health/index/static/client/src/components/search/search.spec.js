@@ -11,7 +11,7 @@
 */
 
 describe('Search', () => {
-  beforeEach(module('components.search'));
+  beforeEach(angular.mock.module('components.search'));
 
   describe('SearchController', () => {
     let $componentController;
