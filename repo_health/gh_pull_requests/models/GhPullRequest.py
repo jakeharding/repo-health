@@ -31,7 +31,9 @@ class GhPullRequest(models.Model):
     base_commit = models.ForeignKey('gh_commits.GhCommit', models.DO_NOTHING,
         related_name="commit_to"        
     )
-    user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
+    user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING,
+        related_name='pull_requests'
+    )
     pullreq_id = models.IntegerField()
     intra_branch = models.IntegerField()
     merged = models.IntegerField()
