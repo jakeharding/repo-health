@@ -11,8 +11,9 @@ Test projects
 """
 
 
-from django.urls import reverse
+import datetime
 from django.test import TestCase, Client
+from django.db import models as m
 from rest_framework import status
 from rest_framework.test import APITestCase
 from .models import GhProject, GhRepoLabel
@@ -58,9 +59,11 @@ class GhProjectApiTest(APITestCase):
     """
 
     project = None
+
     def setUp(self):
         self.project = GhProject.objects.last()
-        #Django has a lot of pull requests
+        self.project_no_prs = GhProject.objects.annotate(prs_to_count=m.Count('prs_to')).order_by('prs_to_count').first()
+        # Django has a lot of pull requests
         self.django = GhProject.objects.get(name='django', owner__login='django')
 
     def test_api_get_project(self):
@@ -70,23 +73,34 @@ class GhProjectApiTest(APITestCase):
         self.assertEqual(r.data['id'], self.project.id)
 
     def test_api_get_project_not_found(self):
-        #Test with a bad owner login
+        # Test with a bad owner login
         r_with_bad_owner = self.client.get('/api/v1/gh-projects', {'owner__login':'incoherehnet giibbuusrish', 'name':self.project.name})
         self.assertTrue(status.is_client_error(r_with_bad_owner.status_code))
 
-        #Test with a bad repo name
-        r_with_bad_repo = self.client.get('/api/v1/gh-projects', {'owner__login':self.project.owner.login, 'name':'gibiberishsh'})
+        # Test with a bad repo name
+        r_with_bad_repo = self.client.get('/api/v1/gh-projects', {
+            'owner__login': self.project.owner.login, 'name': 'gibiberishsh'
+        })
         self.assertTrue(status.is_client_error(r_with_bad_repo.status_code))
 
-        #Test with a bad param
-        r_with_bad_key = self.client.get('/api/v1/gh-projects', {'giibbier':self.project.owner.login, 'name':self.project.name})
+        # Test with a bad param
+        r_with_bad_key = self.client.get('/api/v1/gh-projects', {
+            'giibbier': self.project.owner.login, 'name': self.project.name
+        })
         self.assertTrue(status.is_client_error(r_with_bad_key.status_code))
 
     def test_get_pr_stats(self):
-        r = self.client.get('/api/v1/gh-projects/%d/pull-requests'%self.django.id)
-        self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' %r.status_code)
+        r = self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.django.id)
+        self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
+        self.assertTrue(r.data['pr_count'] and isinstance(r.data['pr_count'], int))
+        self.assertTrue(r.data['prs_last_year'] and isinstance(r.data['prs_last_year'], list))
+        self.assertTrue(r.data['latest_or_created_at'] and isinstance(r.data['latest_or_created_at'], datetime.datetime))
+        self.assertTrue(r.data['contrib_most_prs'] and isinstance(r.data['contrib_most_prs'], str))
+        import pprint as pp
+        pp.pprint(r.data)
 
-        
-        
-        
-              
+        # Test a repo with no prs to be sure no errors are thrown
+        self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.project_no_prs.id)
+
+
+
