@@ -31,3 +31,8 @@ URL:
     "forks_count": int
 }
  ```
+ 
+ ## Future Metric possibilities
+
+- maintainers count per month for past year to track project growth
+- org members per month over past year to track org growth

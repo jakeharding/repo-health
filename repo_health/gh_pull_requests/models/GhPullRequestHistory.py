@@ -16,6 +16,8 @@ from django.db import models
 class GhPullRequestHistory(models.Model):
     OPENED_ACTION = 'opened'
     CLOSED_ACTION = 'closed'
+    MERGED_ACTION = 'merged'
+
     pull_request = models.ForeignKey('gh_pull_requests.GhPullRequest', models.DO_NOTHING,
         related_name='history'
     )

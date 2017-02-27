@@ -13,6 +13,7 @@ Author(s) of this file:
 
 
 from django.db import models
+from .GhPullRequestHistory import GhPullRequestHistory
 
 
 class GhPullRequest(models.Model):
@@ -40,7 +41,11 @@ class GhPullRequest(models.Model):
 
     #Added M2M
     commits = models.ManyToManyField('gh_commits.GhCommit',
-        through = 'gh_pull_requests.GhPullRequestCommit'
+        through ='gh_pull_requests.GhPullRequestCommit'
+    )
+
+    comment_users = models.ManyToManyField('gh_users.GhUser',
+        through='gh_pull_requests.GhPullRequestComment'
     )
 
     def __str__(self):
@@ -49,9 +54,19 @@ class GhPullRequest(models.Model):
     @property
     def created_at(self):
         """Convenience method to determine when pull request was created.
-        For now use the head commit's created_at field.
         """
-        return self.head_commit.created_at
+        return self.history.filter(
+            action=GhPullRequestHistory.OPENED_ACTION,
+        ).order_by('created_at').first().created_at
+
+    @property
+    def closed_at(self):
+        hs = self.history.filter(
+            models.Q(action=GhPullRequestHistory.CLOSED_ACTION) | models.Q(
+                action=GhPullRequestHistory.MERGED_ACTION),
+        ).order_by('created_at').first()
+        if hs:
+            return hs.created_at
 
     class Meta:
         managed = False

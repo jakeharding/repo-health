@@ -14,7 +14,10 @@ from django.db import models
 
 
 class GhPullRequestComment(models.Model):
-    pull_request = models.ForeignKey('gh_pull_requests.GhPullRequest', models.DO_NOTHING)
+    pull_request = models.ForeignKey(
+        'gh_pull_requests.GhPullRequest', models.DO_NOTHING,
+        related_name='comments'
+    )
     user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
     comment_id = models.TextField()
     position = models.IntegerField(blank=True, null=True)

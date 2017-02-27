@@ -94,8 +94,10 @@ class GhProjectApiTest(APITestCase):
         self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
         self.assertTrue(r.data['pr_count'] and isinstance(r.data['pr_count'], int))
         self.assertTrue(r.data['prs_last_year'] and isinstance(r.data['prs_last_year'], list))
-        self.assertTrue(r.data['latest_or_created_at'] and isinstance(r.data['latest_or_created_at'], datetime.datetime))
+        self.assertTrue(r.data.get('latest_pr_created_at') and isinstance(r.data['latest_pr_created_at'], datetime.datetime))
         self.assertTrue(r.data['contrib_most_prs'] and isinstance(r.data['contrib_most_prs'], str))
+        self.assertTrue(r.data.get('prs_no_maintainer_comments') and isinstance(r.data['prs_no_maintainer_comments'], int))
+
         import pprint as pp
         pp.pprint(r.data)
 
