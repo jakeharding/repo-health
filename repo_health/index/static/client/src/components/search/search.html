@@ -1,15 +1,13 @@
-<div class="col-sm-12 text-center search-repo">
-  <div class="col-sm-6 col-sm-offset-3 text-left">
+<div layout="row" layout-align="center center" class="search-repo">
+  <md-content layout-padding flex-gt-md="45" flex-gt-xs="100">
     <form name="$ctrl.ghForm">
       <h2 class="text-center">Github Url</h2>
-      <div class="row">
-        <input id="github_url" ng-model="$ctrl.github_url" type="text" class="form-control" placeholder="https://github.com/jakeharding/repo-health"/>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 text-center search-button">
-          <button type="button" class="btn btn-primary" ng-click="$ctrl.getStats()">Get Statistics</button>
+        <md-input-container md-no-float class="md-block">
+          <input ng-model="$ctrl.github_url" type="text" placeholder="https://github.com/jakeharding/repo-health"/>
+        </md-input-container>
+        <div class="text-center">
+          <md-button class="md-raised md-primary" ng-click="$ctrl.getStats()">Get Statistics</md-button>
         </div>
-      </div>
     </form>
-  </div>
+  </md-content>
 </div>

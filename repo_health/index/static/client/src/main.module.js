@@ -12,6 +12,7 @@
 */
 
 import angular from 'angular';
+import ngMaterial from 'angular-material';
 import uiRouter from 'angular-ui-router';
 import components from 'components/components.module.js';
 
@@ -20,6 +21,7 @@ import 'global.css';
 
 export const main = angular.module('repo-health', [
     uiRouter,
+    ngMaterial,
     components
   ])
   .config(($locationProvider, $urlRouterProvider) => {
