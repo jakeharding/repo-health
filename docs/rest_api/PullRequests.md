@@ -16,8 +16,8 @@ A GET request is made to:
     "prs_no_comments": int,
     "avg_lifetime": str,
     "not_maintainer_prs": int,
-    "avg_comment_per_pr": float,
-    "prs_from_outside_org": int,
+    "avg_comment_per_pr": float, //3 decimal places of precisions
+    "prs_from_outside_org": int | null, // Null if the repo is not part of org
 }
 ```
 

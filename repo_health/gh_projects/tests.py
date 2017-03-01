@@ -89,17 +89,23 @@ class GhProjectApiTest(APITestCase):
         })
         self.assertTrue(status.is_client_error(r_with_bad_key.status_code))
 
+        # test with no param
+        r_with_no_param = self.client.get('/api/v1/gh-projects')
+        self.assertTrue(status.is_client_error(r_with_no_param.status_code))
+
     def test_get_pr_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.django.id)
         self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
+        # Check for a few custom fields of the serialozer
         self.assertTrue(r.data['pr_count'] and isinstance(r.data['pr_count'], int))
         self.assertTrue(r.data['prs_last_year'] and isinstance(r.data['prs_last_year'], list))
-        self.assertTrue(r.data.get('latest_pr_created_at') and isinstance(r.data['latest_pr_created_at'], datetime.datetime))
+        self.assertTrue(
+            r.data.get('latest_pr_created_at') and isinstance(r.data['latest_pr_created_at'], datetime.datetime)
+        )
         self.assertTrue(r.data['contrib_most_prs'] and isinstance(r.data['contrib_most_prs'], str))
-        self.assertTrue(r.data.get('prs_no_maintainer_comments') and isinstance(r.data['prs_no_maintainer_comments'], int))
+        self.assertTrue(
+            r.data.get('prs_no_maintainer_comments') and isinstance(r.data['prs_no_maintainer_comments'], int))
 
-        import pprint as pp
-        pp.pprint(r.data)
 
         # Test a repo with no prs to be sure no errors are thrown
         self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.project_no_prs.id)

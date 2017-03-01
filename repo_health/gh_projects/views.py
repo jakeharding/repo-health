@@ -29,6 +29,8 @@ class GhProjectViewSet(ListModelMixin, GenericViewSet):
     filter_fields = ('owner__login', 'name')
 
     def list(self, r, *args, **kwargs):
+        if not r.GET.get('name') or not r.GET.get('owner__login'):
+            raise NotFound('Repo not found', HTTP_404_NOT_FOUND)
         response = super().list(r, *args, **kwargs)
         if len(response.data) is not 1:
             raise NotFound('Repo not found', HTTP_404_NOT_FOUND)

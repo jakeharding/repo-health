@@ -33,9 +33,9 @@ class GhPullRequestStatsSerializer(s.Serializer):
     maintainers_count = s.SerializerMethodField()
     prs_no_comments = s.SerializerMethodField()
     avg_lifetime = s.SerializerMethodField()
-    # not_maintainer_prs = s.SerializerMethodField()
-    # avg_comment_per_pr = s.SerializerMethodField()
-    # prs_from_outside_org = s.SerializerMethodField()
+    not_maintainer_prs = s.SerializerMethodField()
+    avg_comment_per_pr = s.SerializerMethodField()
+    prs_from_outside_org = s.SerializerMethodField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -101,7 +101,7 @@ class GhPullRequestStatsSerializer(s.Serializer):
                     td += p.closed_at - p.created_at
             avg = (td / closed).days
 
-        # Save this code to hopefully aggregate the average at the database level at sometime.
+        # Save this code to hopefully aggregate the average at the database level sometime.
         # agg = repo.prs_to \
         #     .annotate(closed_at=m.Case(m.When(m.Q(history__action=GhPullRequestHistory.CLOSED_ACTION) & m.Q(history__created_at__isnull=False)), then=m.F('history__created_at'))) \
         #     .annotate(created_at=m.Case(m.When(m.Q(history__action=GhPullRequestHistory.OPENED_ACTION) & m.Q(history__created_at__isnull=False)), then=m.F('history__created_at'))) \
@@ -109,6 +109,18 @@ class GhPullRequestStatsSerializer(s.Serializer):
         #     .values('created_at', 'closed_at', 'id', 'elapsed')
             # .aggregate(life=m.Max('closed_at', output_field=m.DateTimeField()))
         return avg
+
+    def get_not_maintainer_prs(self, repo):
+        return repo.prs_to.exclude(user__in=self._maintainers).count()
+
+    def get_avg_comment_per_pr(self, repo):
+        avg_agg = repo.prs_to.annotate(comment_count=m.Count('comments')) \
+            .aggregate(avg=m.Avg('comment_count'))
+        return avg_agg['avg']
+
+    def get_prs_from_outside_org(self, repo):
+        if repo.is_owned_by_org():
+            return repo.prs_to.exclude(user__organizations=repo.owner).count()
 
     class Meta:
         model = 'gh_projects.GhProject'
