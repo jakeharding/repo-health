@@ -12,10 +12,10 @@ Serializers for pull requests.
 
 import datetime
 import calendar
-from django.db import models
+from django.db import models as m
 from rest_framework import serializers as s
 from repo_health.gh_users.models import GhUser
-from ..models import GhPullRequestHistory, GhPullRequest
+from ..models import GhPullRequestHistory
 
 
 class GhPullRequestStatsSerializer(s.Serializer):
@@ -51,7 +51,7 @@ class GhPullRequestStatsSerializer(s.Serializer):
         self._contrib_most_prs = GhUser.objects.filter(
             pull_requests__base_repo=repo,
         ).annotate(
-            contrib_prs=models.Count('pull_requests')
+            contrib_prs=m.Count('pull_requests')
         ).order_by('-contrib_prs').first()
 
         self._maintainers = repo.maintainers.all()
@@ -88,26 +88,26 @@ class GhPullRequestStatsSerializer(s.Serializer):
         return self._maintainers.count()
 
     def get_prs_no_comments(self, repo):
-        return repo.prs_to.annotate(comments_count=models.Count('comments')).filter(comments_count=0).count()
+        return repo.prs_to.annotate(comments_count=m.Count('comments')).filter(comments_count=0).count()
 
     def get_avg_lifetime(self, repo):
-        avg = 0
-        if repo.pr_count > 0:
+        avg = closed = 0
+        # An inefficient way to calculate average but I haven't got the aggregation to work
+        if repo.pr_count > 0:  # prevent divide by zero
             td = datetime.timedelta()
             for p in repo.prs_to.all():
                 if p.closed_at:
+                    closed += 1
                     td += p.closed_at - p.created_at
-            avg = (td / repo.pr_count).days
+            avg = (td / closed).days
 
+        # Save this code to hopefully aggregate the average at the database level at sometime.
         # agg = repo.prs_to \
-        #     .annotate(closed_at=models.When(history__action=GhPullRequestHistory.CLOSED_ACTION, then=models.F('history__created_at'))) \
-        #     .annotate(created_at=models.When(history__action=GhPullRequestHistory.OPENED_ACTION, then=models.F('history__created_at')))\
-        #     .annotate(elapsed=models.F('closed_at') - models.F('created_at'))\
+        #     .annotate(closed_at=m.Case(m.When(m.Q(history__action=GhPullRequestHistory.CLOSED_ACTION) & m.Q(history__created_at__isnull=False)), then=m.F('history__created_at'))) \
+        #     .annotate(created_at=m.Case(m.When(m.Q(history__action=GhPullRequestHistory.OPENED_ACTION) & m.Q(history__created_at__isnull=False)), then=m.F('history__created_at'))) \
+        #     .annotate(elapsed=m.F('closed_at')) \
         #     .values('created_at', 'closed_at', 'id', 'elapsed')
-        # print(agg)
-        # for a in agg:
-        #     if a.get('elapsed'):
-        #         print("Has elapsed:" + a)
+            # .aggregate(life=m.Max('closed_at', output_field=m.DateTimeField()))
         return avg
 
     class Meta:

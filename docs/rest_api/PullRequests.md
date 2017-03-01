@@ -18,8 +18,6 @@ A GET request is made to:
     "not_maintainer_prs": int,
     "avg_comment_per_pr": float,
     "prs_from_outside_org": int,
-    "maintainers_count: int,
-    "is_org": bool
 }
 ```
 
