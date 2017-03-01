@@ -30,7 +30,7 @@ class GhProject(m.Model):
     )
     deleted = m.IntegerField()
 
-    #M2M fields added
+    # M2M fields added
     commits_m2m = m.ManyToManyField(
         'gh_commits.GhCommit', 
         through='gh_projects.GhProjectCommit',

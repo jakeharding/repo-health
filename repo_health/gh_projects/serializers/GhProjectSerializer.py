@@ -14,6 +14,7 @@ from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from repo_health.gh_users.models import GhUser
 from ..models import GhProject
 
+
 class GhProjectSerializer(ModelSerializer):
     _contribs_count = None
     _watch_not_contribs_count = None
@@ -40,12 +41,11 @@ class GhProjectSerializer(ModelSerializer):
         repo = args[0].first()
         if repo is not None:
             commits = (repo.commits_m2m.all() | repo.commits_fk.all()).order_by('-created_at')
-            commit_users = GhUser.objects.filter(commits__in=commits).distinct()
+            commit_users = GhUser.objects.filter(authored_commits__in=commits).distinct()
             self._commits_count = commits.count()
             self._contribs_count = commit_users.count()
             self._latest_commit = commits.first().created_at
             self._orgs_of_contribs_count = GhUser.objects.filter(members__in=commit_users).exclude(id=repo.owner.id).count()
-    
 
     def get_orgs_of_contribs_count(self, repo):
         return self._orgs_of_contribs_count
@@ -79,4 +79,4 @@ class GhProjectSerializer(ModelSerializer):
         
     class Meta:
         model = GhProject
-        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url', 'forks',]
+        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url', 'forks', ]

@@ -5,17 +5,22 @@ A GET request is made to:
 - `/api/v1/gh-projects/<repo-id>/pull-requests`
 - Note the repo id embedded in the URL
 
+
 ```
 {
     "prs_count": int,
-    "prs_last_year: 12 element array,
+    "prs_last_year:  [int] //12 element array, number of prs per month,oldest first, one year from latest_pr_created_at
     "latest_pr_created_at": datetime str,
     "contrib_most_prs": str - login,
     "prs_no_maintainer_comments": int,
     "prs_no_comments": int,
     "avg_lifetime": str,
     "not_maintainer_prs": int,
-    "avg_comment_per_pr": float,
-    "prs_from_outside_org": int
+    "avg_comment_per_pr": float, //3 decimal places of precisions
+    "prs_from_outside_org": int | null, // Null if the repo is not part of org
 }
 ```
+
+## Possilble future metrics
+
+- upstream/downstream pr count and count of merged

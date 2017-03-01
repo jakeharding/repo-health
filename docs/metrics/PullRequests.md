@@ -16,6 +16,6 @@
  - most contributing user (user with most accepted prs)
  - avg size of pr?
  - not maintainer pr past year?
- - not orn member pr? past year?
+ - not org member pr? past year?
  - avg comments per pr
  

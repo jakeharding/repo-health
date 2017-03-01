@@ -18,11 +18,11 @@ class GhCommit(models.Model):
     sha = models.CharField(unique=True, max_length=40, blank=True, null=True)
     author = models.ForeignKey(
         'gh_users.GhUser', models.DO_NOTHING, 
-        blank=True, null=True, related_name='author'
+        blank=True, null=True, related_name='authored_commits'
     )
     committer = models.ForeignKey(
         'gh_users.GhUser', models.DO_NOTHING, 
-        blank=True, null=True, related_name="commits"
+        blank=True, null=True, related_name="committer_commits"
     )
     project = models.ForeignKey(
         'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True,
@@ -31,7 +31,7 @@ class GhCommit(models.Model):
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
 
-    #Added fields for many to many relationships
+    # Added fields for many to many relationships
     comment_users = models.ManyToManyField(
         "gh_users.GhUser", 
         through="gh_commits.GhCommitComment"
