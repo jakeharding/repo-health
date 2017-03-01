@@ -41,7 +41,7 @@ class GhProjectSerializer(ModelSerializer):
         repo = args[0].first()
         if repo is not None:
             commits = (repo.commits_m2m.all() | repo.commits_fk.all()).order_by('-created_at')
-            commit_users = GhUser.objects.filter(commits__in=commits).distinct()
+            commit_users = GhUser.objects.filter(authored_commits__in=commits).distinct()
             self._commits_count = commits.count()
             self._contribs_count = commit_users.count()
             self._latest_commit = commits.first().created_at
