@@ -21,6 +21,6 @@ A GET request is made to:
 }
 ```
 
-## Possilble future metrics
+## Possible future metrics
 
 - upstream/downstream pr count and count of merged
