@@ -11,10 +11,12 @@
 */
 
 import search from './search/search.module';
+import repoDetails from './repo-details/repo-details.module';
 
 const components = angular
   .module('components', [
-    search
+    search,
+    repoDetails
   ])
   .name;
 
