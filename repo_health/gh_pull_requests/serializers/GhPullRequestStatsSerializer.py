@@ -102,14 +102,14 @@ class GhPullRequestStatsSerializer(s.Serializer):
             avg = (td / closed).days
 
         # Save this code to hopefully aggregate the average at the database level sometime.
-        agg = GhPullRequest.objects.raw(
-            "SELECT `pull_requests`.`id`, `pull_request_history`.`created_at` as `created_at`, `t`.`created_at` as " +
-            "`closed_at` from `pull_requests` join `pull_request_history` on `pull_request_history`." +
-            "`pull_request_id` = `pull_requests`.`id` join `pull_request_history` `t` on`pull_request_history`." +
-            "`pull_request_id` = `pull_requests`.`id` where `t`.`action` = 'closed' and `pull_request_history`." +
-            "`action` = 'opened' and `pull_requests`.`base_repo_id` = %s", [repo.id],
+        # agg = GhPullRequest.objects.raw(
+        #     "SELECT `pull_requests`.`id`, `pull_request_history`.`created_at` as `created_at`, `t`.`created_at` as " +
+        #     "`closed_at` from `pull_requests` join `pull_request_history` on `pull_request_history`." +
+        #     "`pull_request_id` = `pull_requests`.`id` join `pull_request_history` `t` on`pull_request_history`." +
+        #     "`pull_request_id` = `pull_requests`.`id` where `t`.`action` = 'closed' and `pull_request_history`." +
+        #     "`action` = 'opened' and `pull_requests`.`base_repo_id` = %s", [repo.id],
 
-        )
+        # )
         # agg = repo.prs_to \
         #     .annotate(closed_at=m.Case(
         #         m.When(
@@ -126,7 +126,7 @@ class GhPullRequestStatsSerializer(s.Serializer):
         #     .values('created_at', 'closed_at', 'id', 'history__action') \
         #     .exclude(m.Q(history__action=GhPullRequestHistory.CLOSED_ACTION) & m.Q(closed_at__isnull=True)).query
             # .aggregate(avg=m.Avg(m.F('created_at') - m.F('closed_at'), output_field=m.DurationField()))
-        print(agg)
+        # print(agg)
 
         return avg
 
