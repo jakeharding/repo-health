@@ -14,6 +14,16 @@ from django.db import models
 
 
 class GhIssueEvent(models.Model):
+    MERGED_ACTION = 'merged'
+    OPENED_ACTION = 'opened'
+    SUBSCRIBED_ACTION = 'subscribed'
+    REF_ACTION = 'referenced'
+    CLOSED_ACTION = 'closed'
+    REOPENED_ACTION = 'reopened'
+    ASSIGNED_ACTION = 'assigned'
+    MENTIONED_ACTION = 'mentioned'
+    DELETED_ACTION = 'head_ref_deleted'
+
     event_id = models.TextField()
     issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING)
     actor = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
