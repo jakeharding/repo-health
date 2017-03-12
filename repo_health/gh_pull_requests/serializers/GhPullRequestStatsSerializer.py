@@ -15,7 +15,7 @@ import calendar
 from django.db import models as m
 from rest_framework import serializers as s
 from repo_health.gh_users.models import GhUser
-from ..models import GhPullRequestHistory, GhPullRequest
+from ..models import GhPullRequestHistory
 
 
 class GhPullRequestStatsSerializer(s.Serializer):
@@ -142,7 +142,6 @@ class GhPullRequestStatsSerializer(s.Serializer):
         if repo.is_owned_by_org():
             return repo.prs_to.exclude(user__organizations=repo.owner).count()
 
-    class Meta:
-        model = 'gh_projects.GhProject'
-        fields = ('pr_count', )
-
+    # class Meta:
+    #     model = 'gh_projects.GhProject'
+    #     fields = ('pr_count', )

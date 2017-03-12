@@ -12,7 +12,7 @@ merged_count: int,
 avg_lifetime: str,
 popular_labels: [ //Five most popular labels
     label_name: {
-        total: int, total issues with label
+        total: int, //total issues with label
         open: int //open issues with label
     }, ...
 contrib_comments_per_issue: int

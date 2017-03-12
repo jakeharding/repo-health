@@ -14,7 +14,11 @@ from django.db import models
 
 
 class GhIssue(models.Model):
-    repo = models.ForeignKey('gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True)
+    repo = models.ForeignKey('gh_projects.GhProject', models.DO_NOTHING,
+                             blank=True, null=True,
+                             related_name='issues'
+                             )
+
     reporter = models.ForeignKey(
         'gh_users.GhUser', models.DO_NOTHING, blank=True, null=True,
         related_name='reporter'

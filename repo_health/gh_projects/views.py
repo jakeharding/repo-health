@@ -19,6 +19,7 @@ from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from repo_health.gh_pull_requests.serializers import GhPullRequestStatsSerializer
+from repo_health.gh_issues.serializers import GhIssueStatsSerializer
 from .models import GhProject
 from .serializers import GhProjectSerializer, StatsUrlsSerializer
 from repo_health.metrics.serializers import ResponseSerializer
@@ -68,3 +69,12 @@ class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
 
         pr_stats = GhPullRequestStatsSerializer(repo)
         return Response(pr_stats.data)
+
+    @detail_route(methods=['GET'])
+    def issues(self, *args, **kwargs):
+        repo = GhProject.objects\
+            .annotate(issues_count=models.Count('issues'))\
+            .get(pk=kwargs['pk'])
+
+        ser = GhIssueStatsSerializer(repo)
+        return Response(ser.data)
