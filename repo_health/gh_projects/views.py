@@ -52,6 +52,9 @@ class GhProjectViewSet(ListModelMixin, GenericViewSet):
     def issues(self, *args, **kwargs):
         repo = GhProject.objects\
             .annotate(issues_count=models.Count('issues'))\
+            .annotate(most_recent_issue_created=models.Max('issues__created_at'))\
+            .prefetch_related('issues')\
+            .prefetch_related('labels')\
             .get(pk=kwargs['pk'])
 
         ser = GhIssueStatsSerializer(repo)
