@@ -111,6 +111,7 @@ class GhProjectApiTest(APITestCase):
     def test_get_pr_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.django.id)
         self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
+        print(r.data)
         # Check for a few custom fields of the serializer
         self.assertTrue(r.data['pr_count'] and isinstance(r.data['pr_count'], int))
         self.assertTrue(r.data['prs_last_year'] and isinstance(r.data['prs_last_year'], list))
