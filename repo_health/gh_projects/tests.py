@@ -67,6 +67,7 @@ class GhProjectApiTest(APITestCase):
         self.project_no_prs = GhProject.objects.annotate(prs_to_count=m.Count('prs_to')).order_by('prs_to_count').first()
         # Django has a lot of pull requests
         self.django = GhProject.objects.get(name='django', owner__login='django')
+        self.project_with_issues = GhProject.objects.filter(issues__isnull=False).first()
 
     def test_api_get_project(self):
         r = self.client.get(dj_reverse('gh-project-detail', args=[self.project.id]))
@@ -118,13 +119,15 @@ class GhProjectApiTest(APITestCase):
         )
         self.assertTrue(r.data['contrib_most_prs'] and isinstance(r.data['contrib_most_prs'], str))
         self.assertTrue(
-            r.data.get('prs_no_maintainer_comments') and isinstance(r.data['prs_no_maintainer_comments'], int))
+            r.data.get('prs_no_maintainer_comments') and isinstance(r.data['prs_no_maintainer_comments'], int)
+        )
 
         # Test a repo with no prs to be sure no errors are thrown
         self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.project_no_prs.id)
 
     def test_get_issue_stats(self):
-        r = self.client.get('/api/v1/gh-projects/%d/issues' % self.django.id)
+        r = self.client.get('/api/v1/gh-projects/%d/issues' % self.project_with_issues.id)
         print (r.data)
         self.assertTrue(status.is_success(r.status_code))
         self.assertTrue(r.data.get('issues_count'))
+        self.assertTrue(r.data.get('issues_closed_last_year') and isinstance(r.data['issues_closed_last_year'], list))

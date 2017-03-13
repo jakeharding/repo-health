@@ -15,7 +15,7 @@ from django.db import models
 
 class GhIssueEvent(models.Model):
     MERGED_ACTION = 'merged'
-    OPENED_ACTION = 'opened'
+    OPENED_ACTION = 'opened'  # No opened events in test DB. Issue has created_at field. Assume this is opened datetime
     SUBSCRIBED_ACTION = 'subscribed'
     REF_ACTION = 'referenced'
     CLOSED_ACTION = 'closed'
@@ -25,7 +25,9 @@ class GhIssueEvent(models.Model):
     DELETED_ACTION = 'head_ref_deleted'
 
     event_id = models.TextField()
-    issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING)
+    issue = models.ForeignKey(
+        'gh_issues.GhIssue', models.DO_NOTHING, related_name='events'
+    )
     actor = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING)
     action = models.CharField(max_length=255)
     action_specific = models.CharField(max_length=50, blank=True, null=True)
@@ -36,4 +38,3 @@ class GhIssueEvent(models.Model):
         managed = False
         db_table = 'issue_events'
         verbose_name = 'GitHub Issue Event'
-        
