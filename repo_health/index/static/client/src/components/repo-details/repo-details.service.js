@@ -14,14 +14,19 @@ class RepoDetailsService {
 
   repoDetails = null;
 
-  constructor ($repo){
+  constructor ($repo, $q){
     'ngInject';
 
-    Object.assign(this, { $repo });
+    Object.assign(this, { $repo, $q });
   }
 
+  /* Gets the last two strings on a url */
   getNameAndOwnerFromUrl(url = '') {
-    const pathArray = url.split('/');
+    if (url.search('github.com') == -1) {
+      return;
+    }
+
+    const pathArray = url.replace(/.*github.com\//, '').split('/');
     const name = pathArray.pop();
     const owner__login = pathArray.pop();
     return name && owner__login ? { owner__login, name } : undefined;
@@ -29,7 +34,7 @@ class RepoDetailsService {
 
   getStats(params) {
     if (this.repoDetails) {
-      return Promise.resolve(this.repoDetails);
+      return this.$q.resolve(this.repoDetails);
     } else {
       return this.$repo.get('repo', params).then(details => (this.repoDetails = details));
     }
