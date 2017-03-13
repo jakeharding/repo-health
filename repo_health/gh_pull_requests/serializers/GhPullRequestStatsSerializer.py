@@ -16,9 +16,10 @@ from django.db import models as m
 from rest_framework import serializers as s
 from repo_health.gh_users.models import GhUser
 from ..models import GhPullRequestHistory
+from repo_health.index.mixins import CountForPastYearMixin
 
 
-class GhPullRequestStatsSerializer(s.Serializer):
+class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
     _most_recent_history = None
     _opened_histories = None
     _contrib_most_prs = None
@@ -60,20 +61,21 @@ class GhPullRequestStatsSerializer(s.Serializer):
         return repo.pr_count
 
     def get_prs_last_year(self, repo):
-        one_year = datetime.timedelta(days=366)
-        opened_count_for_year = []
-
-        if self._most_recent_history:
-            opened_prev_year = self._opened_histories.filter(created_at__gte=self._most_recent_history.created_at - one_year)
-            dt_to_filter = opened_prev_year.last().created_at
-
-            for m in range(12):
-                days_in_mon = calendar.monthrange(dt_to_filter.year, dt_to_filter.month)[1]
-                opened_count_for_year.append(opened_prev_year.filter(
-                    created_at__year=dt_to_filter.year,
-                    created_at__month=dt_to_filter.month).count())
-                dt_to_filter += datetime.timedelta(days=days_in_mon)
-        return opened_count_for_year
+        return self.get_count_list_for_year(self._opened_histories, 'created_at')
+        # one_year = datetime.timedelta(days=366)
+        # opened_count_for_year = []
+        #
+        # if self._most_recent_history:
+        #     opened_prev_year = self._opened_histories.filter(created_at__gte=self._most_recent_history.created_at - one_year)
+        #     dt_to_filter = opened_prev_year.last().created_at
+        #
+        #     for m in range(12):
+        #         days_in_mon = calendar.monthrange(dt_to_filter.year, dt_to_filter.month)[1]
+        #         opened_count_for_year.append(opened_prev_year.filter(
+        #             created_at__year=dt_to_filter.year,
+        #             created_at__month=dt_to_filter.month).count())
+        #         dt_to_filter += datetime.timedelta(days=days_in_mon)
+        # return opened_count_for_year
 
     def get_latest_pr_created_at(self, repo):
         return self._most_recent_history.created_at if self._most_recent_history else None
