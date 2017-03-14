@@ -37,3 +37,6 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
 
     def get_issues_opened_last_year(self, repo):
         return self.get_count_list_for_year(repo.issues)
+
+    def get_merged_count(self, repo):
+        return repo.issues.filter(events__action=GhIssueEvent.MERGED_ACTION).count()
