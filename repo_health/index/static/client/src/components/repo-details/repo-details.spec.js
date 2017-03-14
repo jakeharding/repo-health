@@ -63,7 +63,7 @@ describe('Repo Details', () => {
     });
   });
 
-    describe('RepoDetailsService', () => {
+  describe('RepoDetailsService', () => {
     let RepoDetailsService;
     let $httpBackend;
     let $apiUrl;
