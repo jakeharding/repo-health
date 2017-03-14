@@ -1,0 +1,32 @@
+<div layout="column" ng-if="$ctrl.loadingRepo" layout-align="center center">
+  Loading your repository... Please wait...
+  <div layout="row" class="md-padding">
+    <md-progress-circular md-diameter="96"></md-progress-circular>
+  </div>
+</div>
+<md-content layout-padding ng-if="!$ctrl.loadingRepo" layout="row" layout-align="center center">
+  <md-card flex="65">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{::$ctrl.details.name}}</span>
+        <span class="md-subhead">{{::$ctrl.details.description}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content layout="column">
+      <div layout="row">
+        <div flex><span class="md-title">Language</span>: {{$ctrl.details.language}}</div>
+        <div flex><span class="md-title">Contributions</span>: {{$ctrl.details.contribs_count}}</div>
+      </div>
+
+      <div layout="row">
+        <div flex><span class="md-title">Watchers</span>: {{$ctrl.details.watchers_count}}</div>
+        <div flex><span class="md-title">Commits</span>: {{$ctrl.details.commits_count}}</div>
+      </div>
+
+      <div layout="row">
+        <div flex><span class="md-title">Milestones</span>: {{$ctrl.details.milestones_count}}</div>
+        <div flex><span class="md-title">Forks</span>: {{$ctrl.details.forks_count}}</div>
+      </div>
+    </md-card-content>
+  </md-card>
+</md-content>

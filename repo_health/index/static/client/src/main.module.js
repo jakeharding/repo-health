@@ -12,20 +12,34 @@
 */
 
 import angular from 'angular';
+import ngMaterial from 'angular-material';
 import uiRouter from 'angular-ui-router';
+import resources from './resources';
 import components from 'components/components.module.js';
+import mainComponent from './main.component';
 
 //Styles
 import 'global.css';
 
 export const main = angular.module('repo-health', [
     uiRouter,
-    components
+    ngMaterial,
+    components,
+    resources
   ])
-  .config(($locationProvider, $urlRouterProvider) => {
+  .component('main', mainComponent)
+  .config(($locationProvider, $urlRouterProvider, $mdThemingProvider) => {
     'ngInject';
     
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/search');
+
+    // Set-up themes
+    $mdThemingProvider.theme('error').backgroundPalette('red').dark();
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('light-blue')
+      .accentPalette('orange')
+      .backgroundPalette('blue-grey');
   })
   .name;

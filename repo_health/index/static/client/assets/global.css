@@ -10,5 +10,5 @@
 * This file will contain all of the styles imported in the order they need to be
 */
 
-@import 'vendor/bootstrap.min.css';
+@import 'vendor/angular-material.min.css';
 @import 'styles/styles.css';
