@@ -75,6 +75,7 @@ class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
         repo = GhProject.objects\
             .annotate(issues_count=models.Count('issues'))\
             .annotate(most_recent_issue_created=models.Max('issues__created_at'))\
+            .annotate(labels_count=models.Count('labels'))\
             .prefetch_related('issues')\
             .prefetch_related('labels')\
             .get(pk=kwargs['pk'])

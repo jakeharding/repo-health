@@ -12,3 +12,4 @@ Import all classes from package.
 
 
 from .GhIssueStatsSerializer import GhIssueStatsSerializer
+from .TotalAndOpenIssueLabelSerial import TotalAndOpenIssueLabelSerial
