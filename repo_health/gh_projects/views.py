@@ -11,7 +11,7 @@ Business logic for api endpoints.
 """
 
 
-from django.db import models
+from django.db import models as m
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.exceptions import NotFound
@@ -19,6 +19,7 @@ from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from repo_health.gh_pull_requests.serializers import GhPullRequestStatsSerializer
+from repo_health.gh_issues.serializers import GhIssueStatsSerializer
 from .models import GhProject
 from .serializers import GhProjectSerializer
 
@@ -41,8 +42,21 @@ class GhProjectViewSet(ListModelMixin, GenericViewSet):
     @detail_route(url_path='pull-requests')
     def pull_requests(self, *args, **kwargs):
         repo = GhProject.objects\
-            .annotate(pr_count=models.Count('prs_to'))\
+            .annotate(pr_count=m.Count('prs_to'))\
             .get(pk=kwargs['pk'])
 
         pr_stats = GhPullRequestStatsSerializer(repo)
         return Response(pr_stats.data)
+
+    @detail_route(methods=['GET'])
+    def issues(self, *args, **kwargs):
+        repo = GhProject.objects\
+            .annotate(issues_count=m.Count('issues'))\
+            .annotate(most_recent_issue_created=m.Max('issues__created_at'))\
+            .annotate(labels_count=m.Count('labels'))\
+            .prefetch_related('issues')\
+            .prefetch_related('labels')\
+            .get(pk=kwargs['pk'])
+
+        ser = GhIssueStatsSerializer(repo)
+        return Response(ser.data)
