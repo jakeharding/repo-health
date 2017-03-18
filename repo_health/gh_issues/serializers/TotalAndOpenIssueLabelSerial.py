@@ -18,9 +18,6 @@ class TotalAndOpenIssueLabelSerial(s.Serializer):
     total = s.SerializerMethodField()
     open = s.SerializerMethodField()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     def get_total(self, label):
         return label.issues.count()
 
