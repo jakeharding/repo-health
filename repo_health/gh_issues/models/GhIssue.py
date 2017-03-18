@@ -47,7 +47,7 @@ class GhIssue(models.Model):
 
     labels = models.ManyToManyField(
         'gh_projects.GhRepoLabel',
-        through='gh_issues.GhIssueLabel'
+        through='gh_issues.GhIssueLabel', related_name='issues'
     )
 
     def __str__(self):

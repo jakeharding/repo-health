@@ -24,7 +24,7 @@ class GhIssueEvent(models.Model):
     MENTIONED_ACTION = 'mentioned'
     DELETED_ACTION = 'head_ref_deleted'
 
-    event_id = models.TextField()
+    event_id = models.TextField(primary_key=True)
     issue = models.ForeignKey(
         'gh_issues.GhIssue', models.DO_NOTHING, related_name='events'
     )

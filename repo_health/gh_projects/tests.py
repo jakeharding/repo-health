@@ -75,7 +75,9 @@ class GhProjectApiTest(APITestCase):
 
     def test_api_get_project_not_found(self):
         # Test with a bad owner login
-        r_with_bad_owner = self.client.get('/api/v1/gh-projects', {'owner__login':'incoherehnet giibbuusrish', 'name':self.project.name})
+        r_with_bad_owner = self.client.get('/api/v1/gh-projects', {
+            'owner__login': 'incoherehnet giibbuusrish', 'name': self.project.name}
+                                           )
         self.assertTrue(status.is_client_error(r_with_bad_owner.status_code))
 
         # Test with a bad repo name
@@ -114,7 +116,9 @@ class GhProjectApiTest(APITestCase):
 
     def test_get_issue_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/issues' % self.project_with_issues.id)
-        print (r.data)
+        import pprint as pp; pp.pprint(r.data)
         self.assertTrue(status.is_success(r.status_code))
         self.assertTrue(r.data.get('issues_count'))
         self.assertTrue(r.data.get('issues_closed_last_year') and isinstance(r.data['issues_closed_last_year'], list))
+        self.assertTrue(r.data.get('avg_lifetime') and isinstance(r.data['avg_lifetime'], int))
+        self.assertTrue(r.data.get('popular_labels') and isinstance(r.data['popular_labels'], list))

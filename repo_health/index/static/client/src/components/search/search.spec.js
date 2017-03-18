@@ -53,7 +53,7 @@ describe('Search', () => {
         spyOn(controller.RepoDetailsService, 'getStats');
         controller.githubUrl = 'This not a url';
         controller.getStats();
-        expect(controller.loadingRepo).toBeTrue;
+        expect(controller.loadingRepo).toBeTruthy();
         expect(controller.RepoDetailsService.getStats).not.toHaveBeenCalled();
       });
 
