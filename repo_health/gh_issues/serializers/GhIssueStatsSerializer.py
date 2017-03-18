@@ -1,5 +1,5 @@
 """
-serializers.py - (C) Copyright - 2017
+GhIssueStatsSerializer.py - (C) Copyright - 2017
 This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 
 SPDX-License-Identifier: MIT
@@ -11,7 +11,6 @@ Serializer for issue stats of a GitHub repo.
 """
 
 import datetime
-from django.db import models as m
 from rest_framework import serializers as s
 from ..models import GhIssueEvent, GhIssueComment
 from .TotalAndOpenIssueLabelSerial import TotalAndOpenIssueLabelSerial
@@ -21,8 +20,6 @@ from repo_health.index.mixins import CountForPastYearMixin
 
 class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
 
-    _label_names = None
-
     issues_count = s.SerializerMethodField()
     issues_closed_last_year = s.SerializerMethodField()
     issues_opened_last_year = s.SerializerMethodField()
@@ -30,10 +27,6 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
     avg_lifetime = s.SerializerMethodField()
     popular_labels = s.SerializerMethodField()
     avg_maintainer_comments_per_issue = s.SerializerMethodField()
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        repo = args[0]
 
     def get_issues_count(self, repo):
         return repo.issues_count

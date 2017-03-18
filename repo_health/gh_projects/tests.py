@@ -123,6 +123,5 @@ class GhProjectApiTest(APITestCase):
         self.assertTrue(r.data.get('avg_maintainer_comments_per_issue') and isinstance(
             r.data['avg_maintainer_comments_per_issue'], float)
                         )
-
         # Django doesn't use issues so make sure an error isn't thrown
-        django = self.client.get('/api/v1/gh-projects/%d/issues' % self.django.id)
+        self.client.get('/api/v1/gh-projects/%d/issues' % self.django.id)

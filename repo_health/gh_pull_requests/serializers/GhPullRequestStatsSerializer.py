@@ -129,7 +129,3 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
     def get_prs_from_outside_org(self, repo):
         if repo.is_owned_by_org():
             return repo.prs_to.exclude(user__organizations=repo.owner).count()
-
-    # class Meta:
-    #     model = 'gh_projects.GhProject'
-    #     fields = ('pr_count', )

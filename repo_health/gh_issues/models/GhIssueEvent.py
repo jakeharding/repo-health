@@ -15,7 +15,7 @@ from django.db import models
 
 class GhIssueEvent(models.Model):
     MERGED_ACTION = 'merged'
-    OPENED_ACTION = 'opened'  # No opened events in test DB. Issue has created_at field. Assume this is opened datetime
+    OPENED_ACTION = 'opened'  # No opened events in test DB. Issue has created_at field.
     SUBSCRIBED_ACTION = 'subscribed'
     REF_ACTION = 'referenced'
     CLOSED_ACTION = 'closed'
