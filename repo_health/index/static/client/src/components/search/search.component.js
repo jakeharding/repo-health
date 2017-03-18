@@ -27,7 +27,7 @@ const searchComponent = {
     getStats() {
       const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
       if (params) {
-        this.loadingRepo = true
+        this.loadingRepo = true;
         this.error = null;
         this.RepoDetailsService.getStats(params).then(() => {
           this.$state.go('repo-details', params);
