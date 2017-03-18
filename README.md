@@ -18,6 +18,16 @@ A Linux production environment is recommmended, and Ubuntu version 12 and greate
 
 ## Database configuration
 Both production and development environments use MySql for a DBMS and require a database configuration specific to the individual environment.
+If using mysql 5.7 or greater, a warning may been seen due to strict mode being enable by default.  Turn off strict mode by adding a file named:
+
+`/usr/local/bin/etc/my.cnf`.
+
+To this file add:
+```
+[mysqld]
+
+sql_mode=NO_ENGINE_SUBSTITUTION
+```
 
 #### Development
 For development, a subset of data is used for testing and provided by ghtorrent [here](http://ghtorrent.org/msr14.html).  Use this link to download the database, and after successful download, unpack the archive to your desired location.  Take note of the location.  The supplied data requires a database to hold so we need to create one using MySql.  The installation of MySql varies on the package manager being used, so it is assumed MySql is installed and running.
