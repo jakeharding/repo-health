@@ -38,7 +38,7 @@ class GhIssue(models.Model):
     created_at = models.DateTimeField()
     ext_ref_id = models.CharField(max_length=24)
 
-    #M2M fields add
+    # M2M fields add
     comment_users = models.ManyToManyField(
         'gh_users.GhUser', 
         through='gh_issues.GhIssueComment',
@@ -47,11 +47,11 @@ class GhIssue(models.Model):
 
     labels = models.ManyToManyField(
         'gh_projects.GhRepoLabel',
-        through='gh_issues.GhIssueLabel', related_name='issues'
+        through='gh_issues.GhIssueLabel', related_name='label_issues'
     )
 
     def __str__(self):
-        return "Issue for: %s" %self.repo.name
+        return "Issue for: %s" % self.repo.name
 
     class Meta:
         managed = False

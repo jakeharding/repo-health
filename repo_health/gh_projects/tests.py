@@ -99,7 +99,6 @@ class GhProjectApiTest(APITestCase):
     def test_get_pr_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.django.id)
         self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
-        print(r.data)
         # Check for a few custom fields of the serializer
         self.assertTrue(r.data['pr_count'] and isinstance(r.data['pr_count'], int))
         self.assertTrue(r.data['prs_last_year'] and isinstance(r.data['prs_last_year'], list))
@@ -116,9 +115,14 @@ class GhProjectApiTest(APITestCase):
 
     def test_get_issue_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/issues' % self.project_with_issues.id)
-        import pprint as pp; pp.pprint(r.data)
         self.assertTrue(status.is_success(r.status_code))
         self.assertTrue(r.data.get('issues_count'))
         self.assertTrue(r.data.get('issues_closed_last_year') and isinstance(r.data['issues_closed_last_year'], list))
         self.assertTrue(r.data.get('avg_lifetime') and isinstance(r.data['avg_lifetime'], int))
         self.assertTrue(r.data.get('popular_labels') and isinstance(r.data['popular_labels'], list))
+        self.assertTrue(r.data.get('avg_maintainer_comments_per_issue') and isinstance(
+            r.data['avg_maintainer_comments_per_issue'], float)
+                        )
+
+        # Django doesn't use issues so make sure an error isn't thrown
+        django = self.client.get('/api/v1/gh-projects/%d/issues' % self.django.id)

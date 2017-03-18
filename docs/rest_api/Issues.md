@@ -15,7 +15,7 @@ popular_labels: [ //Five most popular labels
         total: int, //total issues with label
         open: int //open issues with label
     }, ...
-contrib_comments_per_issue: int
+avg_maintainer_comments_per_issue: int
 ]
 
 

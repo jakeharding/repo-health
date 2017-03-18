@@ -11,8 +11,9 @@ Serializer for issue stats of a GitHub repo.
 """
 
 import datetime
+from django.db import models as m
 from rest_framework import serializers as s
-from ..models import GhIssueEvent
+from ..models import GhIssueEvent, GhIssueComment
 from .TotalAndOpenIssueLabelSerial import TotalAndOpenIssueLabelSerial
 from repo_health.gh_projects.models import GhRepoLabel
 from repo_health.index.mixins import CountForPastYearMixin
@@ -28,11 +29,11 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
     merged_count = s.SerializerMethodField()
     avg_lifetime = s.SerializerMethodField()
     popular_labels = s.SerializerMethodField()
+    avg_maintainer_comments_per_issue = s.SerializerMethodField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         repo = args[0]
-        self._label_names = repo.labels.values_list('name', flat=True)
 
     def get_issues_count(self, repo):
         return repo.issues_count
@@ -51,12 +52,15 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
         avg = closed = 0
         if repo.issues_count is not 0:
             td = datetime.timedelta()
-            closed_issues = repo.issues.prefetch_related('events').filter(events__action=GhIssueEvent.CLOSED_ACTION)
+            closed_issues = repo.issues.prefetch_related('events').filter(events__action=GhIssueEvent.CLOSED_ACTION,
+                                                                          created_at__isnull=False)
+
             for i in closed_issues.all():
                 closed += 1
                 close_event = i.events.filter(action=GhIssueEvent.CLOSED_ACTION).order_by('-created_at').first()
-                td += (close_event.created_at - i.created_at)
-            avg = (td / closed).days
+                if not isinstance(i.created_at, type(None)):
+                    td += (close_event.created_at - i.created_at)
+            avg = (td / closed).days if closed > 0 else closed
         return avg
 
     def get_popular_labels(self, repo):
@@ -71,3 +75,10 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
             label_serial = TotalAndOpenIssueLabelSerial(l)
             response_data.append(label_serial.data)
         return response_data
+
+    def get_avg_maintainer_comments_per_issue(self, repo):
+        comments_from_m = GhIssueComment.objects.filter(
+            issue__in=repo.issues.all(),
+            user__in=repo.maintainers.all()
+        ).count()
+        return comments_from_m / repo.issues.count()

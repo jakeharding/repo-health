@@ -11,7 +11,7 @@ Business logic for api endpoints.
 """
 
 
-from django.db import models
+from django.db import models as m
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.exceptions import NotFound
@@ -42,7 +42,7 @@ class GhProjectViewSet(ListModelMixin, GenericViewSet):
     @detail_route(url_path='pull-requests')
     def pull_requests(self, *args, **kwargs):
         repo = GhProject.objects\
-            .annotate(pr_count=models.Count('prs_to'))\
+            .annotate(pr_count=m.Count('prs_to'))\
             .get(pk=kwargs['pk'])
 
         pr_stats = GhPullRequestStatsSerializer(repo)
@@ -51,9 +51,9 @@ class GhProjectViewSet(ListModelMixin, GenericViewSet):
     @detail_route(methods=['GET'])
     def issues(self, *args, **kwargs):
         repo = GhProject.objects\
-            .annotate(issues_count=models.Count('issues'))\
-            .annotate(most_recent_issue_created=models.Max('issues__created_at'))\
-            .annotate(labels_count=models.Count('labels'))\
+            .annotate(issues_count=m.Count('issues'))\
+            .annotate(most_recent_issue_created=m.Max('issues__created_at'))\
+            .annotate(labels_count=m.Count('labels'))\
             .prefetch_related('issues')\
             .prefetch_related('labels')\
             .get(pk=kwargs['pk'])
