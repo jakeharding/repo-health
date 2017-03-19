@@ -22,9 +22,9 @@ class RepoDetailsService {
 
   /* Gets the last two strings on a url */
   getNameAndOwnerFromUrl(url = '') {
-    if (url.search('github.com') == -1) {
-      return;
-    }
+    // if (url.search('github.com') == -1) {
+    //   return;
+    // }
 
     const pathArray = url.replace(/.*github.com\//, '').split('/');
     const name = pathArray.pop();
@@ -33,11 +33,11 @@ class RepoDetailsService {
   }
 
   getStats(params) {
-    if (this.repoDetails) {
-      return this.$q.resolve(this.repoDetails);
-    } else {
-      return this.$repo.get('repo', params).then(details => (this.repoDetails = details));
-    }
+    // if (this.repoDetails) {
+    //   return this.$q.resolve(this.repoDetails);
+    // } else {
+    return this.$repo.get('repo', params).then(details => (this.repoDetails = details));
+    // }
   }
 
 }

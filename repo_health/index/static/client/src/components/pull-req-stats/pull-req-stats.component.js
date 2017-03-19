@@ -15,14 +15,17 @@ import template from './pull-req-stats';
 const pullReqStatsComponent = {
   template,
   controller: class pullReqStatsComponent {
-
-    constructor($state, $stateParams) {
+    stats = null;
+    constructor(RepoDetailsService, $state, $stateParams, $repo) {
       'ngInject';
-      Object.assign(this, {  $state, $stateParams });
+      Object.assign(this, {  RepoDetailsService, $state, $stateParams, $repo });
     }
 
     $onInit() {
-      console.log(this.$stateParams);
+      console.log(this.RepoDetailsService.repoDetails);
+      // this.$repo.get('pullReqStats').then(stats => {
+      //     this.stats = stats;
+      // });
     }
   }
 };

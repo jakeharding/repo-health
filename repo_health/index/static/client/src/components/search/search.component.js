@@ -18,7 +18,6 @@ const searchComponent = {
 
     loadingRepo = false;
     error = null;
-    githubUrlRegex = '^(?:https:\/\/)?(?:www\.)?(?:github\.com\/)?(.+[^https:\/\/])\/(.+)(\/)?$';
 
     constructor(RepoDetailsService, $state, $stateParams) {
       'ngInject';
@@ -27,13 +26,15 @@ const searchComponent = {
 
     getStats() {
         const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
-        if (params) {
+        if (params && params.owner__login != this.$stateParams.owner__login) {
             this.loadingRepo = true;
             this.error = null;
-            this.$state.go('repo-health', params);
-        } else {
-            this.error = 'This repo does not exist';
-            this.loadingRepo = false;
+            this.RepoDetailsService.getStats(params).then(() => {
+              this.$state.go('repo-health', params);
+            }, () =>  {
+                this.error = 'This repo does not exist';
+                this.loadingRepo = false;
+            });
         }
     }
   }

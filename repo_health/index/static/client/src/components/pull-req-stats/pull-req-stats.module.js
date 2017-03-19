@@ -17,13 +17,13 @@ const components = angular
   .module('components.pull-req-stats', [])
     // .service('PullReqStats', pullPreqStats)
     .component('pullReqStats', pullReqStatsComponent)
-  // .run($api => {
-  //   'ngInject';
-  //     $api.add({
-  //       resource: 'repo',
-  //       url: '/'
-  //     });
-  //   })
+  .run($api => {
+    'ngInject';
+      $api.add({
+        resource: 'pullReqStats',
+        url: '/pull-requests'
+      });
+    })
   .name;
 
 export default components;
