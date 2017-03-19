@@ -21,7 +21,7 @@ const components = angular
     'ngInject';
       $api.add({
         resource: 'pullReqStats',
-        url: '/pull-requests'
+        url: ''
       });
     })
   .name;

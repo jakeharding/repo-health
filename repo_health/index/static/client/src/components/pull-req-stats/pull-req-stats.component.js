@@ -16,6 +16,8 @@ const pullReqStatsComponent = {
   template,
   controller: class pullReqStatsComponent {
     stats = null;
+    loadingStats = true;
+    loadingMsg = "Loading issue stats..."
     constructor(RepoDetailsService, $state, $stateParams, $repo) {
       'ngInject';
       Object.assign(this, {  RepoDetailsService, $state, $stateParams, $repo });
@@ -23,9 +25,15 @@ const pullReqStatsComponent = {
 
     $onInit() {
       console.log(this.RepoDetailsService.repoDetails);
-      // this.$repo.get('pullReqStats').then(stats => {
-      //     this.stats = stats;
-      // });
+      if(this.RepoDetailsService.repoDetails) {
+          let params = {
+            id: this.RepoDetailsService.repoDetails.id,
+            verb: 'pull-requests'
+          }
+          this.$repo.get('pullReqStats', params).then(stats => {
+              this.stats = stats;
+          });
+      }
     }
   }
 };
