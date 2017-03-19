@@ -18,14 +18,6 @@ const components = angular
   .module('components.repo-details', [uiRouter])
     .service('RepoDetailsService', repoDetailsService)
     .component('repoDetails', repoDetailsComponent)
-    .config($stateProvider => {
-      'ngInject';
-
-      $stateProvider.state('repo-details', {
-        url: '/repo-details?name&owner__login',
-        template: '<repo-details></repo-details>'
-      })
-    })
   .run($api => {
     'ngInject';
       $api.add({

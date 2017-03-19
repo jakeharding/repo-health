@@ -25,17 +25,15 @@ const searchComponent = {
     }
 
     getStats() {
-      const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
-      if (params) {
-        this.loadingRepo = true
-        this.error = null;
-        this.RepoDetailsService.getStats(params).then(() => {
-          this.$state.go('repo-details', params);
-        }, () => {
-          this.error = 'This repo does not exist';
-          this.loadingRepo = false;
-        });
-      }
+        const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
+        if (params) {
+            this.loadingRepo = true;
+            this.error = null;
+            this.$state.go('repo-report', params);
+        } else {
+            this.error = 'This repo does not exist';
+            this.loadingRepo = false;
+        }
     }
   }
 };

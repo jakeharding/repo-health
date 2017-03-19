@@ -19,13 +19,21 @@ const repoDetailsComponent = {
     loadingRepo = true;
     details = null;
 
-    constructor(RepoDetailsService, $state, $stateParams) {
+    constructor(RepoDetailsService, $state, $stateParams, $filter) {
       'ngInject';
-      Object.assign(this, { RepoDetailsService, $state, $stateParams });
+      Object.assign(this, { RepoDetailsService, $state, $stateParams, $filter });
     }
 
     $onInit() {
-      this.getStats();
+      if (this.hasValidStateParams())
+        this.getStats();
+    }
+
+    hasValidStateParams () {
+      let nulls = this.$filter('filter')(Object.keys(this.$stateParams), (key) => {
+        return !!this.$stateParams[key];
+      });
+      return nulls.length != 0;
     }
 
     getStats() {

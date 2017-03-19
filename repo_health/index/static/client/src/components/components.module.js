@@ -6,17 +6,20 @@
 *
 * Author(s) of this file:
 * @bparish628
+* J.Harding
 *
 * This is the definitions for all of the components used in this application.
 */
 
 import search from './search/search.module';
 import repoDetails from './repo-details/repo-details.module';
+import pullReqStats from './pull-req-stats/pull-req-stats.module';
 
 const components = angular
   .module('components', [
     search,
-    repoDetails
+    repoDetails,
+    pullReqStats
   ])
   .name;
 

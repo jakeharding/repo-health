@@ -28,11 +28,26 @@ export const main = angular.module('repo-health', [
     resources
   ])
   .component('main', mainComponent)
-  .config(($locationProvider, $urlRouterProvider, $mdThemingProvider) => {
+  .config(($locationProvider, $urlRouterProvider, $mdThemingProvider, $stateProvider) => {
     'ngInject';
     
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/search');
+    $stateProvider.state('repo-report', {
+        url: '/repo-report',
+        params: {
+            name: null,
+            owner__login: null
+        },
+        views: {
+            'repo-details': {
+                template: '<repo-details></repo-details>'
+            },
+            'pull-req-stats': {
+                template: '<pull-req-stats></pull-req-stats>'
+            }
+        }
+    })
 
     // Set-up themes
     $mdThemingProvider.theme('error').backgroundPalette('red').dark();
