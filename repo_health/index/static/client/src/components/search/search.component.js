@@ -18,6 +18,7 @@ const searchComponent = {
 
     loadingRepo = false;
     error = null;
+    githubUrlRegex = '^(?:https:\/\/)?(?:www\.)?(?:github\.com\/)?(.+[^https:\/\/])\/(.+)(\/)?$';
 
     constructor(RepoDetailsService, $state, $stateParams) {
       'ngInject';
@@ -29,7 +30,7 @@ const searchComponent = {
         if (params) {
             this.loadingRepo = true;
             this.error = null;
-            this.$state.go('repo-report', params);
+            this.$state.go('repo-health', params);
         } else {
             this.error = 'This repo does not exist';
             this.loadingRepo = false;

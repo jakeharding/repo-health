@@ -33,12 +33,8 @@ export const main = angular.module('repo-health', [
     
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/search');
-    $stateProvider.state('repo-report', {
-        url: '/repo-report',
-        params: {
-            name: null,
-            owner__login: null
-        },
+    $stateProvider.state('repo-health', {
+        url: '/repo-health/:owner__login/:name',
         views: {
             'repo-details': {
                 template: '<repo-details></repo-details>'
@@ -53,7 +49,7 @@ export const main = angular.module('repo-health', [
     $mdThemingProvider.theme('error').backgroundPalette('red').dark();
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('light-blue')
+      .primaryPalette('blue')
       .accentPalette('orange')
       .backgroundPalette('blue-grey');
   })
