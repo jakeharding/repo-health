@@ -28,6 +28,18 @@ class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     serializer_class = StatsUrlsSerializer
     filter_fields = ('owner__login', 'name')
 
+    def retrieve(self, r, *args, **kwargs):
+        """
+        Override to use the correct serializer. Otherwise it would use the stats serializer.
+        get_object method returns a 404 if project is not found.
+        :param r: Request object
+        :param args: pk of project is the first arg
+        :param kwargs:
+        :return: Response
+        """
+        obj = self.get_object()
+        return Response(GhProjectSerializer(obj).data)
+
     def list(self, r, *args, **kwargs):
         """
         Temporary override as we may use this method to filter repos for an autocomplete.

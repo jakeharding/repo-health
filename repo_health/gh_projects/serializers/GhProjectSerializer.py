@@ -38,7 +38,7 @@ class GhProjectSerializer(ModelSerializer):
         Get some statistics for repo.
         """
         super().__init__(*args, **kwargs)
-        repo = args[0].first()
+        repo = args[0]
         if repo is not None:
             commits = (repo.commits_m2m.all() | repo.commits_fk.all()).order_by('-created_at')
             commit_users = GhUser.objects.filter(authored_commits__in=commits).distinct()

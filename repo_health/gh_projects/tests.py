@@ -14,8 +14,10 @@ Test projects
 import datetime
 from django.test import TestCase, Client
 from django.db import models as m
+from django.shortcuts import reverse as dj_reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from rest_framework.reverse import reverse
 from .models import GhProject, GhRepoLabel
 
 
@@ -67,15 +69,24 @@ class GhProjectApiTest(APITestCase):
         self.django = GhProject.objects.get(name='django', owner__login='django')
 
     def test_api_get_project(self):
-        r = self.client.get('/api/v1/gh-projects', {'owner__login':self.project.owner.login, 'name':self.project.name})
+        r = self.client.get(dj_reverse('gh-project-detail', args=[self.project.id]))
         self.assertTrue(status.is_success(r.status_code))
-        import pprint as pp; pp.pprint(r.data)
-        self.assertEqual(r.data['name'], self.project.name)
-        self.assertEqual(r.data['id'], self.project.id)
+        self.assertEqual(r.data.get('id'), self.project.id)
+
+        #test with bad input
+        max_id = GhProject.objects.all().aggregate(m.Max('id')).get('id__max')
+        bad_input = self.client.get(dj_reverse('gh-project-detail', args=[max_id + 1]))
+        self.assertTrue(status.is_client_error(bad_input.status_code))
+
+    def test_api_get_repo_stats_urls(self):
+        r = self.client.get('/api/v1/gh-projects', {'owner__login': self.project.owner.login, 'name': self.project.name})
+        self.assertTrue(status.is_success(r.status_code))
+        self.assertEqual(r.data['repo_details_url'], reverse('gh-project-detail', args=[self.project.id], request=r.wsgi_request))
+        self.assertEqual(r.data['pr_stats_url'], reverse('gh-project-pull-requests', args=[self.project.id], request=r.wsgi_request))
 
     def test_api_get_project_not_found(self):
         # Test with a bad owner login
-        r_with_bad_owner = self.client.get('/api/v1/gh-projects', {'owner__login':'incoherehnet giibbuusrish', 'name':self.project.name})
+        r_with_bad_owner = self.client.get('/api/v1/gh-projects', {'owner__login':'incoherehnet giibbuusrish', 'name': self.project.name})
         self.assertTrue(status.is_client_error(r_with_bad_owner.status_code))
 
         # Test with a bad repo name
