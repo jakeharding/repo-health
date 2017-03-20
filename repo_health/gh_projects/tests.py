@@ -69,6 +69,7 @@ class GhProjectApiTest(APITestCase):
     def test_api_get_project(self):
         r = self.client.get('/api/v1/gh-projects', {'owner__login':self.project.owner.login, 'name':self.project.name})
         self.assertTrue(status.is_success(r.status_code))
+        import pprint as pp; pp.pprint(r.data)
         self.assertEqual(r.data['name'], self.project.name)
         self.assertEqual(r.data['id'], self.project.id)
 

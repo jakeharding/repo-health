@@ -11,3 +11,4 @@ Import all classes from package.
 """
 
 from .GhProjectSerializer import GhProjectSerializer
+from .StatsUrlSerializer import StatsUrlsSerializer

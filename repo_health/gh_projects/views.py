@@ -12,7 +12,7 @@ Business logic for api endpoints.
 
 
 from django.db import models
-from rest_framework.mixins import ListModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.exceptions import NotFound
 from rest_framework.status import HTTP_404_NOT_FOUND
@@ -20,15 +20,22 @@ from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from repo_health.gh_pull_requests.serializers import GhPullRequestStatsSerializer
 from .models import GhProject
-from .serializers import GhProjectSerializer
+from .serializers import GhProjectSerializer, StatsUrlsSerializer
 
 
-class GhProjectViewSet(ListModelMixin, GenericViewSet):
+class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     queryset = GhProject.objects.all()
-    serializer_class = GhProjectSerializer
+    serializer_class = StatsUrlsSerializer
     filter_fields = ('owner__login', 'name')
 
     def list(self, r, *args, **kwargs):
+        """
+        Temporary override as we may use this method to filter repos for an autocomplete.
+        :param r: Request for repo
+        :param args:
+        :param kwargs:
+        :return: Response
+        """
         if not r.GET.get('name') or not r.GET.get('owner__login'):
             raise NotFound('Repo not found', HTTP_404_NOT_FOUND)
         response = super().list(r, *args, **kwargs)
