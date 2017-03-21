@@ -18,7 +18,8 @@ const repoDetailsComponent = {
   controller: class repoDetailsComponent {
 
     loadingStats = true;
-    loadingMsg = "Loading general repo stats..."
+    loadingMsg = "Loading general repo stats...";
+    stats = null;
 
     constructor($http) {
       'ngInject';

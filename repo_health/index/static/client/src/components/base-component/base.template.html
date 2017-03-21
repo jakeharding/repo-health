@@ -15,24 +15,16 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-content layout="column">
-          <div layout="row">
-            <div flex><span class="md-title">Language</span>: {{$ctrl.stats.language}}</div>
-            <div flex><span class="md-title">Contributions</span>: {{$ctrl.stats.contribs_count}}</div>
+
+          <div ng-repeat="(k, v) in $ctrl.stats">
+              <div layout="row">
+                <div flex><span class="md-title">{{k}}</span>: {{v}}</div>
+              </div>
           </div>
 
-          <div layout="row">
-            <div flex><span class="md-title">Watchers</span>: {{$ctrl.stats.watchers_count}}</div>
-            <div flex><span class="md-title">Commits</span>: {{$ctrl.stats.commits_count}}</div>
-          </div>
-
-          <div layout="row">
-            <div flex><span class="md-title">Milestones</span>: {{$ctrl.stats.milestones_count}}</div>
-            <div flex><span class="md-title">Forks</span>: {{$ctrl.stats.forks_count}}</div>
-          </div>
-
-          <div layout="row">
-            <div flex><span class="md-title">Pull Req</span>: {{$ctrl.stats.prs_last_year}}</div>
-          </div>
+            <canvas id="line" class="chart chart-line" chart-data="$ctrl.stats.prs_last_year" chart-labels="$ctrl.labels"
+                      chart-click="$ctrl.onClick" chart-hover="$ctrl.onHover" chart-series="$ctrl.series" chart-options="$ctrl.options"
+                      chart-dataset-override="$ctrl.datasetOverride"></canvas>
 
         </md-card-content>
     </div>

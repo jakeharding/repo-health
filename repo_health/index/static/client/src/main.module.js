@@ -14,6 +14,7 @@
 import angular from 'angular';
 import ngMaterial from 'angular-material';
 import uiRouter from 'angular-ui-router';
+import 'angular-chart.js';
 import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
@@ -26,12 +27,12 @@ export const main = angular.module('repo-health', [
     uiRouter,
     ngMaterial,
     components,
-    resources
+    resources,
+    'chart.js'
   ])
   .component('main', mainComponent)
   .config(($locationProvider, $urlRouterProvider, $mdThemingProvider, $stateProvider) => {
     'ngInject';
-    
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/search');
     $stateProvider.state('repo-health', {
@@ -46,7 +47,7 @@ export const main = angular.module('repo-health', [
             'repo-details': {
                 controller:  RepoDetailsController,
                 resolve: {
-                    detailsUrl: (statsUrls) => {return statsUrls["repo_details_url"];}
+                    detailsUrl: (statsUrls) => { return statsUrls["repo_details_url"]; }
                 },
                 controllerAs: '$ctrl',
                 template: '<repo-details details-url="$ctrl.detailsUrl"></repo-details>',
@@ -58,10 +59,7 @@ export const main = angular.module('repo-health', [
                   }
                 },
                 controllerAs: '$ctrl',
-                resolve: {
-                    prStatsUrl: (statsUrls) => {
-                        return statsUrls['pr_stats_url'];
-                    }
+                resolve: { prStatsUrl: (statsUrls) => { return statsUrls['pr_stats_url']; }
                 },
                 template: '<pull-req-stats pr-stats-url="$ctrl.prStatsUrl"></pull-req-stats>'
             }
