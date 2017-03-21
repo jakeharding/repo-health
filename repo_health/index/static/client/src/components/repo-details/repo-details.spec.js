@@ -50,11 +50,11 @@ describe('Repo Details', () => {
       });
     });
 
-    describe('getStats', () => {
+    describe('getStatsUrls', () => {
       it('should make a call to service', () => {
-        spyOn(controller.RepoDetailsService, 'getStats').and.returnValue($q.resolve({ name: 'cakephp' }));
-        expect(controller.RepoDetailsService.getStats).not.toHaveBeenCalled();
-        controller.getStats();
+        spyOn(controller.RepoDetailsService, 'getStatsUrls').and.returnValue($q.resolve({ name: 'cakephp' }));
+        expect(controller.RepoDetailsService.getStatsUrls).not.toHaveBeenCalled();
+        controller.getStatsUrls();
         $rootScope.$apply();
         expect(controller.loadingRepo).toBeFalsy();
         expect(controller.details).toEqual({ name: 'cakephp' });
@@ -88,7 +88,7 @@ describe('Repo Details', () => {
       });
     });
 
-    describe('getStats', () => {
+    describe('getStatsUrls', () => {
       it('should return a promise if repoDetails exists', () => {
         RepoDetailsService.repoDetails = { name: 'cakephp', watchers: 123 };
         RepoDetailsService.getStats().then(details => {

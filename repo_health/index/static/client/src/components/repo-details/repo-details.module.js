@@ -21,7 +21,7 @@ const components = angular
   .run($api => {
     'ngInject';
       $api.add({
-        resource: 'repo',
+        resource: 'repoStatsUrls',
         url: '/'
       });
     })

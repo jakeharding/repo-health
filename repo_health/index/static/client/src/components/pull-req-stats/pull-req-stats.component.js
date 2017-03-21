@@ -10,30 +10,36 @@
 * This is the creation of the pull-req-stats component.
 */
 
-import template from './pull-req-stats';
+import template from '../base-component/base.template';
 
 const pullReqStatsComponent = {
   template,
+  bindings: {prStatsUrl: '='},
   controller: class pullReqStatsComponent {
     stats = null;
     loadingStats = true;
     loadingMsg = "Loading issue stats..."
-    constructor(RepoDetailsService, $state, $stateParams, $repo) {
+    constructor(RepoDetailsService, $state, $stateParams, $http) {
       'ngInject';
-      Object.assign(this, {  RepoDetailsService, $state, $stateParams, $repo });
+      Object.assign(this, { RepoDetailsService, $state, $stateParams, $http });
     }
 
     $onInit() {
-      console.log(this.RepoDetailsService.repoDetails);
-      if(this.RepoDetailsService.repoDetails) {
-          let params = {
-            id: this.RepoDetailsService.repoDetails.id,
-            verb: 'pull-requests'
-          }
-          this.$repo.get('pullReqStats', params).then(stats => {
-              this.stats = stats;
-          });
-      }
+        this.$http.get(this.prStatsUrl).then(stats => {
+            this.stats = stats.data;
+            this.loadingStats = false;
+        })
+      // this.RepoDetailsService.getStats(this.$stateParams).then( () => {
+      //     let params = {
+      //       id: this.RepoDetailsService.repoDetails.id,
+      //       verb: 'pull-requests'
+      //     }
+      //     this.$repo.get('pullReqStats', params).then(stats => {
+      //         this.stats = stats;
+      //         this.loadingStats = false;
+      //       }, () => {this.$state.go('search')}
+      //     );
+      // });
     }
   }
 };

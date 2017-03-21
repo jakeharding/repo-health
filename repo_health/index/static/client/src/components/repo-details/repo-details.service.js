@@ -32,11 +32,11 @@ class RepoDetailsService {
     return name && owner__login ? { owner__login, name } : undefined;
   }
 
-  getStats(params) {
+  getStatsUrls(params) {
     // if (this.repoDetails) {
     //   return this.$q.resolve(this.repoDetails);
     // } else {
-    return this.$repo.get('repo', params).then(details => (this.repoDetails = details));
+    return this.$repo.get('repoStatsUrls', params).then(details => (this.repoDetails = details));
     // }
   }
 

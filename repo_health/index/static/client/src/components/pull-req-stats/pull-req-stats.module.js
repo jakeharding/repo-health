@@ -7,7 +7,7 @@
 * Author(s) of this file:
 * J.Harding
 *
-* This is the module definition for the repo-details component
+* This is the module definition for the pr stats module
 */
 
 import uiRouter from 'angular-ui-router';
@@ -15,15 +15,14 @@ import pullReqStatsComponent from './pull-req-stats.component';
 
 const components = angular
   .module('components.pull-req-stats', [])
-    // .service('PullReqStats', pullPreqStats)
     .component('pullReqStats', pullReqStatsComponent)
-  .run($api => {
-    'ngInject';
-      $api.add({
-        resource: 'pullReqStats',
-        url: ''
-      });
-    })
+  // .run($api => {
+  //   'ngInject';
+  //     $api.add({
+  //       resource: 'pullReqStats',
+  //       url: ''
+  //     });
+  //   })
   .name;
 
 export default components;

@@ -11,14 +11,9 @@
       </md-card>
     </div>
   </md-content>
-  <div layout="column" ng-if="$ctrl.loadingRepo" layout-align="center center">
-    Loading your repository... Please wait...
-    <div layout="row" class="md-padding">
-      <md-progress-circular md-diameter="96"></md-progress-circular>
-    </div>
-  </div>
 
-  <div layout="row" layout-align="center center" ng-if="!$ctrl.loadingRepo">
+
+  <div layout="row" layout-align="center center">
     <md-content layout-padding flex-gt-md="45" flex-gt-xs="100">
       <form name="$ctrl.ghForm">
         <h2 class="text-center">Github Url</h2>
@@ -34,7 +29,7 @@
             <md-button
                     type="submit"
                     class="md-raised md-primary"
-                    ng-click="$ctrl.getStats()"
+                    ng-click="$ctrl.getStatsUrls()"
                     ng-disabled="$ctrl.ghForm.$invalid"
             >
                 Get Statistics

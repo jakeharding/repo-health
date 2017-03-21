@@ -1,0 +1,35 @@
+
+<md-content layout-padding layout="row" layout-align="center center">
+  <md-card flex="65">
+      <div layout="column" ng-if="$ctrl.loadingStats" layout-align="center center">
+          {{::$ctrl.loadingMsg}}
+          <div layout="row" class="md-padding">
+            <md-progress-circular md-diameter="96"></md-progress-circular>
+          </div>
+      </div>
+    <div ng-if="!$ctrl.loadingStats">
+         <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{::$ctrl.stats.name}}</span>
+            <span class="md-subhead">{{::$ctrl.stats.description}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="column">
+          <div layout="row">
+            <div flex><span class="md-title">Language</span>: {{$ctrl.stats.language}}</div>
+            <div flex><span class="md-title">Contributions</span>: {{$ctrl.stats.contribs_count}}</div>
+          </div>
+
+          <div layout="row">
+            <div flex><span class="md-title">Watchers</span>: {{$ctrl.stats.watchers_count}}</div>
+            <div flex><span class="md-title">Commits</span>: {{$ctrl.stats.commits_count}}</div>
+          </div>
+
+          <div layout="row">
+            <div flex><span class="md-title">Milestones</span>: {{$ctrl.stats.milestones_count}}</div>
+            <div flex><span class="md-title">Forks</span>: {{$ctrl.stats.forks_count}}</div>
+          </div>
+        </md-card-content>
+    </div>
+  </md-card>
+</md-content>

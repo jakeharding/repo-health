@@ -10,37 +10,27 @@
 * This is the creation of the search component.
 */
 
-import template from './repo-details';
+import template from '../base-component/base.template';
+// import template from './repo-details';
 
 const repoDetailsComponent = {
   template,
+  bindings: {detailsUrl: '='},
   controller: class repoDetailsComponent {
 
-    loadingRepo = true;
-    details = null;
+    loadingStats = true;
+    loadingMsg = "Loading general repo stats..."
 
-    constructor(RepoDetailsService, $state, $stateParams, $filter) {
+    constructor($http) {
       'ngInject';
-      Object.assign(this, { RepoDetailsService, $state, $stateParams, $filter });
+      Object.assign(this, { $http });
     }
 
     $onInit() {
-      if (this.hasValidStateParams())
-        this.getStats();
-    }
-
-    hasValidStateParams () {
-      let nulls = this.$filter('filter')(Object.keys(this.$stateParams), (key) => {
-        return !!this.$stateParams[key];
+      this.$http.get(this.detailsUrl).then(details => {
+        this.stats = details.data;
+        this.loadingStats = false;
       });
-      return nulls.length != 0;
-    }
-
-    getStats() {
-      this.RepoDetailsService.getStats(this.$stateParams).then(details => {
-        this.loadingRepo = false;
-        this.details = details;
-      }, () => this.$state.go('search'));
     }
   }
 };

@@ -24,20 +24,19 @@ const searchComponent = {
       Object.assign(this, { RepoDetailsService, $state, $stateParams });
     }
 
-    getStats() {
+    getStatsUrls() {
         const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
-        if (params && params.owner__login != this.$stateParams.owner__login) {
+        if (params) {
             this.loadingRepo = true;
             this.error = null;
-            this.RepoDetailsService.getStats(params).then(() => {
+            // this.RepoDetailsService.getStats(params).then(() => {
               this.$state.go('repo-health', params);
-            }, () =>  {
+            } else  {
                 this.error = 'This repo does not exist';
                 this.loadingRepo = false;
-            });
+            };
         }
     }
-  }
 };
 
 export default searchComponent;

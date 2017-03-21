@@ -35,12 +35,45 @@ export const main = angular.module('repo-health', [
     $urlRouterProvider.otherwise('/search');
     $stateProvider.state('repo-health', {
         url: '/repo-health/:owner__login/:name',
+        // controller: class RepoHealthController {
+        //   constructor(details) {
+        //       this.details = details;
+        //   }
+        // },
+        // controllerAs: '$ctrl',
+        resolve: {
+            statsUrls: (RepoDetailsService, $stateParams) => {
+                return RepoDetailsService.getStatsUrls($stateParams);
+            }
+        },
         views: {
             'repo-details': {
-                template: '<repo-details></repo-details>'
+                controller: class DetailsController {
+                  constructor(detailsUrl) {
+                      this.detailsUrl = detailsUrl;
+                  }
+                },
+                resolve: {
+                    detailsUrl: (statsUrls) => {
+                        return statsUrls["repo_details_url"];
+                    }
+                },
+                controllerAs: '$ctrl',
+                template: '<repo-details details-url="$ctrl.detailsUrl"></repo-details>',
             },
             'pull-req-stats': {
-                template: '<pull-req-stats></pull-req-stats>'
+                controller: class PrStatUrl {
+                  constructor(prStatsUrl) {
+                      this.prStatsUrl = prStatsUrl;
+                  }
+                },
+                controllerAs: '$ctrl',
+                resolve: {
+                    prStatsUrl: (statsUrls) => {
+                        return statsUrls['pr_stats_url'];
+                    }
+                },
+                template: '<pull-req-stats pr-stats-url="$ctrl.prStatsUrl"></pull-req-stats>'
             }
         }
     })
