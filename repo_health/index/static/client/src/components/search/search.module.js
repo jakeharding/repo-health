@@ -21,7 +21,8 @@ const components = angular
 
       $stateProvider.state('search', {
         url: '/search',
-        template: '<search></search>'
+        template: '<search></search>',
+        params: { error: false }
       })
     })
   .name;

@@ -33,11 +33,7 @@ class RepoDetailsService {
   }
 
   getStatsUrls(params) {
-    // if (this.repoDetails) {
-    //   return this.$q.resolve(this.repoDetails);
-    // } else {
-    return this.$repo.get('repoStatsUrls', params).then(details => (this.repoDetails = details));
-    // }
+    return this.$repo.get('repoStatsUrls', params);
   }
 
 }

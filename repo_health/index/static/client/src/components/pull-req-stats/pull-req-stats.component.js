@@ -19,9 +19,9 @@ const pullReqStatsComponent = {
     stats = null;
     loadingStats = true;
     loadingMsg = "Loading issue stats..."
-    constructor(RepoDetailsService, $state, $stateParams, $http) {
+    constructor( $http) {
       'ngInject';
-      Object.assign(this, { RepoDetailsService, $state, $stateParams, $http });
+      Object.assign(this, { $http });
     }
 
     $onInit() {

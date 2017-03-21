@@ -11,7 +11,6 @@
 */
 
 import template from '../base-component/base.template';
-// import template from './repo-details';
 
 const repoDetailsComponent = {
   template,

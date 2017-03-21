@@ -16,13 +16,6 @@ import pullReqStatsComponent from './pull-req-stats.component';
 const components = angular
   .module('components.pull-req-stats', [])
     .component('pullReqStats', pullReqStatsComponent)
-  // .run($api => {
-  //   'ngInject';
-  //     $api.add({
-  //       resource: 'pullReqStats',
-  //       url: ''
-  //     });
-  //   })
   .name;
 
 export default components;

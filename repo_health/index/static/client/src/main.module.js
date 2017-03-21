@@ -17,6 +17,7 @@ import uiRouter from 'angular-ui-router';
 import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
+import RepoDetailsController from 'components/repo-details/repo-details.controller';
 
 //Styles
 import 'global.css';
@@ -35,28 +36,17 @@ export const main = angular.module('repo-health', [
     $urlRouterProvider.otherwise('/search');
     $stateProvider.state('repo-health', {
         url: '/repo-health/:owner__login/:name',
-        // controller: class RepoHealthController {
-        //   constructor(details) {
-        //       this.details = details;
-        //   }
-        // },
-        // controllerAs: '$ctrl',
         resolve: {
-            statsUrls: (RepoDetailsService, $stateParams) => {
-                return RepoDetailsService.getStatsUrls($stateParams);
+            statsUrls: (RepoDetailsService, $stateParams, $state) => {
+                return RepoDetailsService.getStatsUrls($stateParams)
+                    .then(resp => {return resp;}, () => { return {error:true}});
             }
         },
         views: {
             'repo-details': {
-                controller: class DetailsController {
-                  constructor(detailsUrl) {
-                      this.detailsUrl = detailsUrl;
-                  }
-                },
+                controller:  RepoDetailsController,
                 resolve: {
-                    detailsUrl: (statsUrls) => {
-                        return statsUrls["repo_details_url"];
-                    }
+                    detailsUrl: (statsUrls) => {return statsUrls["repo_details_url"];}
                 },
                 controllerAs: '$ctrl',
                 template: '<repo-details details-url="$ctrl.detailsUrl"></repo-details>',
