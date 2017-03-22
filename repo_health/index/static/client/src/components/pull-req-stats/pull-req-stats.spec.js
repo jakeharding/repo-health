@@ -22,19 +22,35 @@ describe('Pull Req Stats', () => {
   ));
 
   describe('PullReqStatsController', () => {
-    let $componentController;
-    let controller;
+    let $componentController, $httpBackend, $apiUrl;
+    let controller, getPrStatsUrl;
 
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
-      controller = $componentController('pullReqStats');
+      $httpBackend = $injector.get('$httpBackend');
+      $apiUrl = $injector.get('$apiUrl');
+      getPrStatsUrl = `${$apiUrl}/${jasmine.any(Number)}/pull-requests`;
+      controller = $componentController('pullReqStats', null, {prStatsUrl: getPrStatsUrl});
+      $httpBackend.when('GET', getPrStatsUrl).respond(200, {some: 'cakephp', data: 15});
+
     }));
 
+    afterEach(() => {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
     describe('constructor', () => {
+
         it('should setup the controller', () => {
             expect(controller).toBeDefined();
         });
-    });
 
+        it('should make a request to get the stats in the $onInit method', () => {
+            $httpBackend.expectGET(getPrStatsUrl)
+            controller.$onInit();
+            $httpBackend.flush();
+        })
+    });
   });
 });

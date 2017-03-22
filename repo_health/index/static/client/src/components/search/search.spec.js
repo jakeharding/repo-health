@@ -43,38 +43,32 @@ describe('Search', () => {
         expect(controller).toBeDefined();
       });
       it('should setup loadingRepo and error', () => {
-        expect(controller.loadingRepo).toBeFalsy();
         expect(controller.error).toBeNull();
       });
     });
 
     describe('getStatsUrls', () => {
-      let getStats;
 
       it('should not make a call if url is invalid', () => {
-        spyOn(controller.RepoDetailsService, 'getStats');
+        spyOn(controller.$state, 'go');
         controller.githubUrl = 'This not a url';
         controller.getStatsUrls();
-        expect(controller.loadingRepo).toBeTruthy();
-        expect(controller.RepoDetailsService.getStats).not.toHaveBeenCalled();
+        expect(controller.error).toBeTruthy();
+        expect(controller.$state.go).not.toHaveBeenCalledWith('repo-health');
       });
 
       it('should make a call to getStatsUrls on the service', () => {
-        spyOn(controller.RepoDetailsService, 'getStats').and.returnValue($q.resolve({ name: 'cakephp' }));
+        spyOn(controller.RepoDetailsService, 'getStatsUrls').and.returnValue($q.resolve({ name: 'cakephp' }));
         controller.githubUrl = 'https://github.com/cakephp/cakephp';
         controller.getStatsUrls();
-        expect(controller.loadingRepo).toBeTruthy();
-        // expect(controller.RepoDetailsService.getStatsUrls).toHaveBeenCalled();
+        expect(controller.RepoDetailsService.getStatsUrls).toHaveBeenCalled();
       });
 
       it('should set an error if it fails', () => {
-        // spyOn(controller.RepoDetailsService, 'getStatsUrls').and.returnValue($q.reject('error'));
         controller.githubUrl = 'https://github.com/cakephp/';
         controller.getStatsUrls();
         $rootScope.$apply();
-        expect(controller.loadingRepo).toBeFalsy();
-        expect(controller.error).toEqual('This repo does not exist');
-        // expect(controller.RepoDetailsService.getStatsUrls).toHaveBeenCalled();
+        expect(controller.error).toBeTruthy();
       });
     });
   });

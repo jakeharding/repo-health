@@ -22,9 +22,6 @@ class RepoDetailsService {
 
   /* Gets the last two strings on a url */
   getNameAndOwnerFromUrl(url = '') {
-    // if (url.search('github.com') == -1) {
-    //   return;
-    // }
 
     const pathArray = url.replace(/.*github.com\//, '').split('/');
     const name = pathArray.pop();

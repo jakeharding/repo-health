@@ -22,7 +22,7 @@ const searchComponent = {
     constructor(RepoDetailsService, $state, $stateParams) {
       'ngInject';
       Object.assign(this, { RepoDetailsService, $state, $stateParams });
-      this.error = $stateParams.error;
+      this.error = $stateParams.error || null;
     }
 
     getStatsUrls() {
