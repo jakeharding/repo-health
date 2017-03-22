@@ -63,10 +63,12 @@ const pullReqStatsComponent = {
     }
 
     $onInit() {
+      if (this.prStatsUrl) {
         this.$http.get(this.prStatsUrl).then(stats => {
             this.stats = stats.data;
             this.loadingStats = false;
-        })
+        });
+      }
     }
   }
 };

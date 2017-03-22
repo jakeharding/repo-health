@@ -27,10 +27,12 @@ const repoDetailsComponent = {
     }
 
     $onInit() {
-      this.$http.get(this.detailsUrl).then(details => {
-        this.stats = details.data;
-        this.loadingStats = false;
-      });
+      if (this.detailsUrl) {
+        this.$http.get(this.detailsUrl).then(details => {
+            this.stats = details.data;
+            this.loadingStats = false;
+        });
+      }
     }
   }
 };
