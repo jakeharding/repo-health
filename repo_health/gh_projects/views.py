@@ -21,6 +21,7 @@ from rest_framework.decorators import detail_route
 from repo_health.gh_pull_requests.serializers import GhPullRequestStatsSerializer
 from .models import GhProject
 from .serializers import GhProjectSerializer, StatsUrlsSerializer
+from repo_health.metrics.serializers import ResponseSerializer
 
 
 class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
@@ -38,7 +39,9 @@ class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
         :return: Response
         """
         obj = self.get_object()
-        return Response(GhProjectSerializer(obj).data)
+        repo_data = GhProjectSerializer(obj).data
+        response = ResponseSerializer(repo_data)
+        return Response(response.data)
 
     def list(self, r, *args, **kwargs):
         """
