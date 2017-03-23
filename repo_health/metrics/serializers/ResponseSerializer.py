@@ -26,7 +26,9 @@ class ResponseSerializer(s.Serializer):
         self._metrics = []
         for k, v in repo_data_dict.items():
             self._metrics.append(MetricFieldSerializer(v).data)
+            # Do what is need to build the chart response here.
 
+    # TODO Implement charts in response
     def get_charts(self, obj):
         return []
 
