@@ -5,21 +5,6 @@ Represents a response schema for a request to the API. A list of metrics are ret
  
  Comments are added for clarification.
  
- ```
- [
-    {
-        display: string, //display name of the metric
-        ordering: int, //order if the metric in UI
-        metric: int | [int] | string, //Actual data. Array of ints if it is a chart
-        chart_type: null | string, //Type of chart if chart is used
-        chart_name: null | stirng, //Name of chart to allow multiple metrics on one chart
-        
-    },
-    ...
- ]
- ```
- ## OR
- 
 ```
 {
     ...//Maybe some other data defining the Response to the UI

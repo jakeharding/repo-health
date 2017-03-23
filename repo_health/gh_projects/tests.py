@@ -70,8 +70,10 @@ class GhProjectApiTest(APITestCase):
 
     def test_api_get_project(self):
         r = self.client.get(dj_reverse('gh-project-detail', args=[self.project.id]))
+        print(r.data)
         self.assertTrue(status.is_success(r.status_code))
-        self.assertEqual(r.data.get('id'), self.project.id)
+        self.assertTrue(isinstance(r.data.get('metrics'), list))
+        self.assertTrue(isinstance(r.data.get('charts'), list) and len(r.data['charts']) is 0)
 
         #test with bad input
         max_id = GhProject.objects.all().aggregate(m.Max('id')).get('id__max')
