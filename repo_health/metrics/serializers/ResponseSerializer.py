@@ -30,7 +30,7 @@ class ResponseSerializer(s.Serializer):
 
     # TODO Implement charts in response
     def get_charts(self, obj):
-        return []
+        return {}
 
     def get_metrics(self, obj):
         return self._metrics

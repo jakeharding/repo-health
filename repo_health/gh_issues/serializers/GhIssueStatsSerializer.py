@@ -16,29 +16,37 @@ from ..models import GhIssueEvent, GhIssueComment
 from .TotalAndOpenIssueLabelSerial import TotalAndOpenIssueLabelSerial
 from repo_health.gh_projects.models import GhRepoLabel
 from repo_health.index.mixins import CountForPastYearMixin
+from repo_health.metrics.serializers import MetricField
 
 
 class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
 
+    card_title = s.SerializerMethodField()
     issues_count = s.SerializerMethodField()
     issues_closed_last_year = s.SerializerMethodField()
     issues_opened_last_year = s.SerializerMethodField()
     merged_count = s.SerializerMethodField()
     avg_lifetime = s.SerializerMethodField()
-    popular_labels = s.SerializerMethodField()
+    # popular_labels = s.SerializerMethodField()
     avg_maintainer_comments_per_issue = s.SerializerMethodField()
 
+    def get_card_title(self, repo):
+        return MetricField(True, None, 0, None, "Issues")
+
     def get_issues_count(self, repo):
-        return repo.issues_count
+        return MetricField(True, "Number of issues", 1, None, repo.issues_count)
 
     def get_issues_closed_last_year(self, repo):
-        return self.get_count_list_for_year(repo.issues.filter(events__action=GhIssueEvent.CLOSED_ACTION).distinct())
+        metric = self.get_count_list_for_year(repo.issues.filter(events__action=GhIssueEvent.CLOSED_ACTION).distinct())
+        return MetricField(True, "Closed issues last year", 2, None, metric)
 
     def get_issues_opened_last_year(self, repo):
-        return self.get_count_list_for_year(repo.issues)
+        metric = self.get_count_list_for_year(repo.issues)
+        return MetricField(True, "Open issues last year", 3, None, metric)
 
     def get_merged_count(self, repo):
-        return repo.issues.filter(events__action=GhIssueEvent.MERGED_ACTION).count()
+        merged_count = repo.issues.filter(events__action=GhIssueEvent.MERGED_ACTION).count()
+        return MetricField(True, "Merged issues", 4, None, merged_count)
 
     def get_avg_lifetime(self, repo):
         # Similar inefficiency as the PR stats but must access the fields a little differently.
@@ -54,7 +62,7 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
                 if not isinstance(i.created_at, type(None)):
                     td += (close_event.created_at - i.created_at)
             avg = (td / closed).days if closed > 0 else closed
-        return avg
+        return MetricField(True, "Average issue lifetime", 5, 'date', avg)
 
     def get_popular_labels(self, repo):
         # Raw SQL.
@@ -74,4 +82,4 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
             issue__in=repo.issues.all(),
             user__in=repo.maintainers.all()
         ).count()
-        return comments_from_m / repo.issues.count()
+        return MetricField(True, 'Average maintainer comments per issue', 6, None, comments_from_m / repo.issues.count())

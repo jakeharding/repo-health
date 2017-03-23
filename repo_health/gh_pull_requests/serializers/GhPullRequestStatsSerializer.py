@@ -11,12 +11,12 @@ Serializers for pull requests.
 """
 
 import datetime
-import calendar
 from django.db import models as m
 from rest_framework import serializers as s
 from repo_health.gh_users.models import GhUser
 from ..models import GhPullRequestHistory
 from repo_health.index.mixins import CountForPastYearMixin
+from repo_health.metrics.serializers import MetricField
 
 
 class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
@@ -57,26 +57,34 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
 
         self._maintainers = repo.maintainers.all()
 
+    def get_card_title(self, repo):
+        return MetricField(True, None, 0, None, 'Pull requests')
+
     def get_pr_count(self, repo):
-        return repo.pr_count
+        return MetricField(True, 'Number of pull requests', 1, None, repo.pr_count)
 
     def get_prs_last_year(self, repo):
-        return self.get_count_list_for_year(self._opened_histories, 'created_at')
+        num_prs = self.get_count_list_for_year(self._opened_histories, 'created_at')
+        return MetricField(True, 'PRS last year', 2, None, num_prs)
 
     def get_latest_pr_created_at(self, repo):
-        return self._most_recent_history.created_at if self._most_recent_history else None
+        latest = self._most_recent_history.created_at if self._most_recent_history else None
+        return MetricField(True, 'Latest pull request created at', 3, None, latest)
 
     def get_contrib_most_prs(self, repo):
-        return self._contrib_most_prs.login if self._contrib_most_prs else None
+        contrib = self._contrib_most_prs.login if self._contrib_most_prs else None
+        return MetricField(True, 'Most contributing user', 4, None, contrib)
 
     def get_prs_no_maintainer_comments(self, repo):
-        return repo.prs_to.exclude(comment_users__in=self._maintainers).count()
+        no_coms = repo.prs_to.exclude(comment_users__in=self._maintainers).count()
+        return MetricField(True, "PRs with no maintainer comments", 5, None, no_coms)
 
     def get_maintainers_count(self, repo):
-        return self._maintainers.count()
+        return MetricField(True, 'Number of maintainers', 6, None, self._maintainers.count())
 
     def get_prs_no_comments(self, repo):
-        return repo.prs_to.annotate(comments_count=m.Count('comments')).filter(comments_count=0).count()
+        zero_coms = repo.prs_to.annotate(comments_count=m.Count('comments')).filter(comments_count=0).count()
+        return MetricField(True, 'PRs with zero comments', 7, None, zero_coms)
 
     def get_avg_lifetime(self, repo):
         avg = closed = 0
@@ -116,16 +124,19 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
             # .aggregate(avg=m.Avg(m.F('created_at') - m.F('closed_at'), output_field=m.DurationField()))
         # print(agg)
 
-        return avg
+        return MetricField(True, 'Average lifetime', 8, None, avg)
 
     def get_not_maintainer_prs(self, repo):
-        return repo.prs_to.exclude(user__in=self._maintainers).count()
+        prs_not_main = repo.prs_to.exclude(user__in=self._maintainers).count()
+        return MetricField(True, 'PRs not from maintainer', 9, None, prs_not_main)
 
     def get_avg_comment_per_pr(self, repo):
         avg_agg = repo.prs_to.annotate(comment_count=m.Count('comments')) \
             .aggregate(avg=m.Avg('comment_count'))
-        return avg_agg['avg']
+        return MetricField(True, 'Avg comments per PR', 10, None, avg_agg['avg'])
 
     def get_prs_from_outside_org(self, repo):
+        out_org = None
         if repo.is_owned_by_org():
-            return repo.prs_to.exclude(user__organizations=repo.owner).count()
+            out_org = repo.prs_to.exclude(user__organizations=repo.owner).count()
+        return MetricField(True, 'PRs from outside org', 11, None, out_org)

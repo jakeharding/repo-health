@@ -74,7 +74,7 @@ class GhProjectApiTest(APITestCase):
         print(r.data)
         self.assertTrue(status.is_success(r.status_code))
         self.assertTrue(isinstance(r.data.get('metrics'), list))
-        self.assertTrue(isinstance(r.data.get('charts'), list) and len(r.data['charts']) is 0)
+        self.assertTrue(isinstance(r.data.get('charts'), dict))
 
         #test with bad input
         max_id = GhProject.objects.all().aggregate(m.Max('id')).get('id__max')
@@ -113,15 +113,8 @@ class GhProjectApiTest(APITestCase):
         self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
         print(r.data)
         # Check for a few custom fields of the serializer
-        self.assertTrue(r.data['pr_count'] and isinstance(r.data['pr_count'], int))
-        self.assertTrue(r.data['prs_last_year'] and isinstance(r.data['prs_last_year'], list))
-        self.assertTrue(
-            r.data.get('latest_pr_created_at') and isinstance(r.data['latest_pr_created_at'], datetime.datetime)
-        )
-        self.assertTrue(r.data['contrib_most_prs'] and isinstance(r.data['contrib_most_prs'], str))
-        self.assertTrue(
-            r.data.get('prs_no_maintainer_comments') and isinstance(r.data['prs_no_maintainer_comments'], int)
-        )
+        self.assertTrue(r.data.get('metrics') and isinstance(r.data['metrics'], list))
+        self.assertTrue(isinstance(r.data['charts'], dict))
 
         # Test a repo with no prs to be sure no errors are thrown
         self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.project_no_prs.id)
@@ -130,5 +123,5 @@ class GhProjectApiTest(APITestCase):
         r = self.client.get('/api/v1/gh-projects/%d/issues' % self.project_with_issues.id)
         print (r.data)
         self.assertTrue(status.is_success(r.status_code))
-        self.assertTrue(r.data.get('issues_count'))
-        self.assertTrue(r.data.get('issues_closed_last_year') and isinstance(r.data['issues_closed_last_year'], list))
+        self.assertTrue(r.data.get('metrics') and isinstance(r.data['metrics'], list))
+        self.assertTrue(isinstance(r.data['charts'], dict))
