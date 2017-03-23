@@ -13,7 +13,6 @@ Serializer for a GitHub repo.
 from rest_framework.serializers import Serializer, SerializerMethodField
 from repo_health.gh_users.models import GhUser
 from repo_health.metrics.serializers import MetricField
-from ..models import GhProject
 
 
 class GhProjectSerializer(Serializer):
@@ -80,7 +79,7 @@ class GhProjectSerializer(Serializer):
         return MetricField(True, "Number of outside organizations with commits", 5, None, self._orgs_of_contribs_count)
 
     def get_contribs_count(self, obj):
-        return MetricField(True, 'Number of contributrs', 6, None, self._contribs_count)
+        return MetricField(True, 'Number of contributors', 6, None, self._contribs_count)
         
     def get_commits_count(self, obj):
         return MetricField(True, 'Number of commits', 7, None, self._commits_count)
