@@ -68,7 +68,8 @@ class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
             .get(pk=kwargs['pk'])
 
         pr_stats = GhPullRequestStatsSerializer(repo)
-        return Response(pr_stats.data)
+        resp = ResponseSerializer(pr_stats.data)
+        return Response(resp.data)
 
     @detail_route(methods=['GET'])
     def issues(self, *args, **kwargs):
@@ -81,4 +82,5 @@ class GhProjectViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
             .get(pk=kwargs['pk'])
 
         ser = GhIssueStatsSerializer(repo)
-        return Response(ser.data)
+        resp = ResponseSerializer(ser.data)
+        return Response(resp.data)
