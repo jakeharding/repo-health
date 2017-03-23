@@ -8,23 +8,25 @@
           </div>
       </div>
     <div ng-if="!$ctrl.loadingStats">
-         <md-card-title>
+        <div ng-repeat="i in $ctrl.numOfStatsSections">
+         <md-card-title ng-if="$first">
           <md-card-title-text>
-            <span class="md-headline">{{::$ctrl.stats.name}}</span>
-            <span class="md-subhead">{{::$ctrl.stats.description}}</span>
+            <span class="md-headline">{{ $ctrl.stats[2 * i].raw_data }}</span>
+            <span class="md-subhead">{{ $ctrl.stats[2 * i + 1].raw_data }}</span>
           </md-card-title-text>
         </md-card-title>
-        <md-card-content layout="column">
+        <md-card-content layout="column" ng-if="!$first">
 
-          <div ng-repeat="(k, v) in $ctrl.stats">
-              <div layout="row">
-                <div flex><span class="md-title">{{k}}</span>: {{v}}</div>
-              </div>
-          </div>
+                <div flex><span class="md-title" ng-if="$ctrl.stats[(2 * i)].display_name">{{$ctrl.stats[(2 * i)].display_name}}:</span>
+                    {{ $ctrl.getRawDataForChartName(2 * i) }}
+                </div>
+                <div flex><span class="md-title" ng-if="$ctrl.stats[ (2 * i + 1) ].display_name">{{$ctrl.stats[ (2 * i + 1) ].display_name}}:</span>
+                    {{ $ctrl.getRawDataForChartName((2 * i + 1)) }}
+                </div>
 
-            <canvas id="line" class="chart chart-line" chart-data="$ctrl.stats.prs_last_year" chart-labels="$ctrl.labels"
-                      chart-click="$ctrl.onClick" chart-hover="$ctrl.onHover" chart-series="$ctrl.series" chart-options="$ctrl.options"
-                      chart-dataset-override="$ctrl.datasetOverride"></canvas>
+            <!--<canvas id="line" class="chart chart-line" chart-data="$ctrl.stats.prs_last_year" chart-labels="$ctrl.labels"-->
+                      <!--chart-click="$ctrl.onClick" chart-hover="$ctrl.onHover" chart-series="$ctrl.series" chart-options="$ctrl.options"-->
+                      <!--chart-dataset-override="$ctrl.datasetOverride"></canvas>-->
 
         </md-card-content>
     </div>

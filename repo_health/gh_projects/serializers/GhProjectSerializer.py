@@ -65,16 +65,16 @@ class GhProjectSerializer(Serializer):
         return MetricField(True, 'Language', 2, None, repo.language)
 
     def get_name(self, repo):
-        return MetricField(True, 'Name', 0, None, repo.name)
+        return MetricField(True, None, 0, None, repo.name)
 
     def get_description(self, repo):
-        return MetricField(True, 'Description', 1, None, repo.description)
+        return MetricField(True, None, 1, None, repo.description)
 
     def get_forked_from(self, repo):
-        return MetricField(True, 'Has upstream', 3, None, repo.forked_from.name)
+        return MetricField(True, 'Has upstream', 3, None, repo.forked_from.name if repo.forked_from else None)
 
     def get_created_at(self, repo):
-        return MetricField(True, 'Age', 4, 'date', repo.created_at)
+        return MetricField(True, 'Created at', 4, 'date', repo.created_at)
 
     def get_orgs_of_contribs_count(self, repo):
         return MetricField(True, "Number of outside organizations with commits", 5, None, self._orgs_of_contribs_count)
