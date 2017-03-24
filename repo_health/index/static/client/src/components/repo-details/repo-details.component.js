@@ -11,18 +11,12 @@
 */
 
 import template from '../base-component/base.template';
-
-/**
- * Tracks constants for chart names.
- */
-const chartNameEnum = {
-  dateChart: 'date' // Track date as a chart to tell what metrics are dates
-}
+import BaseStatsComponent from '../base-component/base-stats.component';
 
 const repoDetailsComponent = {
   template,
   bindings: {detailsUrl: '='},
-  controller: class repoDetailsComponent {
+  controller: class repoDetailsComponent extends BaseStatsComponent {
 
     loadingStats = true;
     loadingMsg = "Loading general repo stats...";
@@ -30,28 +24,19 @@ const repoDetailsComponent = {
     numOfStatsSections = 0;
 
     constructor($http, $filter) {
+      super( $filter );
       'ngInject';
-      Object.assign(this, { $http, $filter });
+      Object.assign(this, { $http });
     }
 
     $onInit() {
       if (this.detailsUrl) {
         this.$http.get(this.detailsUrl).then(details => {
             this.stats = this.$filter('orderBy')(details.data.metrics, 'ordering');
-            this.numOfStatsSections = new Array(this.stats.length / 2).fill().map((x,i)=>i);
+            this.numOfStatsSections = new Array(this.stats.length / 2).fill().map((x,i) => {return i});
             this.loadingStats = false;
         });
       }
-    }
-
-    getRawDataForChartName(ind) {
-      let rawData = this.stats[ind].raw_data;
-      switch ( this.stats[ind].chart_name ) {
-          case chartNameEnum.dateChart:
-            rawData = this.$filter('date')(rawData);
-            break;
-      }
-      return rawData || 'No';
     }
   }
 };

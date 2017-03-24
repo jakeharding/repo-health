@@ -11,14 +11,16 @@
 */
 
 import template from '../base-component/base.template';
+import BaseStatsComponent from '../base-component/base-stats.component';
 
 const pullReqStatsComponent = {
   template,
   bindings: {prStatsUrl: '='},
-  controller: class pullReqStatsComponent {
+  controller: class pullReqStatsComponent extends BaseStatsComponent {
     stats = null;
     loadingStats = true;
-    loadingMsg = "Loading issue stats...";
+    loadingMsg = "Loading pull request stats...";
+    numOfStatsSections = 0;
 
     labels = ['Jan', 'feb', 'Mar', 'April', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     series = ['Series A', 'Series B'];
@@ -57,7 +59,8 @@ const pullReqStatsComponent = {
       }
     };
     
-    constructor( $http) {
+    constructor( $http, $filter ) {
+      super($filter);
       'ngInject';
       Object.assign(this, { $http });
     }
@@ -65,7 +68,8 @@ const pullReqStatsComponent = {
     $onInit() {
       if (this.prStatsUrl) {
         this.$http.get(this.prStatsUrl).then(stats => {
-            this.stats = stats.data;
+            this.stats = this.$filter('orderBy')(stats.data.metrics, 'ordering');
+            this.numOfStatsSections = new Array(Math.floor(this.stats.length / 2)).fill().map((x,i) => {return i});
             this.loadingStats = false;
         });
       }

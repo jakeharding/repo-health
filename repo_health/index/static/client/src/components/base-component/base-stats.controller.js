@@ -7,7 +7,7 @@
 * Author(s) of this file:
 * J.Harding
 *
-* Base stats controller to handle an error state if no repos are return for an owner login and name request
+* Base stats controller to handle an error state if no repos are returned for an owner login and name request
 */
 
 
@@ -18,6 +18,4 @@ export default class BaseStatsController {
             $state.go('search', {error:true});
         }
     }
-
-
 }

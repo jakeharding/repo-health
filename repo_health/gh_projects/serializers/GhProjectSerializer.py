@@ -45,7 +45,6 @@ class GhProjectSerializer(Serializer):
     owned_by_org = SerializerMethodField()
     forks_count = SerializerMethodField()
 
-
     def __init__(self, *args, **kwargs):
         """
         Get some statistics for repo.

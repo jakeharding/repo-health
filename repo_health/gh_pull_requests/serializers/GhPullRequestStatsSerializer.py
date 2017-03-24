@@ -26,6 +26,7 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
     _maintainers = None
     _maintainers_count = None
 
+    card_title = s.SerializerMethodField()
     pr_count = s.SerializerMethodField()
     prs_last_year = s.SerializerMethodField()
     latest_pr_created_at = s.SerializerMethodField()
