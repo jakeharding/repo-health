@@ -70,7 +70,7 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
 
     def get_latest_pr_created_at(self, repo):
         latest = self._most_recent_history.created_at if self._most_recent_history else None
-        return MetricField(True, 'Latest pull request created at', 3, None, latest)
+        return MetricField(True, 'Latest pull request created at', 3, 'date', latest)
 
     def get_contrib_most_prs(self, repo):
         contrib = self._contrib_most_prs.login if self._contrib_most_prs else None

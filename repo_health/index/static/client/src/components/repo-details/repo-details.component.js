@@ -24,18 +24,14 @@ const repoDetailsComponent = {
     numOfStatsSections = 0;
 
     constructor($http, $filter) {
-      super( $filter );
+      super($http, $filter );
       'ngInject';
       Object.assign(this, { $http });
     }
 
     $onInit() {
       if (this.detailsUrl) {
-        this.$http.get(this.detailsUrl).then(details => {
-            this.stats = this.$filter('orderBy')(details.data.metrics, 'ordering');
-            this.numOfStatsSections = new Array(this.stats.length / 2).fill().map((x,i) => {return i});
-            this.loadingStats = false;
-        });
+        this.getStatsForUrl(this.detailsUrl);
       }
     }
   }

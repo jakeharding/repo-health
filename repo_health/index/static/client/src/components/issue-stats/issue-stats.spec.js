@@ -1,5 +1,5 @@
 /*
-* pull-req-stats.spec.js - (C) Copyright - 2017
+* issue-stats..spec.js - (C) Copyright - 2017
 * This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 *
 * SPDX-License-Identifier: MIT
@@ -7,12 +7,12 @@
 * Author(s) of this file:
 * J.Harding
 *
-* This is the test file for the pull request component
+* This is the test file for the issue stats component
 */
 
 const module = angular.mock.module;
 
-describe('Pull Req Stats', () => {
+describe('Issue Stats', () => {
 
   beforeEach(module(
     'app.resources',
@@ -22,21 +22,19 @@ describe('Pull Req Stats', () => {
     'components.issue-stats'
   ));
 
-  describe('PullReqStatsController', () => {
+  describe('IssueStatsComponent', () => {
     let $componentController, $httpBackend, $apiUrl;
-    let controller, getPrStatsUrl;
+    let controller, getIssueStatsUrl;
 
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
       $httpBackend = $injector.get('$httpBackend');
       $apiUrl = $injector.get('$apiUrl');
-      getPrStatsUrl = `${$apiUrl}/${jasmine.any(Number)}/pull-requests`;
-      controller = $componentController('pullReqStats', null, {prStatsUrl: getPrStatsUrl});
-      $httpBackend.when('GET', getPrStatsUrl).respond(200, {metrics: [
-          {
-              ordering: 0
-          }
-      ]});
+      getIssueStatsUrl = `${$apiUrl}/${jasmine.any(Number)}/issues`;
+      controller = $componentController('issueStats', null, {issueStatsUrl: getIssueStatsUrl});
+      $httpBackend.when('GET', getIssueStatsUrl).respond(200, {metrics: [{
+          ordering: 1
+      }]});
 
     }));
 
@@ -52,7 +50,7 @@ describe('Pull Req Stats', () => {
         });
 
         it('should make a request to get the stats in the $onInit method', () => {
-            $httpBackend.expectGET(getPrStatsUrl)
+            $httpBackend.expectGET(getIssueStatsUrl)
             controller.$onInit();
             $httpBackend.flush();
         })

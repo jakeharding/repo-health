@@ -20,6 +20,8 @@ describe('Repo Details', () => {
         'app.resources',
         'components.search',
         'components.repo-details',
+        'components.pull-req-stats',
+        'components.issue-stats'
     ));
     beforeEach(inject(($injector) => {
         $httpBackend = $injector.get("$httpBackend");

@@ -18,6 +18,7 @@ const template = `
     <div ui-view flex>
       <div ui-view="repo-details"></div>
       <div ui-view="pull-req-stats"></div>
+      <div ui-view="issue-stats"></div>
     </div>
   </div>
 `;

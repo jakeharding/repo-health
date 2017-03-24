@@ -19,6 +19,8 @@ import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
 import RepoDetailsController from 'components/repo-details/repo-details.controller';
+import IssueStatsController from 'components/issue-stats/issue-stats.controller';
+import PrStatsController from 'components/pull-req-stats/pull-req-stats.controller';
 
 //Styles
 import 'global.css';
@@ -53,15 +55,19 @@ export const main = angular.module('repo-health', [
                 template: '<repo-details details-url="$ctrl.detailsUrl"></repo-details>',
             },
             'pull-req-stats': {
-                controller: class PrStatUrl {
-                  constructor(prStatsUrl) {
-                      this.prStatsUrl = prStatsUrl;
-                  }
-                },
+                controller: PrStatsController,
                 controllerAs: '$ctrl',
                 resolve: { prStatsUrl: (statsUrls) => { return statsUrls['pr_stats_url']; }
                 },
                 template: '<pull-req-stats pr-stats-url="$ctrl.prStatsUrl"></pull-req-stats>'
+            },
+            'issue-stats': {
+                controller: IssueStatsController,
+                controllerAs: '$ctrl',
+                template: '<issue-stats issue-stats-url="$ctrl.issueStatsUrl"></issue-stats>',
+                resolve: {
+                    issueStatsUrl: (statsUrls) => { return statsUrls['issue_stats_url']; }
+                }
             }
         }
     })

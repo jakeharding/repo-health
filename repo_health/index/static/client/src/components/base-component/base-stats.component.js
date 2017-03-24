@@ -19,10 +19,8 @@ const chartNameEnum = {
 
 export default class BaseStatsComponent {
 
-    stats = [];
-
-    constructor ( $filter ) {
-        Object.assign( this, {$filter} )
+    constructor ( $http, $filter ) {
+        Object.assign( this, { $http, $filter} )
     }
     /**
     * @description Returns the raw data for the metric based on the chart name
@@ -37,4 +35,13 @@ export default class BaseStatsComponent {
             break;
       }
       return rawData || 'No';
-    }}
+    }
+
+    getStatsForUrl (url) {
+        this.$http.get(url).then(stats => {
+            this.stats = this.$filter('orderBy')(stats.data.metrics, 'ordering');
+            this.numOfStatsSections = new Array(Math.floor(this.stats.length / 2)).fill().map((x,i) => {return i});
+            this.loadingStats = false;
+        });
+    }
+}

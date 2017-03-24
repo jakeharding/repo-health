@@ -60,18 +60,14 @@ const pullReqStatsComponent = {
     };
     
     constructor( $http, $filter ) {
-      super($filter);
+      super($http, $filter);
       'ngInject';
       Object.assign(this, { $http });
     }
 
     $onInit() {
       if (this.prStatsUrl) {
-        this.$http.get(this.prStatsUrl).then(stats => {
-            this.stats = this.$filter('orderBy')(stats.data.metrics, 'ordering');
-            this.numOfStatsSections = new Array(Math.floor(this.stats.length / 2)).fill().map((x,i) => {return i});
-            this.loadingStats = false;
-        });
+          this.getStatsForUrl(this.prStatsUrl);
       }
     }
   }

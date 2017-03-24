@@ -16,7 +16,7 @@ from rest_framework.reverse import reverse
 class StatsUrlsSerializer(Serializer):
 
     repo_details_url = SerializerMethodField()
-    # issue_stats_url = SerializerMethodField()
+    issue_stats_url = SerializerMethodField()
     pr_stats_url = SerializerMethodField()
 
     def get_repo_details_url(self, repo):

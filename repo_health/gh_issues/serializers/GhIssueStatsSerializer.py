@@ -62,7 +62,7 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
                 if not isinstance(i.created_at, type(None)):
                     td += (close_event.created_at - i.created_at)
             avg = (td / closed).days if closed > 0 else closed
-        return MetricField(True, "Average issue lifetime", 5, 'date', avg)
+        return MetricField(True, "Average issue lifetime", 5, None, avg)
 
     def get_popular_labels(self, repo):
         # Raw SQL.
@@ -82,4 +82,5 @@ class GhIssueStatsSerializer(s.Serializer, CountForPastYearMixin):
             issue__in=repo.issues.all(),
             user__in=repo.maintainers.all()
         ).count()
-        return MetricField(True, 'Average maintainer comments per issue', 6, None, comments_from_m / repo.issues.count())
+        avg_coms = round(comments_from_m / repo.issues.count(), 5)
+        return MetricField(True, 'Average maintainer comments per issue', 6, None, avg_coms)
