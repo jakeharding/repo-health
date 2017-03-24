@@ -40,15 +40,20 @@ describe('Repo Details', () => {
 
         beforeEach(inject(($injector) => {
             $componentController = $injector.get('$componentController');
-            controller = $componentController('repoDetails', null, { detailsUrl: getDetailsUrl});
-            $httpBackend.when('GET', getDetailsUrl).respond(200, {name: 'cakephp', watchers: 15});
+            controller = $componentController('repoDetails', null, { detailsUrl: getDetailsUrl, stats: []});
+            $httpBackend.when('GET', getDetailsUrl).respond(200, {
+                metrics: [{
+                    ordering: 1
+                },{
+                    ordering: 2
+                }]
+            });
         }));
 
         describe('constructor', () => {
             it('should setup the controller', () => {
                 expect(controller).toBeDefined();
                 expect(controller.loadingStats).toBeTruthy();
-                expect(controller.stats).toBeNull();
             });
 
             it('should request the details in the $onInit method', () => {
