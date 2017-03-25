@@ -1,0 +1,13 @@
+ version: '2'
+ services:
+   db:
+     image: mysql
+   web:
+     build: .
+     command: python manage.py runserver
+     volumes:
+       - .:/www
+     ports:
+       - "8080:8080"
+     depends_on:
+       - db
