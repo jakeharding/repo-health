@@ -17,15 +17,7 @@ describe('Pull Req Stats', () => {
   beforeEach(module(
     'repo-health',
     'components.pull-req-stats'
-  ), ($provide) => {
-    $provide.provider('StatsService', () => {
-      return {
-        then: () => {
-          return "Mock";
-        }
-      };
-    })
-  });
+  ));
 
   describe('PullReqStatsController', () => {
     let $componentController, $httpBackend, $apiUrl;

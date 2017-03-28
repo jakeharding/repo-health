@@ -13,19 +13,10 @@
 const module = angular.mock.module;
 
 describe('Issue Stats', () => {
-
   beforeEach(module(
     'repo-health',
     'components.issue-stats'
-  ), ($provide) => {
-    $provide.provider('StatsService', () => {
-      return {
-        then: () => {
-          return "Mock";
-        }
-      };
-    })
-  });
+  ));
 
   describe('IssueStatsComponent', () => {
     let $componentController, $httpBackend, $apiUrl;
@@ -36,28 +27,29 @@ describe('Issue Stats', () => {
       $httpBackend = $injector.get('$httpBackend');
       $apiUrl = $injector.get('$apiUrl');
       getIssueStatsUrl = `${$apiUrl}/${jasmine.any(Number)}/issues`;
-      controller = $componentController('issueStats', null, {issueStatsUrl: getIssueStatsUrl});
+      controller = $componentController('issueStats', null, {
+        issueStatsUrl: getIssueStatsUrl
+      });
       $httpBackend.when('GET', getIssueStatsUrl).respond(200, {metrics: [{
           ordering: 1
       }]});
     }));
 
     afterEach(() => {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
     });
 
     describe('constructor', () => {
+      it('should setup the controller', () => {
+        expect(controller).toBeDefined();
+      });
 
-        it('should setup the controller', () => {
-            expect(controller).toBeDefined();
-        });
-
-        it('should make a request to get the stats in the $onInit method', () => {
-            $httpBackend.expectGET(getIssueStatsUrl)
-            controller.$onInit();
-            $httpBackend.flush();
-        })
+      it('should make a request to get the stats in the $onInit method', () => {
+        $httpBackend.expectGET(getIssueStatsUrl)
+        controller.$onInit();
+        $httpBackend.flush();
+      })
     });
   });
 });

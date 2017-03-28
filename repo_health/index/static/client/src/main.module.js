@@ -41,7 +41,7 @@ export const main = angular.module('repo-health', [
         resolve: {
             statsUrls: (RepoDetailsService, $stateParams, $state) => {
                 return RepoDetailsService.getStatsUrls($stateParams)
-                    .then(resp => {return resp;}, () => { return {error:true}});
+                    .then(resp => {return resp;}, () => { return { error:true } });
             }
         },
         views: {
@@ -49,17 +49,14 @@ export const main = angular.module('repo-health', [
                 resolve: {
                     detailsUrl: (statsUrls) => { return statsUrls['repo_details_url']; }
                 },
-                controllerAs: '$ctrl',
                 template: '<repo-details details-url="$resolve.detailsUrl"></repo-details>',
             },
             'pull-req-stats': {
-                controllerAs: '$ctrl',
                 resolve: { prStatsUrl: (statsUrls) => { return statsUrls['pr_stats_url']; }
                 },
                 template: '<pull-req-stats pr-stats-url="$resolve.prStatsUrl"></pull-req-stats>'
             },
             'issue-stats': {
-                controllerAs: '$ctrl',
                 template: '<issue-stats issue-stats-url="$resolve.issueStatsUrl"></issue-stats>',
                 resolve: {
                     issueStatsUrl: (statsUrls) => { return statsUrls['issue_stats_url']; }

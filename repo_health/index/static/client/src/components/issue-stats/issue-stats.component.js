@@ -20,7 +20,7 @@ const issueStatsComponent = {
   controller: class issueStatsComponent {
     stats = null;
     loadingStats = true;
-    loadingMsg = "Loading issue stats...";
+    loadingMsg = 'Loading issue stats...';
     numOfStatsSections = 0;
 
     constructor( $http, $state, StatsService ) {
