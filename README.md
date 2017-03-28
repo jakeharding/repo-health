@@ -1,6 +1,8 @@
 # Repository Health Project for CSCI 4900
 
-This repository holds the proof of concept for the repository health and sustainability project for CSCI 4900 at the Univeristy of Nebraska at Omaha.  This repository will hold the backend and frontend source code to extract data from Github and ghtorrent and prodvide statistics about a selected repository.  Description of the backend and frontend source are provided.
+This repository holds the proof of concept for the repository health and sustainability project for CSCI 4900 at the University of Nebraska at Omaha.  This repository will hold the backend and frontend source code to extract data from Github and ghtorrent and provide statistics about a selected repository.  Description of the backend and frontend source are provided.
+
+This project is not meant to be in production. Charts for the user interface are not implemented yet, so arrays of integers are displayed where charts will be placed in the future.  
 
 ## Backend
 The Django web framework is used in the project to leverage quick development and the third party packages available.  Python requirements are kept in the requirements.txt file, and this file is generated using `pip freeze > requirements.txt`.

@@ -1,5 +1,5 @@
 /*
-* issue-stats.spec.js - (C) Copyright - 2017
+* stats.service.spec.js - (C) Copyright - 2017
 * This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 *
 * SPDX-License-Identifier: MIT
@@ -7,7 +7,7 @@
 * Author(s) of this file:
 * J.Harding
 *
-* This is the test file for the issue stats component
+* This is the test file for the stats service.
 */
 
 const module = angular.mock.module;

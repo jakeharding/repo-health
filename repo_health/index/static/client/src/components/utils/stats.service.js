@@ -7,7 +7,7 @@
 * Author(s) of this file:
 * J.Harding
 *
-* This is the base controller for the components to hold some commone methods.
+* This is the stats service.
 */
 
 /**
