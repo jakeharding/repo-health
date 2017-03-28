@@ -21,13 +21,13 @@
         <md-card-content layout="column" ng-if="!$first">
 
                 <div flex><span class="md-title" ng-if="$ctrl.stats[(2 * i)].display_name">{{$ctrl.stats[(2 * i)].display_name}}:</span>
-                    {{ $ctrl.getRawDataForChartName(2 * i) }}
+                    {{ $ctrl.StatsService.getRawDataForChartName($ctrl.stats[(2 * i)]) }}
                 </div>
                 <div flex>
                     <span class="md-title" ng-if="$ctrl.stats[ (2 * i + 1) ].display_name">
                         {{$ctrl.stats[ (2 * i + 1) ].display_name}}:
                     </span>
-                    {{ $ctrl.getRawDataForChartName((2 * i + 1)) }}
+                    {{ $ctrl.StatsService.getRawDataForChartName($ctrl.stats[ (2 * i + 1) ]) }}
                 </div>
 
                 <!--If we have an odd number of stats and on the last iteration we need to render one more.-->
@@ -35,7 +35,7 @@
                     <span class="md-title" ng-if="$ctrl.stats[$ctrl.stats.length - 1].display_name">
                         {{$ctrl.stats[$ctrl.stats.length-1].display_name}}:
                     </span>
-                    {{ $ctrl.getRawDataForChartName($ctrl.stats.length-1) }}
+                    {{ $ctrl.StatsService.getRawDataForChartName($ctrl.stats.length-1) }}
                 </div>
             <!--<canvas id="line" class="chart chart-line" chart-data="$ctrl.stats.prs_last_year" chart-labels="$ctrl.labels"-->
                       <!--chart-click="$ctrl.onClick" chart-hover="$ctrl.onHover" chart-series="$ctrl.series" chart-options="$ctrl.options"-->

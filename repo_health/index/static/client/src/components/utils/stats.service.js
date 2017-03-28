@@ -23,6 +23,11 @@ class StatsService {
       Object.assign( this, { $http, $filter} )
     }
 
+  /**
+   * @description Returns an array of indices to enable interation over a range in a template
+   * @param statsLength
+   * @returns {[*]}
+   */
     getRangeForSections(statsLength) {
       return [...Array(Math.floor(statsLength / 2)).keys()];
     }
@@ -32,9 +37,9 @@ class StatsService {
     * @param index
     * @returns {*|string}
     */
-    getRawDataForChartName(index) {
-      let rawData = this.stats[index].raw_data;
-      switch ( this.stats[index].chart_name ) {
+    getRawDataForChartName(stat) {
+      let rawData = stat.raw_data;
+      switch ( stat.chart_name ) {
         case chartNameEnum.dateChart:
           rawData = this.$filter('date')(rawData);
           break;
