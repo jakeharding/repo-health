@@ -24,7 +24,7 @@ class StatsService {
     }
 
   /**
-   * @description Returns an array of indices to enable interation over a range in a template
+   * @description Returns an array of indices to enable iteration over a range in a template
    * @param statsLength
    * @returns {[*]}
    */
@@ -34,7 +34,7 @@ class StatsService {
 
     /**
     * @description Returns the raw data for the metric based on the chart name
-    * @param index
+    * @param stat
     * @returns {*|string}
     */
     getRawDataForChartName(stat) {
