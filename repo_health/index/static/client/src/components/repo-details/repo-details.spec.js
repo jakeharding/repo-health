@@ -17,12 +17,17 @@ describe('Repo Details', () => {
     let $apiUrl, getStatsReqUrl, getDetailsUrl;
 
     beforeEach(module(
-        'app.resources',
-        'components.search',
+        'repo-health',
         'components.repo-details',
-        'components.pull-req-stats',
-        'components.issue-stats'
-    ));
+    ), ($provide) => {
+        $provide.provider('StatsService', () => {
+          return {
+            then: () => {
+              return "Mock";
+            }
+          };
+        })
+    });
     beforeEach(inject(($injector) => {
         $httpBackend = $injector.get("$httpBackend");
         $apiUrl = $injector.get('$apiUrl');
@@ -42,7 +47,10 @@ describe('Repo Details', () => {
 
         beforeEach(inject(($injector) => {
             $componentController = $injector.get('$componentController');
-            controller = $componentController('repoDetails', null, { detailsUrl: getDetailsUrl, stats: []});
+            controller = $componentController('repoDetails', null, {
+              detailsUrl: getDetailsUrl,
+              stats: []
+            });
             $httpBackend.when('GET', getDetailsUrl).respond(200, {
                 metrics: [{
                     ordering: 1

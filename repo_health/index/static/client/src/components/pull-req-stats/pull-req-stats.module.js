@@ -10,12 +10,11 @@
 * This is the module definition for the pr stats module
 */
 
-import uiRouter from 'angular-ui-router';
 import pullReqStatsComponent from './pull-req-stats.component';
 
 const components = angular
   .module('components.pull-req-stats', [])
-    .component('pullReqStats', pullReqStatsComponent)
+  .component('pullReqStats', pullReqStatsComponent)
   .name;
 
 export default components;

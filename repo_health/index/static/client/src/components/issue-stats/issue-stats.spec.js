@@ -1,5 +1,5 @@
 /*
-* issue-stats..spec.js - (C) Copyright - 2017
+* issue-stats.spec.js - (C) Copyright - 2017
 * This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 *
 * SPDX-License-Identifier: MIT
@@ -15,12 +15,17 @@ const module = angular.mock.module;
 describe('Issue Stats', () => {
 
   beforeEach(module(
-    'app.resources',
-    'components.search',
-    'components.repo-details',
-    'components.pull-req-stats',
+    'repo-health',
     'components.issue-stats'
-  ));
+  ), ($provide) => {
+    $provide.provider('StatsService', () => {
+      return {
+        then: () => {
+          return "Mock";
+        }
+      };
+    })
+  });
 
   describe('IssueStatsComponent', () => {
     let $componentController, $httpBackend, $apiUrl;
@@ -35,7 +40,6 @@ describe('Issue Stats', () => {
       $httpBackend.when('GET', getIssueStatsUrl).respond(200, {metrics: [{
           ordering: 1
       }]});
-
     }));
 
     afterEach(() => {

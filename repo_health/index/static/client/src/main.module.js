@@ -18,6 +18,7 @@ import 'angular-chart.js';
 import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
+import StatsService from 'components/utils/stats.service';
 
 //Styles
 import 'global.css';
@@ -30,6 +31,7 @@ export const main = angular.module('repo-health', [
     'chart.js'
   ])
   .component('main', mainComponent)
+  .service('StatsService', StatsService)
   .config(($locationProvider, $urlRouterProvider, $mdThemingProvider, $stateProvider) => {
     'ngInject';
     $locationProvider.hashPrefix('');

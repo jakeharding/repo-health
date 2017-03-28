@@ -15,12 +15,17 @@ const module = angular.mock.module;
 describe('Pull Req Stats', () => {
 
   beforeEach(module(
-    'app.resources',
-    'components.search',
-    'components.repo-details',
-    'components.pull-req-stats',
-    'components.issue-stats'
-  ));
+    'repo-health',
+    'components.pull-req-stats'
+  ), ($provide) => {
+    $provide.provider('StatsService', () => {
+      return {
+        then: () => {
+          return "Mock";
+        }
+      };
+    })
+  });
 
   describe('PullReqStatsController', () => {
     let $componentController, $httpBackend, $apiUrl;
@@ -31,13 +36,12 @@ describe('Pull Req Stats', () => {
       $httpBackend = $injector.get('$httpBackend');
       $apiUrl = $injector.get('$apiUrl');
       getPrStatsUrl = `${$apiUrl}/${jasmine.any(Number)}/pull-requests`;
-      controller = $componentController('pullReqStats', null, {prStatsUrl: getPrStatsUrl});
-      $httpBackend.when('GET', getPrStatsUrl).respond(200, {metrics: [
-          {
-              ordering: 0
-          }
-      ]});
-
+      controller = $componentController('pullReqStats', null, {
+        prStatsUrl: getPrStatsUrl
+      });
+      $httpBackend.when('GET', getPrStatsUrl).respond(200, {metrics: [{
+          ordering: 0
+      }]});
     }));
 
     afterEach(() => {

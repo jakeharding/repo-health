@@ -10,27 +10,35 @@
 * This is the creation of the pull-req-stats component.
 */
 
-import template from '../base-component/base.template';
-import BaseStatsComponent from '../base-component/base-stats.component';
+import template from '../utils/base.template';
 
 const pullReqStatsComponent = {
   template,
-  bindings: {prStatsUrl: '='},
-  controller: class pullReqStatsComponent extends BaseStatsComponent {
+  bindings: {
+    prStatsUrl: '='
+  },
+  controller: class pullReqStatsComponent {
     stats = null;
     loadingStats = true;
     loadingMsg = "Loading pull request stats...";
     numOfStatsSections = 0;
     
-    constructor( $http, $filter ) {
-      super($http, $filter);
+    constructor( $http, $state, StatsService ) {
       'ngInject';
-      Object.assign(this, { $http });
+      Object.assign(this, { $http, $state, StatsService });
     }
 
     $onInit() {
       if (this.prStatsUrl) {
-          this.getStatsForUrl(this.prStatsUrl);
+        this.StatsService.getStatsForUrl(this.prStatsUrl).then(stats => {
+          this.stats = stats;
+         this.loadingStats = false;
+          this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
+        });
+      } else {
+        this.$state.go('search', {
+          error: true
+        });
       }
     }
   }

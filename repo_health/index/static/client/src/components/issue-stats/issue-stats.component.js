@@ -10,28 +10,31 @@
 * Create issue-stats component.
 */
 
-import template from '../base-component/base.template';
-import BaseStatsComponent from '../base-component/base-stats.component';
+import template from '../utils/base.template';
 
 const issueStatsComponent = {
   template,
-  bindings: {issueStatsUrl: '='},
+  bindings: {
+    issueStatsUrl: '='
+  },
   controller: class issueStatsComponent {
     stats = null;
     loadingStats = true;
     loadingMsg = "Loading issue stats...";
     numOfStatsSections = 0;
 
-
-    constructor( $http, $state ) {
+    constructor( $http, $state, StatsService ) {
       'ngInject';
-      Object.assign(this, { $http, $state });
+      Object.assign(this, { $http, $state, StatsService });
     }
 
     $onInit() {
       if (this.issueStatsUrl) {
-        // TODO Write service to make API request for stats.
-        // this.getStatsForUrl(this.issueStatsUrl);
+        this.StatsService.getStatsForUrl(this.issueStatsUrl).then(stats => {
+          this.stats = stats;
+          this.loadingStats = false;
+          this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
+        });
       } else {
         this.$state.go('search', {
           error: true

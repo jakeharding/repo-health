@@ -23,7 +23,7 @@ const components = angular
         url: '/search',
         template: '<search></search>',
         params: {
-            error: false
+          error: false
         }
       })
     })

@@ -10,28 +10,37 @@
 * This is the creation of the search component.
 */
 
-import template from '../base-component/base.template';
-import BaseStatsComponent from '../base-component/base-stats.component';
+import template from '../utils/base.template';
 
 const repoDetailsComponent = {
   template,
-  bindings: {detailsUrl: '='},
-  controller: class repoDetailsComponent extends BaseStatsComponent {
+  bindings: {
+    detailsUrl: '='
+  },
+  controller: class repoDetailsComponent {
 
     loadingStats = true;
     loadingMsg = "Loading general repo stats...";
     stats = null;
     numOfStatsSections = 0;
 
-    constructor($http, $filter) {
-      super($http, $filter );
+    constructor($http, StatsService) {
       'ngInject';
-      Object.assign(this, { $http });
+      Object.assign(this, { $http, StatsService });
     }
 
     $onInit() {
       if (this.detailsUrl) {
-        this.getStatsForUrl(this.detailsUrl);
+        // this.getStatsForUrl(this.detailsUrl);
+        this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
+          this.stats = stats;
+          this.loadingStats = false;
+          this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
+        });
+      } else {
+        this.$state.go('search', {
+          error: true
+        });
       }
     }
   }
