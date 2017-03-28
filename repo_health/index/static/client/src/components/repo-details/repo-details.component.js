@@ -31,7 +31,6 @@ const repoDetailsComponent = {
 
     $onInit() {
       if (this.detailsUrl) {
-        // this.getStatsForUrl(this.detailsUrl);
         this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
           this.stats = stats;
           this.loadingStats = false;
