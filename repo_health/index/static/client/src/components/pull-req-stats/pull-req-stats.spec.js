@@ -32,26 +32,25 @@ describe('Pull Req Stats', () => {
         prStatsUrl: getPrStatsUrl
       });
       $httpBackend.when('GET', getPrStatsUrl).respond(200, {metrics: [{
-          ordering: 0
+        ordering: 0
       }]});
     }));
 
     afterEach(() => {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
     });
 
     describe('constructor', () => {
+      it('should setup the controller', () => {
+        expect(controller).toBeDefined();
+      });
 
-        it('should setup the controller', () => {
-            expect(controller).toBeDefined();
-        });
-
-        it('should make a request to get the stats in the $onInit method', () => {
-            $httpBackend.expectGET(getPrStatsUrl)
-            controller.$onInit();
-            $httpBackend.flush();
-        })
+      it('should make a request to get the stats in the $onInit method', () => {
+        $httpBackend.expectGET(getPrStatsUrl)
+        controller.$onInit();
+        $httpBackend.flush();
+      })
     });
   });
 });

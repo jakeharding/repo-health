@@ -19,33 +19,33 @@ const chartNameEnum = {
 
 class StatsService {
 
-    constructor ( $http, $filter ) {
-      Object.assign( this, { $http, $filter} )
-    }
+  constructor ( $http, $filter ) {
+    Object.assign( this, { $http, $filter} )
+  }
 
   /**
-   * @description Returns an array of indices to enable iteration over a range in a template
-   * @param statsLength
-   * @returns {[*]}
-   */
-    getRangeForSections(statsLength) {
-      return [...Array(Math.floor(statsLength / 2)).keys()];
-    }
+  * @description Returns an array of indices to enable iteration over a range in a template
+  * @param statsLength
+  * @returns {[*]}
+  */
+  getRangeForSections(statsLength) {
+    return [...Array(Math.floor(statsLength / 2)).keys()];
+  }
 
-    /**
-    * @description Returns the raw data for the metric based on the chart name
-    * @param stat
-    * @returns {*|string}
-    */
-    getRawDataForChartName(stat) {
-      let rawData = stat.raw_data;
-      switch ( stat.chart_name ) {
-        case chartNameEnum.dateChart:
-          rawData = this.$filter('date')(rawData);
-          break;
-      }
-      return rawData || 'No';
+  /**
+  * @description Returns the raw data for the metric based on the chart name
+  * @param stat
+  * @returns {*|string}
+  */
+  getRawDataForChartName(stat) {
+    let rawData = stat.raw_data;
+    switch ( stat.chart_name ) {
+      case chartNameEnum.dateChart:
+        rawData = this.$filter('date')(rawData);
+        break;
     }
+    return rawData || 'No';
+  }
 
   /**
    * @description Makes a get request to the given url.
