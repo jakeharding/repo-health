@@ -18,9 +18,6 @@ import 'angular-chart.js';
 import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
-import RepoDetailsController from 'components/repo-details/repo-details.controller';
-import IssueStatsController from 'components/issue-stats/issue-stats.controller';
-import PrStatsController from 'components/pull-req-stats/pull-req-stats.controller';
 
 //Styles
 import 'global.css';
@@ -47,24 +44,21 @@ export const main = angular.module('repo-health', [
         },
         views: {
             'repo-details': {
-                controller:  RepoDetailsController,
                 resolve: {
-                    detailsUrl: (statsUrls) => { return statsUrls["repo_details_url"]; }
+                    detailsUrl: (statsUrls) => { return statsUrls['repo_details_url']; }
                 },
                 controllerAs: '$ctrl',
-                template: '<repo-details details-url="$ctrl.detailsUrl"></repo-details>',
+                template: '<repo-details details-url="$resolve.detailsUrl"></repo-details>',
             },
             'pull-req-stats': {
-                controller: PrStatsController,
                 controllerAs: '$ctrl',
                 resolve: { prStatsUrl: (statsUrls) => { return statsUrls['pr_stats_url']; }
                 },
-                template: '<pull-req-stats pr-stats-url="$ctrl.prStatsUrl"></pull-req-stats>'
+                template: '<pull-req-stats pr-stats-url="$resolve.prStatsUrl"></pull-req-stats>'
             },
             'issue-stats': {
-                controller: IssueStatsController,
                 controllerAs: '$ctrl',
-                template: '<issue-stats issue-stats-url="$ctrl.issueStatsUrl"></issue-stats>',
+                template: '<issue-stats issue-stats-url="$resolve.issueStatsUrl"></issue-stats>',
                 resolve: {
                     issueStatsUrl: (statsUrls) => { return statsUrls['issue_stats_url']; }
                 }

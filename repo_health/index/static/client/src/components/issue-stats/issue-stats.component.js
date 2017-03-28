@@ -16,27 +16,26 @@ import BaseStatsComponent from '../base-component/base-stats.component';
 const issueStatsComponent = {
   template,
   bindings: {issueStatsUrl: '='},
-  controller: class issueStatsComponent extends BaseStatsComponent {
+  controller: class issueStatsComponent {
     stats = null;
     loadingStats = true;
     loadingMsg = "Loading issue stats...";
     numOfStatsSections = 0;
 
 
-    constructor( $http, $filter ) {
-      super($http, $filter);
+    constructor( $http, $state ) {
       'ngInject';
-      Object.assign(this, { $http });
+      Object.assign(this, { $http, $state });
     }
 
     $onInit() {
       if (this.issueStatsUrl) {
-        this.getStatsForUrl(this.issueStatsUrl);
-        // this.$http.get(this.issueStatsUrl).then(stats => {
-        //     this.stats = this.$filter('orderBy')(stats.data.metrics, 'ordering');
-        //     this.numOfStatsSections = new Array(Math.floor(this.stats.length / 2)).fill().map((x,i) => {return i});
-        //     this.loadingStats = false;
-        // });
+        // TODO Write service to make API request for stats.
+        // this.getStatsForUrl(this.issueStatsUrl);
+      } else {
+        this.$state.go('search', {
+          error: true
+        });
       }
     }
   }
