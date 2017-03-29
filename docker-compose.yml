@@ -1,10 +1,11 @@
  version: '2'
  services:
- 
    database:
-     image: mysql:5.5
-     container_name: repo-health-db
+     build: ./docker/database
+     restart: always
      command: mysqld --user=root --verbose
+     volumes:
+       - /var/lib/mysql
      ports:
        - "3306:3306"
      environment:
@@ -16,12 +17,11 @@
 
    web:
      build: .
-     image: repo-health
-     container_name: repo-health
-    #  command: python manage.py runserver
      volumes:
        - .:/www
      ports:
-       - "8080:8080"
+       - "8000:8000"
+     links:
+       - database
      depends_on:
        - database

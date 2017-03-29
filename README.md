@@ -35,6 +35,12 @@ Production database is configured in a similar fashion, but the project is not r
 
 ## Development setup
 
+### Using Docker
+This was tested using v1.12.6 of [Docker](https://docs.docker.com/engine/installation/linux/ubuntu/) and v1.11.2 of [Docker Compose](https://docs.docker.com/compose/install/). Any version below these are untested.
+To deploy this application in a docker instance go to the root of this repository and run `docker-compose up`. This will run through the configurations
+of our project and create a working copy. This process takes a couple of minutes. Once it is complete, just head to [localhost:8000](http://localhost:8000) to view
+this application.
+
 ### Backend Configuration
 Developers develop on many projects, and each project has it's own dependancies or deps.  
 For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependancies between projects.  
