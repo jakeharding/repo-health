@@ -1,5 +1,5 @@
 """
-serializers.py - (C) Copyright - 2017
+GhProjectSerializer.py - (C) Copyright - 2017
 This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 
 SPDX-License-Identifier: MIT
@@ -10,12 +10,16 @@ Author(s) of this file:
 Serializer for a GitHub repo.
 """
 
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import Serializer, SerializerMethodField
 from repo_health.gh_users.models import GhUser
-from ..models import GhProject
+from repo_health.metrics.serializers import MetricField
 
 
-class GhProjectSerializer(ModelSerializer):
+class GhProjectSerializer(Serializer):
+    """
+    Calculates the metrics for a repo. Each field returns a list corresponding to the fields of the FieldSerializer.
+
+    """
     _contribs_count = None
     _watch_not_contribs_count = None
     _orgs_of_contribs_count = None
@@ -23,6 +27,14 @@ class GhProjectSerializer(ModelSerializer):
     _commits_count = None
     _latest_commit = None
 
+    # Fields found directly on the model
+    language = SerializerMethodField()
+    name = SerializerMethodField()
+    description = SerializerMethodField()
+    forked_from = SerializerMethodField()
+    created_at = SerializerMethodField()
+
+    # Fields with calculations/aggregations
     contribs_count = SerializerMethodField()
     watchers_count = SerializerMethodField()
     commits_count = SerializerMethodField()
@@ -31,14 +43,14 @@ class GhProjectSerializer(ModelSerializer):
     labels_count = SerializerMethodField()
     orgs_of_contribs_count = SerializerMethodField()
     owned_by_org = SerializerMethodField()
-    forks_count = SerializerMethodField()    
+    forks_count = SerializerMethodField()
 
     def __init__(self, *args, **kwargs):
         """
         Get some statistics for repo.
         """
         super().__init__(*args, **kwargs)
-        repo = args[0].first()
+        repo = args[0]
         if repo is not None:
             commits = (repo.commits_m2m.all() | repo.commits_fk.all()).order_by('-created_at')
             commit_users = GhUser.objects.filter(authored_commits__in=commits).distinct()
@@ -47,36 +59,47 @@ class GhProjectSerializer(ModelSerializer):
             self._latest_commit = commits.first().created_at
             self._orgs_of_contribs_count = GhUser.objects.filter(members__in=commit_users).exclude(id=repo.owner.id).count()
 
+    def get_language(self, repo):
+        return MetricField(True, 'Language', 2, None, repo.language)
+
+    def get_name(self, repo):
+        return MetricField(True, None, 0, None, repo.name)
+
+    def get_description(self, repo):
+        return MetricField(True, None, 1, None, repo.description)
+
+    def get_forked_from(self, repo):
+        return MetricField(True, 'Has upstream', 3, None, repo.forked_from.name if repo.forked_from else None)
+
+    def get_created_at(self, repo):
+        return MetricField(True, 'Created at', 4, 'date', repo.created_at)
+
     def get_orgs_of_contribs_count(self, repo):
-        return self._orgs_of_contribs_count
+        return MetricField(True, "Number of outside organizations with commits", 5, None, self._orgs_of_contribs_count)
 
     def get_contribs_count(self, obj):
-        return self._contribs_count
+        return MetricField(True, 'Number of contributors', 6, None, self._contribs_count)
         
     def get_commits_count(self, obj):
-        return self._commits_count
+        return MetricField(True, 'Number of commits', 7, None, self._commits_count)
 
     def get_maintainers_count(self, repo):
-        return repo.maintainers.count()
+        return MetricField(True, 'Number of maintainers', 8, None, repo.maintainers.count())
     
     def get_watchers_count(self, repo):
-        return repo.watchers.count()
+        return MetricField(True, 'Number of watchers', 9, None, repo.watchers.count())
 
     def get_milestones_count(self, repo):
-        return repo.milestones.count()
+        return MetricField(True, 'Number of milestones', 10, None, repo.milestones.count())
     
     def get_latest_commit_created_at(self, repo):
-        return self._latest_commit
+        return MetricField(True, 'Age of latest commit', 11, 'date', self._latest_commit)
     
     def get_labels_count(self, repo):
-        return repo.labels.count()
+        return MetricField(True, 'Number of labels', 12, None, repo.labels.count())
     
     def get_owned_by_org(self, repo):
-        return repo.is_owned_by_org()
+        return MetricField(True, 'Is owner an organization', 13, None, repo.is_owned_by_org())
     
     def get_forks_count(self, repo):
-        return repo.forks.all().count()
-        
-    class Meta:
-        model = GhProject
-        exclude = ['commits_m2m', 'maintainers', 'watchers', 'url', 'forks', ]
+        return MetricField(True, 'Number of forks', 14, None, repo.forks.all().count())

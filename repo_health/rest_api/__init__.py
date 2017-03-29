@@ -15,7 +15,7 @@ from rest_framework import routers
 from repo_health.gh_projects.views import GhProjectViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register('gh-projects', GhProjectViewSet)
+router.register('gh-projects', GhProjectViewSet, base_name='gh-project')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

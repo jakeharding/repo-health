@@ -13,14 +13,26 @@
 const module = angular.mock.module;
 
 describe('Repo Details', () => {
-  let $rootScope;
-  let $q;
+  let $httpBackend;
+  let $apiUrl, getStatsReqUrl, getDetailsUrl;
 
   beforeEach(module(
-    'app.resources', 
-    'components.search', 
-    'components.repo-details')
-  );
+    'repo-health',
+    'components.repo-details',
+  ));
+
+  beforeEach(inject(($injector) => {
+    $httpBackend = $injector.get("$httpBackend");
+    $apiUrl = $injector.get('$apiUrl');
+    getStatsReqUrl = `${$apiUrl}?name=cakephp&owner__login=cakephp`;
+    getDetailsUrl = `${$apiUrl}/${jasmine.any(Number)}`;
+
+  }));
+
+  afterEach(() => {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
 
   describe('RepoDetailsController', () => {
     let $componentController;
@@ -28,59 +40,48 @@ describe('Repo Details', () => {
 
     beforeEach(inject(($injector) => {
       $componentController = $injector.get('$componentController');
-      $rootScope = $injector.get('$rootScope');
-      $q = $injector.get('$q');
-      controller = $componentController('repoDetails');
+      controller = $componentController('repoDetails', null, {
+        detailsUrl: getDetailsUrl,
+        stats: []
+      });
+      $httpBackend.when('GET', getDetailsUrl).respond(200, {
+        metrics: [{
+          ordering: 1
+        },{
+          ordering: 2
+        }]
+      });
     }));
 
     describe('constructor', () => {
       it('should setup the controller', () => {
         expect(controller).toBeDefined();
-      });
-      
-      it('should setup loadingRepo and details', () => {
-        expect(controller.loadingRepo).toBeTruthy();
-        expect(controller.details).toBeNull();
+        expect(controller.loadingStats).toBeTruthy();
       });
 
-      it('should setup RepoDetailsService, $state, $stateParams', () => {
-        expect(controller.RepoDetailsService).toBeDefined();
-        expect(controller.$state).toBeDefined();
-        expect(controller.$stateParams).toBeDefined();
-      });
-    });
-
-    describe('getStats', () => {
-      it('should make a call to service', () => {
-        spyOn(controller.RepoDetailsService, 'getStats').and.returnValue($q.resolve({ name: 'cakephp' }));
-        expect(controller.RepoDetailsService.getStats).not.toHaveBeenCalled();
-        controller.getStats();
-        $rootScope.$apply();
-        expect(controller.loadingRepo).toBeFalsy();
-        expect(controller.details).toEqual({ name: 'cakephp' });
-        expect(controller.RepoDetailsService.getStats).toHaveBeenCalled();
+      it('should request the details in the $onInit method', () => {
+        $httpBackend.expectGET(getDetailsUrl);
+        controller.$onInit();
+        $httpBackend.flush();
       });
     });
   });
 
   describe('RepoDetailsService', () => {
     let RepoDetailsService;
-    let $httpBackend;
-    let $apiUrl;
 
     beforeEach(inject(($injector) => {
-      $rootScope = $injector.get('$rootScope');
-      $q = $injector.get('$q');
-      $httpBackend = $injector.get('$httpBackend');
-      $apiUrl = $injector.get('$apiUrl');
-      RepoDetailsService = $injector.get('RepoDetailsService');
+        RepoDetailsService = $injector.get('RepoDetailsService');
     }));
 
     describe('getNameAndOwnerFromUrl', () => {
       it('should return name and owner', () => {
-        expect(RepoDetailsService.getNameAndOwnerFromUrl('https://github.com/name/repo')).toEqual({ name: 'repo', owner__login: 'name' });
+        expect(RepoDetailsService.getNameAndOwnerFromUrl('https://github.com/name/repo')).toEqual({
+          name: 'repo',
+          owner__login: 'name'
+        });
       });
-      
+
       it('should return undefined', () => {
         expect(RepoDetailsService.getNameAndOwnerFromUrl()).toBeUndefined();
         expect(RepoDetailsService.getNameAndOwnerFromUrl('not a url')).toBeUndefined();
@@ -88,24 +89,15 @@ describe('Repo Details', () => {
       });
     });
 
-    describe('getStats', () => {
-      it('should return a promise if repoDetails exists', () => {
-        RepoDetailsService.repoDetails = { name: 'cakephp', watchers: 123 };
-        RepoDetailsService.getStats().then(details => {
-          expect(details).toEqual(RepoDetailsService.repoDetails);
-        });
-        $rootScope.$apply();
+    describe('getStatsUrls', () => {
+      beforeEach(() => {
+        $httpBackend.when('GET', getStatsReqUrl).respond(200, {repo_details_url: 'cakephp', pr_stats_url: 15});
       });
 
-      it('should set repoDetails if it doesn\'t exist', () => {
-        $httpBackend.when('GET', `${$apiUrl}?name=cakephp&owner__login=cakephp`).respond(200, { name: 'cakephp', watchers: 15 });
-        RepoDetailsService.getStats({ name: 'cakephp', owner__login: 'cakephp' }).then(details => {
-          expect(details).toEqual(RepoDetailsService.repoDetails);
-        });
+      it('should make a request to get the urls', () => {
+        $httpBackend.expectGET(getStatsReqUrl);
+        RepoDetailsService.getStatsUrls({name: 'cakephp', owner__login: 'cakephp'});
         $httpBackend.flush();
-        $rootScope.$apply();
-        expect(RepoDetailsService.repoDetails.name).toEqual('cakephp');
-        expect(RepoDetailsService.repoDetails.watchers).toEqual(15);
       });
     });
   });

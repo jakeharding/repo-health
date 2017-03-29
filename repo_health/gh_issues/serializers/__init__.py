@@ -6,9 +6,10 @@ SPDX-License-Identifier: MIT
 
 Author(s) of this file:
   J. Harding
-  
+
 Import all classes from package.
 """
 
-from .GhProjectSerializer import GhProjectSerializer
-from .StatsUrlSerializer import StatsUrlsSerializer
+
+from .GhIssueStatsSerializer import GhIssueStatsSerializer
+from .TotalAndOpenIssueLabelSerial import TotalAndOpenIssueLabelSerial

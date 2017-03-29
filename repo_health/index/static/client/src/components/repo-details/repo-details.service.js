@@ -22,9 +22,6 @@ class RepoDetailsService {
 
   /* Gets the last two strings on a url */
   getNameAndOwnerFromUrl(url = '') {
-    if (url.search('github.com') == -1) {
-      return;
-    }
 
     const pathArray = url.replace(/.*github.com\//, '').split('/');
     const name = pathArray.pop();
@@ -32,12 +29,8 @@ class RepoDetailsService {
     return name && owner__login ? { owner__login, name } : undefined;
   }
 
-  getStats(params) {
-    if (this.repoDetails) {
-      return this.$q.resolve(this.repoDetails);
-    } else {
-      return this.$repo.get('repo', params).then(details => (this.repoDetails = details));
-    }
+  getStatsUrls(params) {
+    return this.$repo.get('repoStatsUrls', params);
   }
 
 }

@@ -16,10 +16,12 @@ describe('Search', () => {
   let sandbox;
 
   beforeEach(module(
-    'app.resources', 
+    'app.resources',
+    'repo-health',
     'components.repo-details',
-    'components.search')
-  );
+    'components.pull-req-stats',
+    'components.search'
+  ));
 
   describe('SearchController', () => {
     let $componentController;
@@ -41,38 +43,32 @@ describe('Search', () => {
         expect(controller).toBeDefined();
       });
       it('should setup loadingRepo and error', () => {
-        expect(controller.loadingRepo).toBeFalsy();
         expect(controller.error).toBeNull();
       });
     });
 
-    describe('getStats', () => {
-      let getStats;
+    describe('getStatsUrls', () => {
 
       it('should not make a call if url is invalid', () => {
-        spyOn(controller.RepoDetailsService, 'getStats');
+        spyOn(controller.$state, 'go');
         controller.githubUrl = 'This not a url';
-        controller.getStats();
-        expect(controller.loadingRepo).toBeTrue;
-        expect(controller.RepoDetailsService.getStats).not.toHaveBeenCalled();
+        controller.getStatsUrls();
+        expect(controller.error).toBeTruthy();
+        expect(controller.$state.go).not.toHaveBeenCalledWith('repo-health');
       });
 
-      it('should make a call to getStats on the service', () => {
-        spyOn(controller.RepoDetailsService, 'getStats').and.returnValue($q.resolve({ name: 'cakephp' }));
+      it('should make a call to getStatsUrls on the service', () => {
+        spyOn(controller.RepoDetailsService, 'getStatsUrls').and.returnValue($q.resolve({ name: 'cakephp' }));
         controller.githubUrl = 'https://github.com/cakephp/cakephp';
-        controller.getStats();
-        expect(controller.loadingRepo).toBeTruthy();
-        expect(controller.RepoDetailsService.getStats).toHaveBeenCalled();
+        controller.getStatsUrls();
+        expect(controller.RepoDetailsService.getStatsUrls).toHaveBeenCalled();
       });
 
       it('should set an error if it fails', () => {
-        spyOn(controller.RepoDetailsService, 'getStats').and.returnValue($q.reject('error'));
-        controller.githubUrl = 'https://github.com/cakephp/cakephp';
-        controller.getStats();
+        controller.githubUrl = 'https://github.com/cakephp/';
+        controller.getStatsUrls();
         $rootScope.$apply();
-        expect(controller.loadingRepo).toBeFalsy();
-        expect(controller.error).toEqual('This repo does not exist');
-        expect(controller.RepoDetailsService.getStats).toHaveBeenCalled();
+        expect(controller.error).toBeTruthy();
       });
     });
   });

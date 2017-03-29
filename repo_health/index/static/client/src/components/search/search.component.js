@@ -16,26 +16,23 @@ const searchComponent = {
   template,
   controller: class searchComponent {
 
-    loadingRepo = false;
     error = null;
+    errorMsg = 'This repo does not exist';
 
     constructor(RepoDetailsService, $state, $stateParams) {
       'ngInject';
       Object.assign(this, { RepoDetailsService, $state, $stateParams });
+      this.error = $stateParams.error || null;
     }
 
-    getStats() {
-      const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
-      if (params) {
-        this.loadingRepo = true
-        this.error = null;
-        this.RepoDetailsService.getStats(params).then(() => {
-          this.$state.go('repo-details', params);
-        }, () => {
-          this.error = 'This repo does not exist';
-          this.loadingRepo = false;
-        });
-      }
+    getStatsUrls() {
+        const params = this.RepoDetailsService.getNameAndOwnerFromUrl(this.githubUrl);
+        if (params) {
+            this.error = null;
+            this.$state.go('repo-health', params);
+        } else  {
+            this.error = true;
+        }
     }
   }
 };

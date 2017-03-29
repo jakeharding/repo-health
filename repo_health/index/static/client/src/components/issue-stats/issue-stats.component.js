@@ -1,37 +1,36 @@
 /*
-* search.component.js - (C) Copyright - 2017
+* issue-stats.component.js - (C) Copyright - 2017
 * This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
 *
 * SPDX-License-Identifier: MIT
 *
 * Author(s) of this file:
-* @bparish628
+* J.Harding
 *
-* This is the creation of the search component.
+* Create issue-stats component.
 */
 
 import template from '../utils/base.template';
 
-const repoDetailsComponent = {
+const issueStatsComponent = {
   template,
   bindings: {
-    detailsUrl: '='
+    issueStatsUrl: '='
   },
-  controller: class repoDetailsComponent {
-
-    loadingStats = true;
-    loadingMsg = "Loading general repo stats...";
+  controller: class issueStatsComponent {
     stats = null;
+    loadingStats = true;
+    loadingMsg = 'Loading issue stats...';
     numOfStatsSections = 0;
 
-    constructor($http, StatsService) {
+    constructor( $http, $state, StatsService ) {
       'ngInject';
-      Object.assign(this, { $http, StatsService });
+      Object.assign(this, { $http, $state, StatsService });
     }
 
     $onInit() {
-      if (this.detailsUrl) {
-        this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
+      if (this.issueStatsUrl) {
+        this.StatsService.getStatsForUrl(this.issueStatsUrl).then(stats => {
           this.stats = stats;
           this.loadingStats = false;
           this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
@@ -45,4 +44,4 @@ const repoDetailsComponent = {
   }
 };
 
-export default repoDetailsComponent;
+export default issueStatsComponent;
