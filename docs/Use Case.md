@@ -15,7 +15,7 @@
 * Metrics for a healthy repository are already defined
 * The repositories to be compared are already picked out 
 
-**Main Success Scenario:** Project lead understands the metrics presented and makes an accurate decision on if the software should be incoporated  
+**Main Success Scenario:** Project lead understands the metrics presented and makes an accurate decision if the software should be incoporated  
 
 **Failed End Conditions:** Project lead receives little to no information on the health of the chosen repository  
 
