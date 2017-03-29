@@ -3,6 +3,7 @@ FROM mysql:5.5
 RUN mkdir /data
 WORKDIR /data
 
+# Install MSR14 database and add a custom sql file to be ran on initialization.
 RUN apt-get update && apt-get install -y curl sed
 RUN curl -O https://ghtstorage.blob.core.windows.net/downloads/msr14-mysql.gz
 RUN gzip -d msr14-mysql.gz
