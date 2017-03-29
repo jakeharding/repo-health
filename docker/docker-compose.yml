@@ -1,13 +1,27 @@
  version: '2'
  services:
-   db:
-     image: mysql
+ 
+   database:
+     image: mysql:5.5
+     container_name: repo-health-db
+     command: mysqld --user=root --verbose
+     ports:
+       - "3306:3306"
+     environment:
+       MYSQL_BASE: "msr14"
+       MYSQL_USER: "msr14"
+       MYSQL_PASSWORD: "msr14"
+       MYSQL_ROOT_PASSWORD: "password"
+       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
    web:
      build: .
-     command: python manage.py runserver
+     image: repo-health
+     container_name: repo-health
+    #  command: python manage.py runserver
      volumes:
        - .:/www
      ports:
        - "8080:8080"
      depends_on:
-       - db
+       - database
