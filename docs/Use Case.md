@@ -4,10 +4,10 @@
 
 **Primary Actor:** Project Leader 
 
-**Goal in Context:** The project lead is able to access if an open source project is healthly enough for its company's standards to incorporate into their product.  
+**Goal in Context:** The project lead is able to assess if an open source project is healthly enough for its company's standards to incorporate into their product  
 
 **Stakeholders:**  
-* Project Lead: To understand if software is apporiate to incorporate into their own product
+* Project Lead: To understand if software is appropriate to incorporate into their own product
 * Developer: To clearly gauge if a piece of software will need to be maintained by them or if it's reliable
 * Manager: To access the longevity of this project with regards to dependencies
 
@@ -17,6 +17,6 @@
 
 **Main Success Scenario:** Project lead understands the metrics presented and makes an accurate decision on if the software should be incoporated  
 
-**Failed End Conditions:** Project lead recieves little to no information on the health of the chosen repository.  
+**Failed End Conditions:** Project lead receives little to no information on the health of the chosen repository  
 
-**Trigger:** Project lead is assigned to a brand new project and needs to access what libraries and dependencies should be used  
+**Trigger:** Project lead is assigned to a brand new project and needs to assess what libraries and dependencies should be used  
