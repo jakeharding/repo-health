@@ -14,7 +14,8 @@ from django.db import models
 
 class GhRepoLabel(models.Model):
     repo = models.ForeignKey(
-      'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True
+      'gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True,
+      related_name='labels'
     )
     name = models.CharField(max_length=24)
     ext_ref_id = models.CharField(max_length=24)

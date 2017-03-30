@@ -31,7 +31,16 @@ class TestGhUser(TestCase):
         self.maintain_user = GhUser.objects.filter(
             maintain_repos__isnull = False
         ).first()
+
+        self.organization = GhUser.objects.filter(
+            type=GhUser.ORG_TYPE
+        ).first()
+
+    def test_org_is_org(self):
+        self.assertTrue(self.organization.is_org())
         
+    def test_user_is_not_org(self):
+        self.assertFalse(self.maintain_user.is_org())
     
     def test_get_m2m(self):
         self.assertTrue(self.orgs_user.organizations.all())

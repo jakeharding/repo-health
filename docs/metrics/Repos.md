@@ -2,7 +2,7 @@
 
 msr14 limitations
  - has no recognition of releases, tags, stars, downloads
- - has an empty table: RepoMilestone
+ - has empty tables: GhRepoMilestone, GhFork
 
 
 ###From slides
@@ -20,7 +20,7 @@ msr14 limitations
  - numbers of watchers
  - number of watchers who aren't contributors
  - organizations of contributors
-  - project doesn't have an organization directly
+ - number of forks
  - number of labels
  - is a fork
  - number of commits

@@ -13,7 +13,10 @@ GitHub repo milestones model.
 from django.db import models
 
 class GhRepoMilestone(models.Model):
-    repo = models.ForeignKey('gh_projects.GhProject', models.DO_NOTHING, blank=True, null=True)
+    repo = models.ForeignKey('gh_projects.GhProject', models.DO_NOTHING, 
+        blank=True, null=True,
+        related_name='milestones'    
+    )
     name = models.CharField(max_length=24)
     ext_ref_id = models.CharField(max_length=24)
 

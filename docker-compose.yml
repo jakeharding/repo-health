@@ -1,0 +1,27 @@
+ version: '2'
+ services:
+   database:
+     build: ./docker/database
+     restart: always
+     command: mysqld --user=root --verbose
+     volumes:
+       - /var/lib/mysql
+     ports:
+       - "3306:3306"
+     environment:
+       MYSQL_BASE: "msr14"
+       MYSQL_USER: "msr14"
+       MYSQL_PASSWORD: "msr14"
+       MYSQL_ROOT_PASSWORD: "password"
+       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+   web:
+     build: .
+     volumes:
+       - .:/www
+     ports:
+       - "8000:8000"
+     links:
+       - database
+     depends_on:
+       - database

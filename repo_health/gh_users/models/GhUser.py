@@ -1,7 +1,24 @@
+"""
+GhUser.py - (C) Copyright - 2017
+This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
+
+SPDX-License-Identifier: MIT
+
+Author(s) of this file:
+  J. Harding
+
+GitHub User model.
+"""
+
+
 from django.db import models as m
 
 
 class GhUser(m.Model):
+    
+    ORG_TYPE = 'ORG'
+    USER_TYPE = 'USR'
+
     login = m.CharField(unique=True, max_length=255)
     name = m.CharField(max_length=255, blank=True, null=True)
     company = m.CharField(max_length=255, blank=True, null=True)
@@ -21,6 +38,9 @@ class GhUser(m.Model):
         'self', symmetrical=False, related_name='members',
         through='gh_users.GhOrgMember'
     )
+
+    def is_org(self):
+        return self.type == self.ORG_TYPE
 
     class Meta:
         managed = False

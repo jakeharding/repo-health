@@ -1,38 +1,15 @@
+{% load static %}
+
 <!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Repo Health Assessment</title>
+<html ng-app="repo-health">
+  <head>
+    <meta charset="UTF-8">
+    <title>Repo Health Assessment</title>
+  </head>
+  <body class="container">
+    <main></main>
+  </body>
 
-        <link rel="stylesheet" href="/static/assets/vendor/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/assets/css/styles.css">
-    
-        <!--Loading libs from node_modules for this example.  Will need to bundle them correctly.-->
-        <script type="text/javascript" src="/static/node_modules/angular/angular.min.js"></script>
-        <script type="text/javascript" src="/static/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>  
-    </head>
-
-    {% comment %}
-    This template is rendered within Django, and this comment won't get rendered in the browser because it is wrapped in Django's comment tag. Django's and Angular's template language share the same curly braces for variable names. Like: {{ variable }}.  Angular UI Router is used to get around this by rendering subsequent child templates in Angular only. This makes the frontend modular so it can be removed completely from the backend code, and not tied to Django specifically.
-
-    Angular variables can still be rendered in this page by wrapping them in Django's verbatim tag, similar to this comment.  All html is rendered as expected.
-    {% endcomment %}
-    <body class="container" >
-        <div class="col-sm-12 text-center">
-            <h1>Repo Health Assessment</h1>
-        </div>
-        <div ng-app="repo-health">
-            <div ui-view></div>
-        </div>
-    </body>
-    
-    <!--Bundle these also.-->
-    <script type="text/javascript" src="/static/src/app.js"></script>
-    <script type="text/javascript" src="/static/src/components/components.module.js"></script>
-
-    <!-- Search Component -->
-    <script type="text/javascript" src="/static/src/components/search/search.module.js"></script>    
-    <script type="text/javascript" src="/static/src/components/search/search.component.js"></script>    
-    <script type="text/javascript" src="/static/src/components/search/search.controller.js"></script>    
-        
+  <script type="text/javascript" src="{% static 'dist/js/vendor.js' %}"></script>    
+  <script type="text/javascript" src="{% static 'dist/js/app.js' %}"></script> 
 </html>

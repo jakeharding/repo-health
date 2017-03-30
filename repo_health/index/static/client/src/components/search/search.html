@@ -1,0 +1,41 @@
+<div class="container">
+  <md-content class="md-padding" layout-xs="column" layout="row" ng-if="$ctrl.error">
+    <div flex-xs flex-gt-xs layout="column">
+      <md-card md-theme="error">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Error</span>
+            <span class="md-subhead">{{$ctrl.errorMsg}}</span>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+  </md-content>
+
+
+  <div layout="row" layout-align="center center">
+    <md-content layout-padding flex-gt-md="45" flex-gt-xs="100">
+      <form name="$ctrl.ghForm">
+        <h2 class="text-center">Github Url</h2>
+          <md-input-container class="md-block">
+            <input
+                    ng-model="$ctrl.githubUrl"
+                    type="text"
+                    required
+                    placeholder="Github URL"
+            />
+          </md-input-container>
+          <div class="text-center">
+            <md-button
+                    type="submit"
+                    class="md-raised md-primary"
+                    ng-click="$ctrl.getStatsUrls()"
+                    ng-disabled="$ctrl.ghForm.$invalid"
+            >
+                Get Statistics
+            </md-button>
+          </div>
+      </form>
+    </md-content>
+  </div>
+</div>

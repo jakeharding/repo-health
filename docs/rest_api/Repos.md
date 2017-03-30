@@ -18,14 +18,21 @@ URL:
     "ext_ref_id": str,
     "deleted": int,
     "owner": int,
+    "forked_from": null or int,    
     "contribs_count": int,
     "watchers_count": int,
-    "watch_not_contribs_counts: int,
+    "maintainers_count": int,
+    "milestones_count": int,
     "orgs_of_contribs_count": int,
     "labels_count": int,
-    "is_fork": bool,
     "commits_count": int,
     "milestones_count": int,
-    "age_of_latest_commit": date str
+    "owned_by_org": bool,
+    "forks_count": int
 }
  ```
+ 
+ ## Future Metric possibilities
+
+- maintainers count per month for past year to track project growth
+- org members per month over past year to track org growth

@@ -1,6 +1,6 @@
-#REST API README    
+# REST API README    
 
-##Purpose
+## Purpose
 GitHub maintains a REST API so why do we need another? 
  - The reason to host and supply the data independentluy of GitHub enables us to structure the data in a fashion suitable for our purpose.
 

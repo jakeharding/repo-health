@@ -1,0 +1,14 @@
+/*
+* component.module.js - (C) Copyright - 2017
+* This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
+*
+* SPDX-License-Identifier: MIT
+*
+* Author(s) of this file:
+* @bparish628
+*
+* This file will contain all of the styles imported in the order they need to be
+*/
+
+@import 'vendor/angular-material.min.css';
+@import 'styles/styles.css';

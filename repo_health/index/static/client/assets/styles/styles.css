@@ -1,0 +1,26 @@
+/*
+* styles.css - (C) Copyright - 2017
+* This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
+*
+* SPDX-License-Identifier: MIT
+*
+* Author(s) of this file:
+* @bparish628
+*
+* This file holds the general css for the application
+*/
+
+.text-center {
+  text-align: center;
+}
+
+.search-repo {
+  width: 75%;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
