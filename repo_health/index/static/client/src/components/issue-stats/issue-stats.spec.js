@@ -31,7 +31,7 @@ describe('Issue Stats', () => {
         issueStatsUrl: getIssueStatsUrl
       });
       $httpBackend.when('GET', getIssueStatsUrl).respond(200, {metrics: [{
-          ordering: 1
+        ordering: 1
       }]});
     }));
 

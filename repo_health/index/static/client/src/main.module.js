@@ -15,7 +15,6 @@
 import angular from 'angular';
 import ngMaterial from 'angular-material';
 import uiRouter from 'angular-ui-router';
-import 'angular-chart.js';
 import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
@@ -28,21 +27,21 @@ export const main = angular.module('repo-health', [
     uiRouter,
     ngMaterial,
     components,
-    resources,
-    'chart.js'
+    resources
   ])
   .component('main', mainComponent)
   .service('StatsService', StatsService)
   .config(($locationProvider, $urlRouterProvider, $mdThemingProvider, $stateProvider) => {
     'ngInject';
+    
     $locationProvider.hashPrefix('');
     $urlRouterProvider.otherwise('/search');
     $stateProvider.state('repo-health', {
       url: '/repo-health/:owner__login/:name',
       resolve: {
         statsUrls: (RepoDetailsService, $stateParams, $state) => {
-            return RepoDetailsService.getStatsUrls($stateParams)
-                .then(resp => {return resp;}, () => { return { error:true } });
+          return RepoDetailsService.getStatsUrls($stateParams)
+            .then(resp => { return resp; }, () => { return { error: true } });
         }
       },
       views: {
@@ -71,7 +70,7 @@ export const main = angular.module('repo-health', [
     $mdThemingProvider.theme('error').backgroundPalette('red').dark();
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('blue')
+      .primaryPalette('light-blue')
       .accentPalette('orange')
       .backgroundPalette('blue-grey');
   })
