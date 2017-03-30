@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y curl sed
 RUN curl -O https://ghtstorage.blob.core.windows.net/downloads/msr14-mysql.gz
 RUN gzip -d msr14-mysql.gz
 
-# Add the database to use to beginining of file
+# Use msr14 for the msr14 script 
 RUN echo 'USE msr14;' | cat - msr14-mysql > temp && mv temp msr14-mysql
 
 # We need to move the files to this folder, because they will get run on initialization
