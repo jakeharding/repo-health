@@ -61,10 +61,10 @@ Step 3: Go to the root folder of `repo-health` and run `docker-compose up`. This
 Step 4: Once complete, a message will display saying that the server is listening to port 8000. You may now go to [localhost:8000](http://localhost:8000) to view this application.
 
 ### Backend Configuration
-Developers develop on many projects, and each project has it's own dependencies or deps.
-For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependencies between projects.
-Virtualenv and virtualenvwrapper are used to create and maintain the environment and need to be installed in the base Python using the pip command line tool.
-An explanation of how to install pip is [here](https://pip.pypa.io/en/stable/installing/), but if you can run `which pip` and see a result, you have pip installed.
+Developers develop on many projects, and each project has it's own dependencies or deps.  
+For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependencies between projects.  
+Virtualenv and virtualenvwrapper are used to create and maintain the environment and need to be installed in the base Python using the pip command line tool.  
+An explanation of how to install pip is [here](https://pip.pypa.io/en/stable/installing/), but if you can run `which pip` and see a result, you have pip installed.  
 To install virtualenv and virtualenvwrapper use:
   `pip install virtualenv virtualenvwrapper`
 and wait for a success message.  If unsuccessful, try the same command using `pip3` in place of `pip`.
