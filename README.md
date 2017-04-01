@@ -48,14 +48,21 @@ Production database is configured in a similar fashion, but the project is not r
 ## Development setup
 
 ### Using Docker
+Docker is the preferred way to get an environment running. If you choose to use Docker, you will NOT have to do any of the other configuration. Please skip the Backend Configuration and Frontend Configuration sections.
+
 This was tested using v1.12.6 of [Docker](https://docs.docker.com/engine/installation/linux/ubuntu/) and v1.11.2 of [Docker Compose](https://docs.docker.com/compose/install/). Any version below these are untested.
-Before starting a docker deploy, make sure that port 3306 is open (mysql should not be running locally). To deploy this application in a docker instance go to the root of this repository and run `docker-compose up`. This will run through the configurations
-of our project and create a working copy. This process takes a couple of minutes. Please wait until it completes. A message will display saying that the server is listening to port 8000. Once it is complete, just head to [localhost:8000](http://localhost:8000) to view
-this application.
+
+Step 1: Clone `repo-health` onto your local machine. Run `git clone https://github.com/jakeharding/repo-health.git` to clone.
+
+Step 2: Make sure `mysql` is not running locally and that port 3306 and 8000 are free. If running on ubuntu, run `service mysql stop`.
+
+Step 3: Go to the root folder of `repo-health` and run `docker-compose up`. This will run through all of our configurations. This process wil take a couple of minutes.
+
+Step 4: Once complete, a message will display saying that the server is listening to port 8000. You may now go to [localhost:8000](http://localhost:8000) to view this application.
 
 ### Backend Configuration
-Developers develop on many projects, and each project has it's own dependancies or deps.  
-For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependancies between projects.  
+Developers develop on many projects, and each project has it's own dependencies or deps.  
+For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependencies between projects.  
 Virtualenv and virtualenvwrapper are used to create and maintain the environment and need to be installed in the base Python using the pip command line tool.  
 An explanation of how to install pip is [here](https://pip.pypa.io/en/stable/installing/), but if you can run `which pip` and see a result, you have pip installed.  
 To install virtualenv and virtualenvwrapper use:
