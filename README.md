@@ -52,9 +52,9 @@ Docker is the preferred way to get an environment running. If you choose to use 
 
 This was tested using v1.12.6 of [Docker](https://docs.docker.com/engine/installation/linux/ubuntu/) and v1.11.2 of [Docker Compose](https://docs.docker.com/compose/install/). Any version below these are untested.
 
-Step 1: Clone `repo-health` onto your local machine.
+Step 1: Clone `repo-health` onto your local machine. Run `git clone https://github.com/jakeharding/repo-health.git` to clone.
 
-Step 2: Make sure `mysql` is not running locally and that port 3306 and 8000 are free.
+Step 2: Make sure `mysql` is not running locally and that port 3306 and 8000 are free. If running on ubuntu, run `service mysql stop`.
 
 Step 3: Go to the root folder of `repo-health` and run `docker-compose up`. This will run through all of our configurations. This process wil take a couple of minutes.
 
