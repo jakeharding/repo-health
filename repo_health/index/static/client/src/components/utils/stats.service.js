@@ -20,6 +20,7 @@ const chartNameEnum = {
 class StatsService {
 
   constructor ( $http, $filter ) {
+    'ngInject';
     Object.assign( this, { $http, $filter} )
   }
 
