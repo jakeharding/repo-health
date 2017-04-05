@@ -10,7 +10,7 @@ The Django web framework is used in the project to leverage quick development an
 Python 3.5 is recommended for this project.  It can be downloaded and installed at [python.org](python.org).
 
 ## Frontend
-The frontend source is written in ES2015 using [Angular](https://angularjs.org/). We are using [Bootstrap](http://getbootstrap.com/) for our styles.   
+The frontend source is written in ES2015 using [Angular](https://angularjs.org/). We are using [Angular Material](https://material.angularjs.org/latest/) for our styles.   
 
 ## Development Environment
 A Unix dev environment is recommended because the setup instructions provided are known to work in these environments using a bash terminal.  The instructions may work in a Windows bash terminal but have not been tested.
@@ -48,7 +48,7 @@ Production database is configured in a similar fashion, but the project is not r
 ## Development setup
 
 ### Using Docker
-Docker is the preferred way to get an environment running. If you choose to use Docker, you will NOT have to do any of the other configuration. Please skip the Backend Configuration and Frontend Configuration sections.
+Docker is the preferred way to get an environment running. If you choose to use Docker, you will NOT have to do any of the other configuration. Please skip the Backend Configuration and Frontend Configuration sections. Please note the Docker environment uses a development server and serves the backend application in a development state.  This is not safe for production use.
 
 This was tested using v1.12.6 of [Docker](https://docs.docker.com/engine/installation/linux/ubuntu/) and v1.11.2 of [Docker Compose](https://docs.docker.com/compose/install/). Any version below these are untested.
 
