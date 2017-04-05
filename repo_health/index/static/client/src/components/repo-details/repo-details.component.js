@@ -24,9 +24,9 @@ const repoDetailsComponent = {
     stats = null;
     numOfStatsSections = 0;
 
-    constructor($http, StatsService) {
+    constructor($http, StatsService, $state) {
       'ngInject';
-      Object.assign(this, { $http, StatsService });
+      Object.assign(this, { $http, StatsService, $state });
     }
 
     $onInit() {
