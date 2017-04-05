@@ -17,8 +17,8 @@
 
    web:
      build: .
-     volumes:
-       - .:/www
+    #  volumes:
+    #    - .:/www
      ports:
        - "8000:8000"
      links:
