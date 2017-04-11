@@ -24,3 +24,8 @@
   right: 0;
   margin: auto;
 }
+
+.repo-tabs {
+  background: white;
+  border: 1px solid #e1e1e1;
+}
