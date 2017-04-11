@@ -14,7 +14,7 @@ Python 3.5 is recommended for this project.  It can be downloaded and installed 
 The frontend source is written in ES2015 using [Angular](https://angularjs.org/). We are using [Angular Material](https://material.angularjs.org/latest/) for our styles.   
 
 ## Installation
-Docker is the preferred way to get an environment running. If you would like to not use Docker, please click [here](https://github.com/jakeharding/repo-health/blob/master/docs/Other%20Installation.md). Please skip the Backend Configuration and Frontend Configuration sections. Please note the Docker environment uses a development server and serves the backend application in a development state.  This is not safe for production use.
+Docker is the preferred way to get an environment running. If you would like to not use Docker, please click [here](https://github.com/jakeharding/repo-health/blob/master/docs/Other%20Installation.md). Please note the Docker environment uses a development server and serves the backend application in a development state.  This is not safe for production use.
 
 This was tested using v1.12.6 of [Docker](https://docs.docker.com/engine/installation/linux/ubuntu/) and v1.11.2 of [Docker Compose](https://docs.docker.com/compose/install/). Any version below these are untested.
 
