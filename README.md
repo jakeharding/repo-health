@@ -51,6 +51,8 @@ All source code is covered by the MIT license.  This license can be found [here]
 
 All other material, such as documentation, is covered by the Creative Commons - Attribution, or the CC BY license.
 
+© 2017 Jake Harding and Benjamin Parish
+
 ## Contributing
 External contributions are not being accepted at this time. For existing contributors, please use the following header documentation at the top of each file:
 
