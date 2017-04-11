@@ -14,11 +14,19 @@ const template = `
   <div layout="row" layout-align="center center">
     <h1 class="md-display-3 text-center">Repo Health Assessment</h1>
   </div>
-  <div layout="row">
-    <div ui-view flex>
-      <div ui-view="repo-details"></div>
-      <div ui-view="pull-req-stats"></div>
-      <div ui-view="issue-stats"></div>
+  <div layout="row" layout-align="center center">
+    <div ui-view flex="65">
+      <md-tabs class="repo-tabs" md-dynamic-height md-border-bottom>
+        <md-tab label="Details">
+          <div ui-view="repo-details"></div>
+        </md-tab>
+        <md-tab label="Pull Request Stats">
+          <div ui-view="pull-req-stats"></div>
+        </md-tab>
+        <md-tab label="Issue Stats">
+          <div ui-view="issue-stats"></div>
+        </md-tab>
+      </md-tabs>
     </div>
   </div>
 `;
