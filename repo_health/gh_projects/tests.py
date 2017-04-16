@@ -26,6 +26,7 @@ class TestGhProject(TestCase):
     Specifically test database relationships to show no error thrown and a result is returned.
     """
 
+    fixtures = ['projects.json']
     project = None
     client = None 
 
@@ -51,6 +52,7 @@ class TestGhProject(TestCase):
 
     def test_get_repo_labels(self):
         labels = GhRepoLabel.objects.filter(repo__isnull=False)
+        print(labels.values_list('id', flat=True))
         self.assertTrue(labels)
 
 
@@ -60,6 +62,7 @@ class GhProjectApiTest(APITestCase):
     """
 
     project = None
+    fixtures = ['projects.json']
 
     def setUp(self):
         self.project = GhProject.objects.last()
@@ -75,7 +78,7 @@ class GhProjectApiTest(APITestCase):
         self.assertTrue(isinstance(r.data.get('metrics'), list))
         self.assertTrue(isinstance(r.data.get('charts'), dict))
 
-        #test with bad input
+        # test with bad input
         max_id = GhProject.objects.all().aggregate(m.Max('id')).get('id__max')
         bad_input = self.client.get(dj_reverse('gh-project-detail', args=[max_id + 1]))
         self.assertTrue(status.is_client_error(bad_input.status_code))
