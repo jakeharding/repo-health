@@ -1,6 +1,11 @@
 language: python
 python:
   - "3.6"
-install: "pip install -r requirements.txt"
+install:
+  - "pip install -r requirements.txt"
+  - "nvm install 7.4.0"
+  - "npm install --prefix ./repo_health/index/static"
 services: mysql
-script: "python manage.py test --settings=repo_health.travis_settings"
+script:
+  - "python manage.py test --settings=repo_health.travis_settings"
+  - "npm test --prefix ./repo_health/index/static/"

@@ -36,7 +36,7 @@ npm test
 ``` 
 To run Backend tests:
 ```
-python manage.py test --keepdb
+python manage.py test
 ``` 
 
 ## Production setup

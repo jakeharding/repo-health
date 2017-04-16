@@ -26,8 +26,6 @@ Open the MySql interpreter with root access using: `mysql -u root -p`.  If you h
 
 The user needs to have access to the database. Run `grant all on msr14.* to 'msr14'@'localhost;`.  After commands have been run successfully, run `quit;` to exit the interpreter.  We can now load the data into the database by running `mysql -u root -p msr14 < path_to_extracted_data_file`.  The `path_to_extracted_data_file` is the absolute path noted earlier, and `msr14` is the name of the database created.  Once this is successful, you can enter the information into the local_settings.py.
 
-If running unit tests, this process will need to be repeated with a test database named `test_msr14`.
-
 Located in the `repo_health` directory of this repository is a `local_settings.py.example` file. Save a copy of this file as `local_settings.py` to the same directory.  Please do not remove the example file from the repo.  If you created the database and user as `msr14` then you will need insert the password for the user in the `PASSWORD` placeholder.  Otherwise enter the required information into the correct places and save the file.
 
 #### Production Database
