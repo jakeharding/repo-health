@@ -1,0 +1,6 @@
+language: python
+python:
+  - "3.6"
+install: "pip install -r requirements.txt"
+services: mysql
+script: "python manage.py test --settings=repo_health.travis_settings"
