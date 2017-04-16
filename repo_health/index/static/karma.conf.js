@@ -27,7 +27,7 @@ module.exports = (config) => {
     ],
     plugins: [
       require('karma-jasmine'),
-      require('karma-chrome-launcher'),
+      require('karma-phantomjs-launcher'),
       require('karma-webpack')
     ],
     preprocessors: {
@@ -38,7 +38,7 @@ module.exports = (config) => {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: false,
     concurrency: Infinity,
   });

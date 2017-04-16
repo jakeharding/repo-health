@@ -1,4 +1,5 @@
 appdirs==1.4.0
+coverage==4.3.4
 Django==1.10.5
 django-filter==1.0.1
 django-fixture-magic==0.1.3

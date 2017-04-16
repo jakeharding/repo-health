@@ -3,9 +3,13 @@ python:
   - "3.6"
 install:
   - "pip install -r requirements.txt"
+  - "pip install python-coveralls"
   - "nvm install 7.4.0"
   - "npm install --prefix ./repo_health/index/static"
-services: mysql
+services:
+  - "mysql"
 script:
-  - "python manage.py test --settings=repo_health.travis_settings"
+  - "coverage run --source=repo_health manage.py test"
   - "npm test --prefix ./repo_health/index/static/"
+after_success:
+  - "coveralls"
