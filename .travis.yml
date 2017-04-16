@@ -4,12 +4,12 @@ python:
 install:
   - "pip install -r requirements.txt"
   - "pip install python-coveralls"
-  - "nvm install 7.4.0"
-  - "npm install --prefix ./repo_health/index/static"
+#  - "nvm install 7.4.0"
+#  - "npm install --prefix ./repo_health/index/static"
 services:
   - "mysql"
 script:
   - "coverage run --source=repo_health manage.py test"
-  - "npm test --prefix ./repo_health/index/static/"
+#  - "npm test --prefix ./repo_health/index/static/"
 after_success:
   - "coveralls"
