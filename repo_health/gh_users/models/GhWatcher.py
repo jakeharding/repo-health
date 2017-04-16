@@ -4,6 +4,7 @@ Github Watchers
 
 from django.db import models as m
 
+
 class GhWatcher(m.Model):
     repo = m.ForeignKey('gh_projects.GhProject', m.DO_NOTHING)
     user = m.ForeignKey('gh_users.GhUser', m.DO_NOTHING)

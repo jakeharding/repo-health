@@ -1,0 +1,164 @@
+[
+{
+    "model": "gh_users.ghuser",
+    "pk": 1,
+    "fields": {
+        "login": "akka",
+        "name": "Akka Project",
+        "company": null,
+        "location": "Uppsala, Sweden",
+        "email": "info@typesafe.com",
+        "created_at": "2012-03-03T04:44:45",
+        "ext_ref_id": "52343e2ebd3543bb7f000001",
+        "type": "ORG"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 2,
+    "fields": {
+        "login": "hadley",
+        "name": "hadley wickham",
+        "company": "Rice University",
+        "location": "Houston, TX",
+        "email": "h.wickham@gmail.com",
+        "created_at": "2008-04-01T07:47:36",
+        "ext_ref_id": "52343eecbd35436ddb000001",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_users.ghorgmember",
+    "pk": 1,
+    "fields": {
+        "user_id": 1,
+        "org_id": 71003,
+        "created_at": "2013-09-24 04:48:13"
+    }
+},
+{
+    "model": "gh_users.ghorgmember",
+    "pk": 2,
+    "fields": {
+        "user_id": 1,
+        "org_id": 75250,
+        "created_at": "2013-09-24 04:48:13"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 71003,
+    "fields": {
+        "login": "heathermiller",
+        "name": "Heather Miller",
+        "company": "EPFL",
+        "location": "Lausanne, Switzerland",
+        "email": "heather.miller@epfl.ch",
+        "created_at": "2011-03-23T16:55:36",
+        "ext_ref_id": "523575bebd354372fe0047ac",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 75250,
+    "fields": {
+        "login": "viktorklang",
+        "name": "Viktor Klang (\u221a)",
+        "company": null,
+        "location": null,
+        "email": "viktor.klang@gmail.com",
+        "created_at": "2008-05-20T06:43:03",
+        "ext_ref_id": "52358ce8bd3543981b002917",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 7,
+    "fields": {
+        "login": "rstudio",
+        "name": "RStudio",
+        "company": null,
+        "location": "Boston, MA",
+        "email": "info@rstudio.org",
+        "created_at": "2010-12-07T12:03:35",
+        "ext_ref_id": "52343eecbd35436de1000001",
+        "type": "ORG"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 7,
+    "fields": {
+        "url": "https://api.github.com/repos/rstudio/shiny",
+        "owner": 7,
+        "name": "shiny",
+        "description": "Easy interactive web applications with R",
+        "language": "JavaScript",
+        "created_at": "2012-06-20T11:45:11",
+        "ext_ref_id": "52343eecbd35436de1000002",
+        "forked_from": null,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 2,
+    "fields": {
+        "login": "hadley",
+        "name": "hadley wickham",
+        "company": "Rice University",
+        "location": "Houston, TX",
+        "email": "h.wickham@gmail.com",
+        "created_at": "2008-04-01T07:47:36",
+        "ext_ref_id": "52343eecbd35436ddb000001",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 2,
+    "fields": {
+        "url": "https://api.github.com/repos/hadley/devtools",
+        "owner": 2,
+        "name": "devtools",
+        "description": "Tools to make an R developer's life easier",
+        "language": "R",
+        "created_at": "2010-05-02T21:08:49",
+        "ext_ref_id": "52343eecbd35436ddb000002",
+        "forked_from": null,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghwatcher",
+    "pk": 1,
+    "fields": {
+        "repo_id": 2,
+        "user_id": 2,
+        "created_at": "2013-09-24 04:48:13",
+        "ext_ref_id": "523addb7bd3543223900a4d5"
+    }
+},
+{
+    "model": "gh_users.ghprojectmember",
+    "pk": 1,
+    "fields": {
+        "repo_id": 2,
+        "user_id": 2,
+        "created_at": "2013-09-24 04:48:13",
+        "ext_ref_id": "523addb7bd3543223900a4d5"
+    }
+},
+{
+    "model": "gh_users.ghprojectmember",
+    "pk": 2,
+    "fields": {
+        "repo_id": 7,
+        "user_id": 2,
+        "created_at": "2013-09-24 04:48:13",
+        "ext_ref_id": "523addb7bd3543223900a4d6"
+    }
+}
+]
