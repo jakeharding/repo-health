@@ -37,7 +37,6 @@ class TestGhProject(TestCase):
         ).first()
         self.client = Client()
 
-
     def test_get_project(self):
         self.assertTrue(self.project)
 
@@ -52,7 +51,6 @@ class TestGhProject(TestCase):
 
     def test_get_repo_labels(self):
         labels = GhRepoLabel.objects.filter(repo__isnull=False)
-        print(labels.values_list('id', flat=True))
         self.assertTrue(labels)
 
 
