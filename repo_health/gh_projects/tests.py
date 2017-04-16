@@ -11,7 +11,6 @@ Test projects
 """
 
 
-import datetime
 from django.test import TestCase, Client
 from django.db import models as m
 from django.shortcuts import reverse as dj_reverse
@@ -71,7 +70,7 @@ class GhProjectApiTest(APITestCase):
 
     def test_api_get_project(self):
         r = self.client.get(dj_reverse('gh-project-detail', args=[self.project.id]))
-        print(r.data)
+        
         self.assertTrue(status.is_success(r.status_code))
         self.assertTrue(isinstance(r.data.get('metrics'), list))
         self.assertTrue(isinstance(r.data.get('charts'), dict))
@@ -111,7 +110,6 @@ class GhProjectApiTest(APITestCase):
     def test_get_pr_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/pull-requests' % self.django.id)
         self.assertTrue(status.is_success(r.status_code), 'Status code was: %d' % r.status_code)
-        print(r.data)
         # Check for a few custom fields of the serializer
         self.assertTrue(r.data.get('metrics') and isinstance(r.data['metrics'], list))
         self.assertTrue(isinstance(r.data['charts'], dict))
@@ -121,7 +119,6 @@ class GhProjectApiTest(APITestCase):
 
     def test_get_issue_stats(self):
         r = self.client.get('/api/v1/gh-projects/%d/issues' % self.project_with_issues.id)
-        print (r.data)
         self.assertTrue(status.is_success(r.status_code))
         self.assertTrue(r.data.get('metrics') and isinstance(r.data['metrics'], list))
         self.assertTrue(isinstance(r.data['charts'], dict))

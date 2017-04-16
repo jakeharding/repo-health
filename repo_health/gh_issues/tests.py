@@ -15,7 +15,9 @@ Specifically test database relationships to be sure an error is not thrown and a
 from django.test import TestCase
 from .models import GhIssue, GhIssueComment
 
+
 class TestGhIssue(TestCase):
+    fixtures = ['issues.json',]
     issue = None
     issue_user = None
 

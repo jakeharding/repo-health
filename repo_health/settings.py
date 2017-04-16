@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'fixture_magic',
     'repo_health.gh_users',
     'repo_health.gh_projects',
     'repo_health.gh_commits',

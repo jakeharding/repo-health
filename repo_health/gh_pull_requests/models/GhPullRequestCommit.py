@@ -19,6 +19,5 @@ class GhPullRequestCommit(models.Model):
     commit = models.ForeignKey('gh_commits.GhCommit', models.DO_NOTHING)
 
     class Meta:
-        managed = False
         db_table = 'pull_request_commits'
         unique_together = (('pull_request', 'commit'),)

@@ -14,7 +14,6 @@ class GhProjectMember(m.Model):
         return self.user.login
 
     class Meta:
-        managed = False
         db_table = 'project_members'
         unique_together = (('repo', 'user'),)
         verbose_name = 'GitHub Project Member'

@@ -30,6 +30,5 @@ class GhPullRequestHistory(models.Model):
         return 'history for PR: %s' %self.pull_request.base_repo.name
 
     class Meta:
-        managed = False
         db_table = 'pull_request_history'
         verbose_name = 'GitHub Pull Request History'

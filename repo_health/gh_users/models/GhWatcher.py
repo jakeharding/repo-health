@@ -14,7 +14,6 @@ class GhWatcher(m.Model):
         return self.user.login
 
     class Meta:
-        managed = False
         db_table = 'watchers'
         unique_together = (('repo', 'user'),)
         verbose_name = 'GitHub Watcher'

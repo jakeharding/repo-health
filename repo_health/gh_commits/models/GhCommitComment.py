@@ -28,6 +28,5 @@ class GhCommitComment(models.Model):
         return "User: %s" % self.user.login
 
     class Meta:
-        managed = False
         db_table = 'commit_comments'
         verbose_name='GitHub Commit Comment'

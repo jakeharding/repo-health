@@ -30,6 +30,5 @@ class GhRepoLabel(models.Model):
         return "Label name: '%s' for repo: %s" % (self.name, self.repo.name)
 
     class Meta:
-        managed = False
         db_table = 'repo_labels'
         verbose_name = 'GitHub Repo Label'

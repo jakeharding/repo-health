@@ -49,6 +49,5 @@ class GhCommit(models.Model):
         return "Project: %s Author: %s" %(self.project.name, self.author.login)
 
     class Meta:
-        managed = False
         db_table = 'commits'
         verbose_name="GitHub Commit"
