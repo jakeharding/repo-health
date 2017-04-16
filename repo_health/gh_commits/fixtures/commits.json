@@ -56,90 +56,6 @@
 },
 {
     "model": "gh_users.ghuser",
-    "pk": 14,
-    "fields": {
-        "login": "TTimo",
-        "name": "Timothee \"TTimo\" Besset",
-        "company": "",
-        "location": "Dallas, TX, USA",
-        "email": "ttimo@ttimo.net",
-        "created_at": "2008-04-11T07:54:48",
-        "ext_ref_id": "52343eedbd35436e92000001",
-        "type": "USR"
-    }
-},
-{
-    "model": "gh_projects.ghproject",
-    "pk": 10,
-    "fields": {
-        "url": "https://api.github.com/repos/TTimo/doom3.gpl",
-        "owner": 14,
-        "name": "doom3.gpl",
-        "description": "Doom 3 GPL source release",
-        "language": "C++",
-        "created_at": "2011-11-22T14:27:23",
-        "ext_ref_id": "52343eeebd35436e92000002",
-        "forked_from": null,
-        "deleted": 0
-    }
-},
-{
-    "model": "gh_users.ghuser",
-    "pk": 18,
-    "fields": {
-        "login": "DOPSGAPH",
-        "name": "unknown",
-        "company": null,
-        "location": null,
-        "email": "timo@plague.(none)",
-        "created_at": "2013-09-14T05:48:40",
-        "ext_ref_id": "",
-        "type": "USR"
-    }
-},
-{
-    "model": "gh_commits.ghcommit",
-    "pk": 2,
-    "fields": {
-        "sha": "e9c4795109cc83155632454f63f21fc4a0ae5a09",
-        "author": 18,
-        "committer": 18,
-        "project": 10,
-        "created_at": "2011-12-29T14:12:27",
-        "ext_ref_id": "52343ef0bd35436e92000004"
-    }
-},
-{
-    "model": "gh_users.ghuser",
-    "pk": 14,
-    "fields": {
-        "login": "TTimo",
-        "name": "Timothee \"TTimo\" Besset",
-        "company": "",
-        "location": "Dallas, TX, USA",
-        "email": "ttimo@ttimo.net",
-        "created_at": "2008-04-11T07:54:48",
-        "ext_ref_id": "52343eedbd35436e92000001",
-        "type": "USR"
-    }
-},
-{
-    "model": "gh_projects.ghproject",
-    "pk": 10,
-    "fields": {
-        "url": "https://api.github.com/repos/TTimo/doom3.gpl",
-        "owner": 14,
-        "name": "doom3.gpl",
-        "description": "Doom 3 GPL source release",
-        "language": "C++",
-        "created_at": "2011-11-22T14:27:23",
-        "ext_ref_id": "52343eeebd35436e92000002",
-        "forked_from": null,
-        "deleted": 0
-    }
-},
-{
-    "model": "gh_users.ghuser",
     "pk": 18,
     "fields": {
         "login": "DOPSGAPH",
@@ -170,35 +86,6 @@
     "fields": {
         "commit_id": 1,
         "parent_id": 2
-    }
-},
-{
-    "model": "gh_users.ghuser",
-    "pk": 14,
-    "fields": {
-        "login": "TTimo",
-        "name": "Timothee \"TTimo\" Besset",
-        "company": "",
-        "location": "Dallas, TX, USA",
-        "email": "ttimo@ttimo.net",
-        "created_at": "2008-04-11T07:54:48",
-        "ext_ref_id": "52343eedbd35436e92000001",
-        "type": "USR"
-    }
-},
-{
-    "model": "gh_projects.ghproject",
-    "pk": 10,
-    "fields": {
-        "url": "https://api.github.com/repos/TTimo/doom3.gpl",
-        "owner": 14,
-        "name": "doom3.gpl",
-        "description": "Doom 3 GPL source release",
-        "language": "C++",
-        "created_at": "2011-11-22T14:27:23",
-        "ext_ref_id": "52343eeebd35436e92000002",
-        "forked_from": null,
-        "deleted": 0
     }
 },
 {
@@ -250,20 +137,6 @@
         "created_at": "2010-12-30T03:21:27",
         "ext_ref_id": "523447b8bd35436e92001d8c",
         "type": "USR"
-    }
-},
-{
-    "model": "gh_users.ghuser",
-    "pk": 16,
-    "fields": {
-        "login": "TrinityCore",
-        "name": "Trinity Core",
-        "company": null,
-        "location": "InterWebs",
-        "email": null,
-        "created_at": "2010-12-28T16:23:14",
-        "ext_ref_id": "52343eeebd35436eaf000001",
-        "type": "ORG"
     }
 },
 {
