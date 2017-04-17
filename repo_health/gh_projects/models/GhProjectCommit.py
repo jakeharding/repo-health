@@ -19,6 +19,5 @@ class GhProjectCommit(m.Model):
     commit = m.ForeignKey('gh_commits.GhCommit', m.DO_NOTHING)
 
     class Meta:
-        managed = False
         db_table = 'project_commits'
         unique_together = (('project', 'commit'),)

@@ -23,6 +23,5 @@ class GhCommitParent(models.Model):
     )
 
     class Meta:
-        managed = False
         db_table = 'commit_parents'
         unique_together = (('commit', 'parent'),)

@@ -30,7 +30,6 @@ class GhFork(models.Model):
           return self.forked_project.name
 
     class Meta:
-        managed = False
         db_table = 'forks'
         unique_together = (('forked_project', 'forked_from'),)
         verbose_name = 'GitHub Fork'

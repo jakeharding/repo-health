@@ -1,0 +1,397 @@
+[
+{
+    "model": "gh_users.ghuser",
+    "pk": 6,
+    "fields": {
+        "login": "mavam",
+        "name": "Matthias Vallentin",
+        "company": "University of California, Berkeley",
+        "location": "Berkeley, CA",
+        "email": "vallentin@icir.org",
+        "created_at": "2009-02-11T17:12:03",
+        "ext_ref_id": "52343eecbd35436de3000001",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 24,
+    "fields": {
+        "login": "DWgit",
+        "name": null,
+        "company": null,
+        "location": null,
+        "email": null,
+        "created_at": "2012-06-20T07:37:50",
+        "ext_ref_id": "52343f10bd35436de3000067",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 14,
+    "fields": {
+        "url": "https://api.github.com/repos/DWgit/stat-cookbook",
+        "owner": 24,
+        "name": "stat-cookbook",
+        "description": "The probability and statistics cookbook",
+        "language": "R",
+        "created_at": "2012-06-20T07:38:17",
+        "ext_ref_id": "52343f11bd35436de3000068",
+        "forked_from": 4,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 115,
+    "fields": {
+        "login": "invalid-email-address",
+        "name": "Check your git settings!",
+        "company": null,
+        "location": null,
+        "email": "support@github.com",
+        "created_at": "2009-11-02T20:48:38",
+        "ext_ref_id": "52343f3bbd35436de30000b9",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_commits.ghcommit",
+    "pk": 194,
+    "fields": {
+        "sha": "72791377fb53e2fba0998485d2942da69694cb30",
+        "author": 115,
+        "committer": 115,
+        "project": 14,
+        "created_at": "2012-06-20T08:20:35",
+        "ext_ref_id": "52343f3bbd35436de30000b8"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 167988,
+    "fields": {
+        "login": "rails",
+        "name": "Ruby on Rails",
+        "company": null,
+        "location": null,
+        "email": null,
+        "created_at": "2008-04-01T18:59:25",
+        "ext_ref_id": "5237b213bd3543c151000001",
+        "type": "ORG"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 78852,
+    "fields": {
+        "url": "https://api.github.com/repos/rails/rails",
+        "owner": 167988,
+        "name": "rails",
+        "description": "Ruby on Rails",
+        "language": "Ruby",
+        "created_at": "2008-04-10T19:19:47",
+        "ext_ref_id": "5237b213bd3543c151000002",
+        "forked_from": null,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 355890,
+    "fields": {
+        "login": "cciollaro",
+        "name": null,
+        "company": null,
+        "location": null,
+        "email": null,
+        "created_at": "2012-03-23T21:37:40",
+        "ext_ref_id": "5241d774bd3543f785000004",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 108740,
+    "fields": {
+        "url": "https://api.github.com/repos/cciollaro/rails",
+        "owner": 355890,
+        "name": "rails",
+        "description": "Ruby on Rails",
+        "language": "Ruby",
+        "created_at": "2013-09-26T07:38:42",
+        "ext_ref_id": "525168b0bd3543c87e001ff7",
+        "forked_from": 78852,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 4,
+    "fields": {
+        "url": "https://api.github.com/repos/mavam/stat-cookbook",
+        "owner": 6,
+        "name": "stat-cookbook",
+        "description": "The probability and statistics cookbook",
+        "language": "R",
+        "created_at": "2012-04-23T13:24:37",
+        "ext_ref_id": "52343eecbd35436de3000002",
+        "forked_from": null,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 23,
+    "fields": {
+        "login": "ronert",
+        "name": null,
+        "company": null,
+        "location": null,
+        "email": null,
+        "created_at": "2012-02-20T12:58:06",
+        "ext_ref_id": "52343f0fbd35436de3000065",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 13,
+    "fields": {
+        "url": "https://api.github.com/repos/ronert/stat-cookbook",
+        "owner": 23,
+        "name": "stat-cookbook",
+        "description": "The probability and statistics cookbook",
+        "language": "R",
+        "created_at": "2012-04-23T14:18:43",
+        "ext_ref_id": "52343f0fbd35436de3000066",
+        "forked_from": 4,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 141504,
+    "fields": {
+        "login": "django",
+        "name": "Django",
+        "company": null,
+        "location": "Internet",
+        "email": null,
+        "created_at": "2008-10-06T12:43:18",
+        "ext_ref_id": "5236e2e0bd35438a45000001",
+        "type": "ORG"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 69158,
+    "fields": {
+        "url": "https://api.github.com/repos/django/django",
+        "owner": 141504,
+        "name": "django",
+        "description": "The Web framework for perfectionists with deadlines.",
+        "language": "Python",
+        "created_at": "2012-04-27T19:47:18",
+        "ext_ref_id": "5236e2e0bd35438a45000002",
+        "forked_from": null,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 1,
+    "fields": {
+        "login": "akka",
+        "name": "Akka Project",
+        "company": null,
+        "location": "Uppsala, Sweden",
+        "email": "info@typesafe.com",
+        "created_at": "2012-03-03T04:44:45",
+        "ext_ref_id": "52343e2ebd3543bb7f000001",
+        "type": "ORG"
+    }
+},
+{
+    "model": "gh_projects.ghproject",
+    "pk": 1,
+    "fields": {
+        "url": "https://api.github.com/repos/akka/akka",
+        "owner": 1,
+        "name": "akka",
+        "description": "Akka Project",
+        "language": "Scala",
+        "created_at": "2009-02-16T05:51:54",
+        "ext_ref_id": "52343e2ebd3543bb7f000002",
+        "forked_from": null,
+        "deleted": 0
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 205525,
+    "fields": {
+        "login": "patriknw",
+        "name": "Patrik Nordwall",
+        "company": null,
+        "location": null,
+        "email": "patrik.nordwall@gmail.com",
+        "created_at": "2010-07-18T14:26:00",
+        "ext_ref_id": "5239017cbd35432239000ac8",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_commits.ghcommit",
+    "pk": 355221,
+    "fields": {
+        "sha": "6246099694c856fe099f887e3ba01c88c0d554cd",
+        "author": 205525,
+        "committer": 205525,
+        "project": 1,
+        "created_at": "2013-09-17T04:37:54",
+        "ext_ref_id": "5239017cbd35432239000ac7"
+    }
+},
+{
+    "model": "gh_commits.ghcommit",
+    "pk": 355225,
+    "fields": {
+        "sha": "5e1913cac25ea0cde51cd515282f60c21c201bf9",
+        "author": 205525,
+        "committer": 205525,
+        "project": 1,
+        "created_at": "2013-09-17T07:52:08",
+        "ext_ref_id": "52390181bd35432239000acb"
+    }
+},
+{
+    "model": "gh_pull_requests.ghpullrequest",
+    "pk": 67621,
+    "fields": {
+        "head_repo": 1,
+        "base_repo": 1,
+        "head_commit": 355225,
+        "base_commit": 355221,
+        "user": 205525,
+        "pullreq_id": 1741,
+        "intra_branch": 1,
+        "merged": 0
+    }
+},
+{
+    "model": "gh_issues.ghissue",
+    "pk": 112093,
+    "fields": {
+        "repo": 1,
+        "reporter": null,
+        "assignee": null,
+        "issue_id": "1741",
+        "pull_request": 1,
+        "pull_request_0": 67621,
+        "created_at": "2013-09-17T08:06:45",
+        "ext_ref_id": "5239015cbd35432239000462"
+    }
+},
+{
+    "model": "gh_commits.ghcommit",
+    "pk": 355227,
+    "fields": {
+        "sha": "d9eda5fbfa1875e76efa8724354623f3a61a57dd",
+        "author": 205525,
+        "committer": 205525,
+        "project": 1,
+        "created_at": "2013-09-17T06:50:33",
+        "ext_ref_id": "52390184bd35432239000acc"
+    }
+},
+{
+    "model": "gh_pull_requests.ghpullrequest",
+    "pk": 67623,
+    "fields": {
+        "head_repo": 1,
+        "base_repo": 1,
+        "head_commit": 355227,
+        "base_commit": 355221,
+        "user": 205525,
+        "pullreq_id": 1740,
+        "intra_branch": 1,
+        "merged": 0
+    }
+},
+{
+    "model": "gh_issues.ghissue",
+    "pk": 112095,
+    "fields": {
+        "repo": 1,
+        "reporter": null,
+        "assignee": null,
+        "issue_id": "1740",
+        "pull_request": 1,
+        "pull_request_0": 67623,
+        "created_at": "2013-09-17T06:53:13",
+        "ext_ref_id": "5239015cbd35432239000463"
+    }
+},
+{
+    "model": "gh_users.ghuser",
+    "pk": 506660,
+    "fields": {
+        "login": "AYGIITNJ",
+        "name": "Chris Ciollaro",
+        "company": null,
+        "location": null,
+        "email": "oitcc3@oit.umass.edu",
+        "created_at": "2013-10-06T08:42:06",
+        "ext_ref_id": "",
+        "type": "USR"
+    }
+},
+{
+    "model": "gh_commits.ghcommit",
+    "pk": 566382,
+    "fields": {
+        "sha": "bac28f0eb36675d5df7e6a9ac813f4aa8446d58f",
+        "author": 506660,
+        "committer": 506660,
+        "project": 78852,
+        "created_at": "2013-09-26T07:27:20",
+        "ext_ref_id": "525168acbd3543c87e001ff6"
+    }
+},
+{
+    "model": "gh_projects.ghprojectcommit",
+    "pk": 1,
+    "fields": {
+        "project_id": 108740,
+        "commit_id": 566382
+    }
+},
+{
+    "model": "gh_projects.ghprojectcommit",
+    "pk": 2,
+    "fields": {
+        "project_id": 14,
+        "commit_id": 194
+    }
+},
+{
+    "model": "gh_projects.ghrepolabel",
+    "pk": 3349,
+    "fields": {
+        "repo": 1,
+        "name": "tested",
+        "ext_ref_id": "5239291fbd354322390071fe"
+    }
+},
+{
+    "model": "gh_projects.ghrepolabel",
+    "pk": 3348,
+    "fields": {
+        "repo": 1,
+        "name": "needs-attention",
+        "ext_ref_id": "5239291fbd354322390071ff"
+    }
+}
+]

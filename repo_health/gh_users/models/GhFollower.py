@@ -15,7 +15,6 @@ class GhFollower(m.Model):
         return self.user.login
 
     class Meta:
-        managed = False
         db_table = 'followers'
         unique_together = (('user', 'follower'),)
         verbose_name = "GitHub Follower"

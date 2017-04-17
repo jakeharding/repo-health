@@ -30,6 +30,5 @@ class GhPullRequestComment(models.Model):
         return "PR comment by: %s For base repo: %s" %(self.user.login, self.pull_request.base_repo)
 
     class Meta:
-        managed = False
         db_table = 'pull_request_comments'
         verbose_name = 'GitHub Pull Request Comment'

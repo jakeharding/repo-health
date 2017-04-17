@@ -54,6 +54,5 @@ class GhIssue(models.Model):
         return "Issue for: %s" % self.repo.name
 
     class Meta:
-        managed = False
         db_table = 'issues'
         verbose_name = 'GitHub Issue'

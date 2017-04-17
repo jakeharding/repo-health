@@ -24,7 +24,7 @@ class GhIssueEvent(models.Model):
     MENTIONED_ACTION = 'mentioned'
     DELETED_ACTION = 'head_ref_deleted'
 
-    event_id = models.TextField(primary_key=True)
+    event_id = models.TextField()
     issue = models.ForeignKey(
         'gh_issues.GhIssue', models.DO_NOTHING, related_name='events'
     )
@@ -32,9 +32,8 @@ class GhIssueEvent(models.Model):
     action = models.CharField(max_length=255)
     action_specific = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField()
-    ext_ref_id = models.CharField(max_length=24)
+    ext_ref_id = models.CharField(max_length=24, primary_key=True)
 
     class Meta:
-        managed = False
         db_table = 'issue_events'
         verbose_name = 'GitHub Issue Event'

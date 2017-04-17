@@ -15,21 +15,22 @@ Specifically test database relationships to show no error thrown and a result is
 from django.test import TestCase
 from .models import GhUser
 
+
 class TestGhUser(TestCase):
     orgs_user = None
     watcher_user = None
     maintain_user = None
-    
+    fixtures = ['users.json']
 
     def setUp(self):
         self.orgs_user = GhUser.objects.filter(
-            organizations__isnull = False
+            organizations__isnull=False
         ).first()
         self.watcher_user = GhUser.objects.filter(
-            watched_repos__isnull = False
+            watched_repos__isnull=False
         ).first()
         self.maintain_user = GhUser.objects.filter(
-            maintain_repos__isnull = False
+            maintain_repos__isnull=False
         ).first()
 
         self.organization = GhUser.objects.filter(
@@ -47,4 +48,4 @@ class TestGhUser(TestCase):
         self.assertTrue(self.watcher_user.watched_repos.all())
         self.assertTrue(self.maintain_user.maintain_repos.all())      
         self.assertTrue(self.orgs_user.organizations.first().members.all())
-        
+

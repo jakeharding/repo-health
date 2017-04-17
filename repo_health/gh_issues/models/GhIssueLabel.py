@@ -19,7 +19,6 @@ class GhIssueLabel(models.Model):
     issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING)
 
     class Meta:
-        managed = False
         db_table = 'issue_labels'
         unique_together = (('issue', 'label'),)
-        
+

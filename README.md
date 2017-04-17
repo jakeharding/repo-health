@@ -1,5 +1,8 @@
 # Repository Health Project for CSCI 4900
 
+[![Build Status](https://travis-ci.org/jakeharding/repo-health.svg?branch=travis)](https://travis-ci.org/jakeharding/repo-health)
+[![Coverage Status](https://coveralls.io/repos/github/jakeharding/repo-health/badge.svg?branch=travis)](https://coveralls.io/github/jakeharding/repo-health?branch=travis)
+
 This repository holds the proof of concept for the repository health and sustainability project for CSCI 4900 at the University of Nebraska at Omaha.  This repository will hold the backend and frontend source code to extract data from Github and ghtorrent and provide statistics about a selected repository.  Description of the backend and frontend source are provided.
 
 This project is not meant to be in production. Charts for the user interface are not implemented yet, so arrays of integers are displayed where charts will be placed in the future.  
@@ -34,7 +37,7 @@ npm test
 ``` 
 To run Backend tests:
 ```
-python manage.py test --keepdb
+python manage.py test
 ``` 
 
 ## Production setup

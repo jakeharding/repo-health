@@ -60,7 +60,6 @@ class GhProject(m.Model):
         return self.owner.is_org()
 
     class Meta:
-        managed = False
         db_table = 'projects'
         unique_together = (('name', 'owner'),)
         verbose_name="GitHub Project"

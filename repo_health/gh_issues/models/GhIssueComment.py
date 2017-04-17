@@ -17,14 +17,13 @@ from django.db import models
 class GhIssueComment(models.Model):
     issue = models.ForeignKey('gh_issues.GhIssue', models.DO_NOTHING, related_name='comments')
     user = models.ForeignKey('gh_users.GhUser', models.DO_NOTHING, related_name='issue_comments')
-    comment_id = models.TextField(primary_key=True)
+    comment_id = models.TextField()
     created_at = models.DateTimeField()
-    ext_ref_id = models.CharField(max_length=24)
+    ext_ref_id = models.CharField(max_length=24, primary_key=True)
 
     def __str__(self):
         return "Comment by: %s" % self.user.login
 
     class Meta:
-        managed = False
         db_table = 'issue_comments'
         verbose_name = 'GitHub Issue Comment'
