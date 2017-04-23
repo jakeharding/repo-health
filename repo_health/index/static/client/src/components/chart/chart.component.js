@@ -15,16 +15,13 @@ import template from './chart.template';
 const chartComponent = {
   template,
   bindings: {
-    'metric': '=',
-    'chart': '='
+    'metric': '<',
+    'chart': '<'
   },
   controller: class chartComponentController {
     options = null;
     hasData = true;
     titleText = '';
-    constructor() {
-      'ngInject';
-    }
 
     $onInit() {
       this.titleText = this.chart.title;

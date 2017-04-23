@@ -14,7 +14,7 @@ import chartComponent from './chart.component';
 
 const components = angular
   .module('components.chart', [])
-    .component('chart', chartComponent)
+  .component('chart', chartComponent)
   .name;
 
 export default components;

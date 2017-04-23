@@ -34,7 +34,7 @@ const pullReqStatsComponent = {
         this.StatsService.getStatsForUrl(this.prStatsUrl).then(stats => {
           this.stats = stats.metrics;
           this.charts = stats.charts;
-         this.loadingStats = false;
+          this.loadingStats = false;
           this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
         });
       } else {
