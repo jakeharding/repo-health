@@ -22,6 +22,7 @@ const repoDetailsComponent = {
     loadingStats = true;
     loadingMsg = "Loading general repo stats...";
     stats = null;
+    charts = null;
     numOfStatsSections = 0;
 
     constructor($http, StatsService, $state) {
@@ -30,17 +31,18 @@ const repoDetailsComponent = {
     }
 
     $onInit() {
-      // if (this.detailsUrl) {
-      //   this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
-      //     this.stats = stats;
-      //     this.loadingStats = false;
-      //     this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
-      //   });
-      // } else {
-      //   this.$state.go('search', {
-      //     error: true
-      //   });
-      // }
+      if (this.detailsUrl) {
+        this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
+          this.stats = stats.metrics;
+          this.charts = stats.charts;
+          this.loadingStats = false;
+          this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
+        });
+      } else {
+        this.$state.go('search', {
+          error: true
+        });
+      }
     }
   }
 };

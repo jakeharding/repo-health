@@ -23,24 +23,23 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content layout="column" ng-if="!$first">
-        <div flex ng-if="metric.chart_name">
-          <chart metric="metric" chart="chart"></chart>
-        </div>
+
+        <chart ng-if="metric.chart_name" metric="metric" chart="chart"></chart>
+
         <div flex ng-if="!metric.chart_name">
           <span class="md-title" ng-if="metric.display_name">{{ metric.display_name }}:</span>
-          {{ $ctrl.StatsService.getRawDataForChartName(metric) }}
+          {{ $ctrl.StatsService.getRawData(metric) }}
         </div>
-
-          <chart ng-if="nextMetric.chart_name"
-              metric="nextMetric"
-              chart="nextChart">
-          </chart>
+        <chart ng-if="nextMetric.chart_name"
+            metric="nextMetric"
+            chart="nextChart">
+        </chart>
 
         <div flex ng-if="!nextMetric.chart_name">
           <span class="md-title" ng-if="nextMetric.display_name">
             {{ nextMetric.display_name }}:
           </span>
-          {{ $ctrl.StatsService.getRawDataForChartName(nextMetric) }}
+          {{ $ctrl.StatsService.getRawData(nextMetric) }}
         </div>
 
         <!--If we have an odd number of stats and on the last iteration we need to render one more.-->
@@ -48,7 +47,7 @@
           <span class="md-title" ng-if="lastMetric.display_name">
             {{ lastMetric.display_name }}:
           </span>
-          {{ $ctrl.StatsService.getRawDataForChartName(lastMetric) }}
+          {{ $ctrl.StatsService.getRawData(lastMetric) }}
         </div>
       </md-card-content>
     </div>

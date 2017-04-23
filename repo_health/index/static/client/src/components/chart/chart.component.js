@@ -26,10 +26,9 @@ const chartComponent = {
       'ngInject';
     }
 
-
     $onInit() {
       this.titleText = this.chart.title;
-      if ( this.metric.raw_data.length == 0) {
+      if ( this.metric.raw_data.length === 0) {
         this.hasData = false;
         this.titleText = `No data for the ${this.chart.title} chart to display`;
       }
