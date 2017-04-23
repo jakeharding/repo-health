@@ -19,8 +19,26 @@ const chartComponent = {
     'chart': '='
   },
   controller: class chartComponentController {
-    constructor () {
+    options = null;
+    hasData = true;
+    titleText = '';
+    constructor() {
       'ngInject';
+    }
+
+
+    $onInit() {
+      this.titleText = this.chart.title;
+      if ( this.metric.raw_data.length == 0) {
+        this.hasData = false;
+        this.titleText = `No ${this.chart.title} to display`;
+      }
+      this.options = {
+        title: {
+          display: true,
+          text: this.titleText
+        }
+      }
     }
   }
 };

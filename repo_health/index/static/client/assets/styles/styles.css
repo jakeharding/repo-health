@@ -29,3 +29,7 @@
   background: white;
   border: 1px solid #e1e1e1;
 }
+
+.empty-chart {
+  padding-bottom: 25px;
+}
