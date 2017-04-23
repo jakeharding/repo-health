@@ -31,7 +31,7 @@ const chartComponent = {
       this.titleText = this.chart.title;
       if ( this.metric.raw_data.length == 0) {
         this.hasData = false;
-        this.titleText = `No ${this.chart.title} to display`;
+        this.titleText = `No data for the ${this.chart.title} chart to display`;
       }
       this.options = {
         title: {

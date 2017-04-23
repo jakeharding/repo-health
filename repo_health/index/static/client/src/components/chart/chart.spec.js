@@ -20,13 +20,17 @@ describe('Chart', () => {
 
   describe('ChartComponent', () => {
     let $componentController, controller;
-    const mockMetric = "mock metric";
-    const mockChart = "mock chart";
+    const mockMetricEmptyData = {
+      raw_data: []
+    };
+    const mockChart = {
+      title: "Fake title"
+    };
 
     beforeEach(inject($injector => {
       $componentController = $injector.get('$componentController');
       controller = $componentController('chart', null, {
-        metric: mockMetric,
+        metric: mockMetricEmptyData,
         chart: mockChart
       });
     }));
@@ -34,7 +38,12 @@ describe('Chart', () => {
     describe('constructor', () => {
       it('should setup the controller with a chart and metric property', () => {
         expect(controller.chart).toBe(mockChart);
-        expect(controller.metric).toBe(mockMetric);
+        expect(controller.metric).toBe(mockMetricEmptyData);
+      });
+
+      it('should set the title text in the onInit method', () => {
+        controller.$onInit();
+        expect(controller.titleText).toBe(`No data for the ${mockChart.title} chart to display`)
       })
     })
   })
