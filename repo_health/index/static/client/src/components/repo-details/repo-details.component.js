@@ -30,17 +30,17 @@ const repoDetailsComponent = {
     }
 
     $onInit() {
-      if (this.detailsUrl) {
-        this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
-          this.stats = stats;
-          this.loadingStats = false;
-          this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
-        });
-      } else {
-        this.$state.go('search', {
-          error: true
-        });
-      }
+      // if (this.detailsUrl) {
+      //   this.StatsService.getStatsForUrl(this.detailsUrl).then(stats => {
+      //     this.stats = stats;
+      //     this.loadingStats = false;
+      //     this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
+      //   });
+      // } else {
+      //   this.$state.go('search', {
+      //     error: true
+      //   });
+      // }
     }
   }
 };

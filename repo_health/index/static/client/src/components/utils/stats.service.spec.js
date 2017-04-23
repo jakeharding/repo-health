@@ -13,7 +13,7 @@
 const module = angular.mock.module;
 
 describe("StatsService", () => {
-  let StatsService, $httpBackend;
+  let StatsService, $httpBackend, $q;
   let someFakeUrl = 'some/fake/url';
   beforeEach(module(
     'repo-health'
@@ -22,12 +22,14 @@ describe("StatsService", () => {
   beforeEach(inject(($injector) => {
     StatsService = $injector.get('StatsService');
     $httpBackend = $injector.get('$httpBackend');
+    $q = $injector.get('$q');
   }));
 
   describe('getStatsForUrl', () => {
     beforeEach(() => {
       $httpBackend.when('GET', someFakeUrl).respond(200, {
-        metrics: []
+        metrics: [],
+        charts: {}
       });
     });
     afterEach(() => {
@@ -37,8 +39,12 @@ describe("StatsService", () => {
 
     it('should make a request to the given url', () => {
       $httpBackend.expectGET(someFakeUrl);
-      StatsService.getStatsForUrl(someFakeUrl);
+      let result = StatsService.getStatsForUrl(someFakeUrl);
       $httpBackend.flush();
+      result.then(res => {
+        expect(res.charts).toBeDefined();
+        expect(res.metrics).toBeDefined();
+      })
     });
   })
 

@@ -54,8 +54,9 @@ class StatsService {
    */
   getStatsForUrl (url) {
     return this.$http.get(url).then(stats => {
-      stats = this.$filter('orderBy')(stats.data.metrics, 'ordering');
-      return stats;
+      let charts = stats.data.charts;
+      let metrics = this.$filter('orderBy')(stats.data.metrics, 'ordering');
+      return {metrics, charts};
     });
   }
 }

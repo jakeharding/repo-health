@@ -30,15 +30,15 @@ const pullReqStatsComponent = {
 
     $onInit() {
       if (this.prStatsUrl) {
-        this.StatsService.getStatsForUrl(this.prStatsUrl).then(stats => {
-          this.stats = stats;
-         this.loadingStats = false;
-          this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
-        });
-      } else {
-        this.$state.go('search', {
-          error: true
-        });
+      //   this.StatsService.getStatsForUrl(this.prStatsUrl).then(stats => {
+      //     this.stats = stats;
+      //    this.loadingStats = false;
+      //     this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
+      //   });
+      // } else {
+      //   this.$state.go('search', {
+      //     error: true
+      //   });
       }
     }
   }

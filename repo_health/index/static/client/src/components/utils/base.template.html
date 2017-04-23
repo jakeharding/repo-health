@@ -8,38 +8,48 @@
       </div>
     </div>
     <div ng-if="!$ctrl.loadingStats">
-      <div ng-repeat="i in $ctrl.numOfStatsSections">
+      <div ng-repeat="i in $ctrl.numOfStatsSections"
+           ng-init="metric=$ctrl.stats[2 * i]; chart=$ctrl.charts[metric.chart_name];
+            nextMetric=$ctrl.stats[ 2 * i + 1]; nextChart=$ctrl.charts[nextMetric.chart_name];
+            lastMetric=$ctrl.stats[ $ctrl.stats.length-1 ]"
+      >
         <md-card-title ng-if="$first">
         <md-card-title-text>
-          <span class="md-headline">{{ $ctrl.stats[2 * i].raw_data }}</span>
+          <span class="md-headline">{{ metric.raw_data }}</span>
           <span class="md-subhead">
-            <b ng-if="$ctrl.stats[2 * i + 1].display_name">{{ $ctrl.stats[2 * i + 1].display_name }}</b>
-            {{ $ctrl.stats[2 * i + 1].raw_data }}
+            <b ng-if="nextMetric.display_name">{{ nextMetric.display_name }}</b>
+            {{ nextMetric.raw_data }}
           </span>
         </md-card-title-text>
       </md-card-title>
       <md-card-content layout="column" ng-if="!$first">
-        <div flex><span class="md-title" ng-if="$ctrl.stats[(2 * i)].display_name">{{$ctrl.stats[(2 * i)].display_name}}:</span>
-          {{ $ctrl.StatsService.getRawDataForChartName($ctrl.stats[(2 * i)]) }}
+        <div flex ng-if="metric.chart_name">
+          <chart metric="metric" chart="chart"></chart>
         </div>
-        <div flex>
-          <span class="md-title" ng-if="$ctrl.stats[ (2 * i + 1) ].display_name">
-            {{$ctrl.stats[ (2 * i + 1) ].display_name}}:
+        <div flex ng-if="!metric.chart_name">
+          <span class="md-title" ng-if="metric.display_name">{{ metric.display_name }}:</span>
+          {{ $ctrl.StatsService.getRawDataForChartName(metric) }}
+        </div>
+
+          <chart ng-if="nextMetric.chart_name"
+              metric="nextMetric"
+              chart="nextChart">
+          </chart>
+
+        <div flex ng-if="!nextMetric.chart_name">
+          <span class="md-title" ng-if="nextMetric.display_name">
+            {{ nextMetric.display_name }}:
           </span>
-          {{ $ctrl.StatsService.getRawDataForChartName($ctrl.stats[ (2 * i + 1) ]) }}
+          {{ $ctrl.StatsService.getRawDataForChartName(nextMetric) }}
         </div>
 
         <!--If we have an odd number of stats and on the last iteration we need to render one more.-->
         <div flex ng-if="$ctrl.stats.length % 2 != 0 && $last">
-          <span class="md-title" ng-if="$ctrl.stats[$ctrl.stats.length - 1].display_name">
-            {{$ctrl.stats[$ctrl.stats.length-1].display_name}}:
+          <span class="md-title" ng-if="lastMetric.display_name">
+            {{ lastMetric.display_name }}:
           </span>
-          {{ $ctrl.StatsService.getRawDataForChartName($ctrl.stats.length-1) }}
+          {{ $ctrl.StatsService.getRawDataForChartName(lastMetric) }}
         </div>
-    <!--<canvas id="line" class="chart chart-line" chart-data="$ctrl.stats.prs_last_year" chart-labels="$ctrl.labels"-->
-              <!--chart-click="$ctrl.onClick" chart-hover="$ctrl.onHover" chart-series="$ctrl.series" chart-options="$ctrl.options"-->
-              <!--chart-dataset-override="$ctrl.datasetOverride"></canvas>-->
-
       </md-card-content>
     </div>
   </md-card>
