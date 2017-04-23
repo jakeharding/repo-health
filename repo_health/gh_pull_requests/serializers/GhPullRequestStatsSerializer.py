@@ -16,7 +16,7 @@ from rest_framework import serializers as s
 from repo_health.gh_users.models import GhUser
 from ..models import GhPullRequestHistory
 from repo_health.index.mixins import CountForPastYearMixin
-from repo_health.metrics.serializers import MetricField
+from repo_health.metrics.serializers import MetricField, ChartField
 
 
 class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
@@ -25,6 +25,7 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
     _contrib_most_prs = None
     _maintainers = None
     _maintainers_count = None
+    _charts = None
 
     card_title = s.SerializerMethodField()
     pr_count = s.SerializerMethodField()
@@ -39,8 +40,20 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
     avg_comment_per_pr = s.SerializerMethodField()
     prs_from_outside_org = s.SerializerMethodField()
 
+    # Chart name
+    PRS_LAST_YEAR = 'prs_last_year'
+
+    @property
+    def charts(self):
+        return self._charts
+
+    @charts.setter
+    def charts(self, charts):
+        self._charts = charts
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.charts = []
         repo = args[0]
         self._opened_histories = GhPullRequestHistory.objects.filter(
             pull_request__base_repo=repo,
@@ -65,12 +78,13 @@ class GhPullRequestStatsSerializer(s.Serializer, CountForPastYearMixin):
         return MetricField(True, 'Number of pull requests', 1, None, repo.pr_count)
 
     def get_prs_last_year(self, repo):
-        num_prs = self.get_count_list_for_year(self._opened_histories, 'created_at')
-        return MetricField(True, 'PRS last year', 2, None, num_prs)
+        num_prs, most_recent = self.get_count_list_for_year(self._opened_histories, 'created_at')
+        self._charts.append(ChartField(self.PRS_LAST_YEAR, most_recent, 'Pull requests last year', None, None, 1))
+        return MetricField(True, 'Pull requests last year', 2, self.PRS_LAST_YEAR, num_prs)
 
     def get_latest_pr_created_at(self, repo):
         latest = self._most_recent_history.created_at if self._most_recent_history else None
-        return MetricField(True, 'Latest pull request created at', 3, 'date', latest)
+        return MetricField(True, 'Latest pull request created at', 3, None, latest, True)
 
     def get_contrib_most_prs(self, repo):
         contrib = self._contrib_most_prs.login if self._contrib_most_prs else None
