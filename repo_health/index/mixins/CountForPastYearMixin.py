@@ -32,7 +32,7 @@ class CountForPastYearMixin(object):
         """
 
         count_for_year = []
-
+        most_recent = None
         if queryset.exists():
             most_recent = queryset.order_by(F(query_string).desc()).first().created_at
             dt_to_filter = most_recent - self.ONE_YEAR
@@ -45,4 +45,4 @@ class CountForPastYearMixin(object):
                 days_in_mon = calendar.monthrange(dt_to_filter.year, dt_to_filter.month)[1]
                 count_for_year.append(queryset.filter(**qwargs).count())
                 dt_to_filter += datetime.timedelta(days=days_in_mon)
-        return count_for_year
+        return count_for_year, most_recent

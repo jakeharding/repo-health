@@ -13,24 +13,29 @@ Serializers for api response.
 
 from rest_framework import serializers as s
 from .MetricFieldSerializer import MetricFieldSerializer
+from .ChartSerializer import ChartSerializer
 
 
 class ResponseSerializer(s.Serializer):
 
     _metrics = None
+    _charts = None
     charts = s.SerializerMethodField()
     metrics = s.SerializerMethodField()
 
-    def __init__(self, repo_data_dict):
-        super().__init__(repo_data_dict)
+    def __init__(self, metric_dict, charts):
+        super().__init__(metric_dict)
         self._metrics = []
-        for k, v in repo_data_dict.items():
-            self._metrics.append(MetricFieldSerializer(v).data)
-            # Do what is need to build the chart response here.
+        self._charts = charts
 
     # TODO Implement charts in response
     def get_charts(self, obj):
-        return {}
+        chart_data = {}
+        for c in self._charts:
+            chart_data[c.chart_name] = ChartSerializer(c).data
+        return chart_data
 
     def get_metrics(self, obj):
+        for k, v in obj.items():
+            self._metrics.append(MetricFieldSerializer(v).data)
         return self._metrics

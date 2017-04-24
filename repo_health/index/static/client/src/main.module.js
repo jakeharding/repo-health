@@ -19,6 +19,7 @@ import resources from './resources';
 import components from 'components/components.module.js';
 import mainComponent from './main.component';
 import StatsService from 'components/utils/stats.service';
+import 'angular-chart.js';
 
 //Styles
 import 'global.css';
@@ -26,8 +27,9 @@ import 'global.css';
 export const main = angular.module('repo-health', [
     uiRouter,
     ngMaterial,
+    'chart.js',
     components,
-    resources
+    resources,
   ])
   .component('main', mainComponent)
   .service('StatsService', StatsService)

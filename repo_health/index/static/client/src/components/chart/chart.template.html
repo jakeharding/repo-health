@@ -1,0 +1,15 @@
+<canvas
+    id="$ctrl.metric.chart_name"
+    ng-if="$ctrl.hasData"
+    class="chart chart-line"
+    chart-data="$ctrl.metric.raw_data"
+    chart-options="$ctrl.options"
+    chart-labels="$ctrl.chart.x_names">
+</canvas>
+
+<div
+  ng-if="!$ctrl.hasData"
+  class="empty-chart"
+>
+  {{ $ctrl.titleText }}
+</div>

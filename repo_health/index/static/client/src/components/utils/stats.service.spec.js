@@ -13,7 +13,7 @@
 const module = angular.mock.module;
 
 describe("StatsService", () => {
-  let StatsService, $httpBackend;
+  let StatsService, $httpBackend, $q;
   let someFakeUrl = 'some/fake/url';
   beforeEach(module(
     'repo-health'
@@ -22,12 +22,14 @@ describe("StatsService", () => {
   beforeEach(inject(($injector) => {
     StatsService = $injector.get('StatsService');
     $httpBackend = $injector.get('$httpBackend');
+    $q = $injector.get('$q');
   }));
 
   describe('getStatsForUrl', () => {
     beforeEach(() => {
       $httpBackend.when('GET', someFakeUrl).respond(200, {
-        metrics: []
+        metrics: [],
+        charts: {}
       });
     });
     afterEach(() => {
@@ -37,8 +39,12 @@ describe("StatsService", () => {
 
     it('should make a request to the given url', () => {
       $httpBackend.expectGET(someFakeUrl);
-      StatsService.getStatsForUrl(someFakeUrl);
+      let result = StatsService.getStatsForUrl(someFakeUrl);
       $httpBackend.flush();
+      result.then(res => {
+        expect(res.charts).toBeDefined();
+        expect(res.metrics).toBeDefined();
+      })
     });
   })
 
@@ -50,30 +56,31 @@ describe("StatsService", () => {
     });
   });
 
-  describe('getRawDataForChartName', () => {
-    it('should call the $filter if chart name is `date`', () => {
+  describe('getRawData', () => {
+    it('should call the $filter if metric is a date', () => {
       spyOn(StatsService, '$filter').and.callThrough();
       let mockStat = {
-        chart_name: 'date',
+        chart_name: null,
+        is_date: true,
         raw_data: "2013-10-05T11:40:36"// Must have a valid date format for $filter to use it
       }
-      expect(StatsService.getRawDataForChartName(mockStat)).not.toBe(mockStat.raw_data);
+      expect(StatsService.getRawData(mockStat)).not.toBe(mockStat.raw_data);
       expect(StatsService.$filter).toHaveBeenCalledWith('date');
     });
 
-    it('should the raw data is the chart name is null', () => {
+    it('should the raw data is the metric is not a date', () => {
       let mockStat = {
         raw_data: 89,
-        chart_name: null
+        is_date: false
       }
-      expect(StatsService.getRawDataForChartName(mockStat)).toBe(mockStat.raw_data);
+      expect(StatsService.getRawData(mockStat)).toBe(mockStat.raw_data);
     });
 
     it('should return `No` is the raw_data is 0', () => {
       let mockStat = {
         raw_data: 0
       }
-      expect(StatsService.getRawDataForChartName(mockStat)).toBe('No');
+      expect(StatsService.getRawData(mockStat)).toBe('No');
     })
   })
 });
