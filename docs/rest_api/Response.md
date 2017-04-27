@@ -12,7 +12,10 @@ Represents a response schema for a request to the API. A list of metrics are ret
         chart_name : {
             chart_type: int, //Enumerate chart types?
             x_names: [string],
-            y_names: [string]
+            y_names: [string],
+            title: string,
+            x_label: string,
+            y_label: string
         },
         ...
     },

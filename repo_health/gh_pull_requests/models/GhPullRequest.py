@@ -69,7 +69,6 @@ class GhPullRequest(models.Model):
             return hs.created_at
 
     class Meta:
-        managed = False
         db_table = 'pull_requests'
         unique_together = (('pullreq_id', 'base_repo'),)
         verbose_name = 'GitHub Pull Request'

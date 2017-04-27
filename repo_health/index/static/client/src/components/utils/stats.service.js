@@ -38,12 +38,10 @@ class StatsService {
   * @param stat
   * @returns {*|string}
   */
-  getRawDataForChartName(stat) {
+  getRawData(stat) {
     let rawData = stat.raw_data;
-    switch ( stat.chart_name ) {
-      case chartNameEnum.dateChart:
-        rawData = this.$filter('date')(rawData);
-        break;
+    if ( stat.is_date ) {
+      rawData = this.$filter('date')(rawData);
     }
     return rawData || 'No';
   }
@@ -54,8 +52,9 @@ class StatsService {
    */
   getStatsForUrl (url) {
     return this.$http.get(url).then(stats => {
-      stats = this.$filter('orderBy')(stats.data.metrics, 'ordering');
-      return stats;
+      let charts = stats.data.charts;
+      let metrics = this.$filter('orderBy')(stats.data.metrics, 'ordering');
+      return {metrics, charts};
     });
   }
 }

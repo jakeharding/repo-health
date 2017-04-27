@@ -27,6 +27,9 @@ class GhProjectSerializer(Serializer):
     _commits_count = None
     _latest_commit = None
 
+    # Currently no charts for the details
+    _charts = []
+
     # Fields found directly on the model
     language = SerializerMethodField()
     name = SerializerMethodField()
@@ -44,6 +47,10 @@ class GhProjectSerializer(Serializer):
     orgs_of_contribs_count = SerializerMethodField()
     owned_by_org = SerializerMethodField()
     forks_count = SerializerMethodField()
+
+    @property
+    def charts(self):
+        return self._charts
 
     def __init__(self, *args, **kwargs):
         """
@@ -72,7 +79,7 @@ class GhProjectSerializer(Serializer):
         return MetricField(True, 'Has upstream', 3, None, repo.forked_from.name if repo.forked_from else None)
 
     def get_created_at(self, repo):
-        return MetricField(True, 'Created at', 4, 'date', repo.created_at)
+        return MetricField(True, 'Created at', 4, None, repo.created_at, True)
 
     def get_orgs_of_contribs_count(self, repo):
         return MetricField(True, "Number of outside organizations with commits", 5, None, self._orgs_of_contribs_count)
@@ -93,7 +100,7 @@ class GhProjectSerializer(Serializer):
         return MetricField(True, 'Number of milestones', 10, None, repo.milestones.count())
     
     def get_latest_commit_created_at(self, repo):
-        return MetricField(True, 'Age of latest commit', 11, 'date', self._latest_commit)
+        return MetricField(True, 'Age of latest commit', 11, None, self._latest_commit, True)
     
     def get_labels_count(self, repo):
         return MetricField(True, 'Number of labels', 12, None, repo.labels.count())

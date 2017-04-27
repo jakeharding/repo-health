@@ -9,4 +9,6 @@ node_modules
 dist
 .vscode
 .idea
+.coverage
+htmlcov
 __pycache__

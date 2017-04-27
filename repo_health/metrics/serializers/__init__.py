@@ -10,6 +10,6 @@ Author(s) of this file:
 Import all classes from package.
 """
 
-from .ChartSerializer import ChartSerializer
+from .ChartSerializer import ChartSerializer, ChartField
 from .MetricFieldSerializer import MetricFieldSerializer, MetricField
 from .ResponseSerializer import ResponseSerializer

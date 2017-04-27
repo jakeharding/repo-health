@@ -28,7 +28,7 @@ class GhUser(m.Model):
     ext_ref_id = m.CharField(max_length=24)
     type = m.CharField(max_length=255)
 
-    #M2M Fields added.
+    # M2M Fields added.
     comment_commits = m.ManyToManyField(
         'gh_commits.GhCommit', 
         through='gh_commits.GhCommitComment'
@@ -43,7 +43,6 @@ class GhUser(m.Model):
         return self.type == self.ORG_TYPE
 
     class Meta:
-        managed = False
         db_table = 'users'
         verbose_name="GitHub User"
 

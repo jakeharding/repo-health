@@ -16,13 +16,15 @@ from rest_framework import serializers as s
 
 class MetricField(object):
     is_displayed = display_name = ordering = chart_name = raw_data = None
+    is_date = False
 
-    def __init__(self, is_displayed, display_name, ordering, chart_name, raw_data):
+    def __init__(self, is_displayed, display_name, ordering, chart_name, raw_data, is_date=False):
         self.is_displayed = is_displayed
         self.display_name = display_name
         self.ordering = ordering
         self.chart_name = chart_name
         self.raw_data = raw_data
+        self.is_date = is_date
 
 
 class MetricFieldSerializer(s.Serializer):
@@ -32,6 +34,7 @@ class MetricFieldSerializer(s.Serializer):
     ordering = s.IntegerField()
     chart_name = s.CharField()
     raw_data = s.SerializerMethodField()
+    is_date = s.BooleanField()
 
     def get_raw_data(self, obj):
         return obj.raw_data

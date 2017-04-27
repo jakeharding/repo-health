@@ -10,5 +10,4 @@ Author(s) of this file:
 Configure app.
 """
 
-
 default_app_config = 'repo_health.gh_users.apps.GhUsersConfig'

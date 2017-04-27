@@ -15,13 +15,15 @@ import search from './search/search.module';
 import repoDetails from './repo-details/repo-details.module';
 import pullReqStats from './pull-req-stats/pull-req-stats.module';
 import issueStats from './issue-stats/issue-stats.module';
+import chart from './chart/chart.module';
 
 const components = angular
   .module('components', [
     search,
     repoDetails,
     pullReqStats,
-    issueStats
+    issueStats,
+    chart
   ])
   .name;
 

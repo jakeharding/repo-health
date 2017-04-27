@@ -18,7 +18,6 @@ class GhOrgMember(m.Model):
         return self.user.login
 
     class Meta:
-        managed = False
         db_table = 'organization_members'
         unique_together = (('org', 'user'),)
         verbose_name = 'GitHub Organization Member'

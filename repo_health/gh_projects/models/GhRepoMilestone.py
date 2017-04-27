@@ -21,6 +21,5 @@ class GhRepoMilestone(models.Model):
     ext_ref_id = models.CharField(max_length=24)
 
     class Meta:
-        managed = False
         db_table = 'repo_milestones'
         verbose_name = 'GitHub Repo Milestone'

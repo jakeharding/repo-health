@@ -19,6 +19,7 @@ const issueStatsComponent = {
   },
   controller: class issueStatsComponent {
     stats = null;
+    charts = null;
     loadingStats = true;
     loadingMsg = 'Loading issue stats...';
     numOfStatsSections = 0;
@@ -31,7 +32,8 @@ const issueStatsComponent = {
     $onInit() {
       if (this.issueStatsUrl) {
         this.StatsService.getStatsForUrl(this.issueStatsUrl).then(stats => {
-          this.stats = stats;
+          this.charts = stats.charts;
+          this.stats = stats.metrics;
           this.loadingStats = false;
           this.numOfStatsSections = this.StatsService.getRangeForSections(this.stats.length);
         });
