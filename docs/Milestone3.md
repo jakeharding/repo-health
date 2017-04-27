@@ -13,11 +13,11 @@ The current state of the system is in a proof of concept and is not ready for a 
 ## Development Environment
 Our development operating system is a Linux/Unix (Mac) environment and our database management system is MySQL. 
 
-Our server is running on Python 3.5+ and is using the Django web framework and dev server. Python’s `virtualenv` is used to keep every developers python environment the same.
+Our server is running on Python 3.5+ and is using the Django web framework and dev server.
 
 Our front end is using the node package manager (npm) to manage and keep our dependencies in sync.
 
-Docker is used to create an instance of the system as fast as possible.
+Docker is used to create an instance of the system as fast as possible and isolate the installation from other parts of the infrastructure running the application.
 
 ## Posted Repository Issues
 - Jake - [GitHealth](https://github.com/Ashkeelun/GitHealth)
