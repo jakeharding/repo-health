@@ -6,6 +6,14 @@ A Unix dev environment is recommended because the setup instructions provided ar
 ## Production Environment
 A Linux production environment is recommmended, and Ubuntu version 12 and greater is preferred.  A database will be needed and configuration for the database will need to be provided.  See below for database configuration.
 
+The app is not ready for production yet so this part is incomplete.
+
+Assumptions made about production:
+- Operating system: Ubuntu 12.04 or greater
+- Application will be running in it's own isolated environment, and a virtualenv is not needed.
+- Apache httpd server is used to serve app using mod_wsgi.
+- All static files are served from Apache using a redirect from url `/static/` to a static documents folder. This folder is created using `python manage.py collectstatic`.  This is not necessary in development.
+
 ## Database configuration
 Both production and development environments use MySql for a DBMS and require a database configuration specific to the individual environment.
 If using mysql 5.7 or greater, a warning may been seen due to strict mode being enable by default.  Turn off strict mode by adding a file named:
@@ -26,14 +34,16 @@ Open the MySql interpreter with root access using: `mysql -u root -p`.  If you h
 
 The user needs to have access to the database. Run `grant all on msr14.* to 'msr14'@'localhost;`.  After commands have been run successfully, run `quit;` to exit the interpreter.  We can now load the data into the database by running `mysql -u root -p msr14 < path_to_extracted_data_file`.  The `path_to_extracted_data_file` is the absolute path noted earlier, and `msr14` is the name of the database created.  Once this is successful, you can enter the information into the local_settings.py.
 
-Located in the `repo_health` directory of this repository is a `local_settings.py.example` file. Save a copy of this file as `local_settings.py` to the same directory.  Please do not remove the example file from the repo.  If you created the database and user as `msr14` then you will need insert the password for the user in the `PASSWORD` placeholder.  Otherwise enter the required information into the correct places and save the file.
+Located in the `repo_health` directory of this repository is a `local_settings.py.example` file. Save a copy of this file as `local_settings.py` to the same directory.  Please do not remove the example file from the repo.  If you created the database and user as `msr14` then you will need to insert the password for the user in the `PASSWORD` placeholder.  Otherwise enter the required information into the correct places and save the file.
 
 #### Production Database
 Production database is configured in a similar fashion, but the project is not ready for a production setup so this will be revisited.
 
 ## Backend Configuration
-Developers develop on many projects, and each project has it's own dependencies or deps.  
-For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependencies between projects.  
+Python 3.5 is recommended for this project.  It can be downloaded and installed at [python.org](python.org).
+Python requirements are kept in the requirements.txt file, and this file is generated using `pip freeze > requirements.txt`.
+
+Developers develop on many projects, and each project has it's own dependencies or deps. For this reason, a virtual environment is created on the developer's machine in order to isolate Python dependencies between projects.  
 Virtualenv and virtualenvwrapper are used to create and maintain the environment and need to be installed in the base Python using the pip command line tool.  
 An explanation of how to install pip is [here](https://pip.pypa.io/en/stable/installing/), but if you can run `which pip` and see a result, you have pip installed.  
 To install virtualenv and virtualenvwrapper use:
@@ -57,13 +67,13 @@ To start using the virtualenv, run `workon <virtualenv name>`.
 From inside the virtualenv and in the project root folder, run `pip install -r requirements.txt` to install the deps from the file.
 Note for Linux users: `sudo apt-get install libmysqlclient-dev` may need to be ran from the terminal in order for MySQL to be used with the mysqlclient dependency. A mysql_config not found error will be present when running `pip install -r requirements.txt` to signify this.
 
-Once successful, the database is ready to be migrated. Since we are using an existing database and structure we will need to fake the initial migrations that normally created the tables and columns for each Django app using models that map the Github tables.  These are noted by packages beginning with `gh_`.  Run this command for every package in the `repo_health` folder: `python manage.py migrate <package_name> --fake-initial`.  After success run `python manage.py migrate` to run any other migrations.
+Once successful, the database is ready to be migrated. Run `python manage.py migrate` to run migrations.
 
 Run `python manage.py runserver` to start the built in dev server, and navigate a browser to [http://localhost:8000](http://localhost:8000) to view the index page.
 
 An admin is available at [http://localhost:8000/admin/](http://localhost:8000/admin/) when the server is running. In order to login to the admin a user will need to be created. Run `python manage.py createsuperuser` and follow the instructions.
 
-Run `python manage.py test --keepdb` to run the tests.  The `--keepdb` is important so Django doesn't try to destroy the test database.
+Run `python manage.py test` to run the tests.
 
 ## Frontend configuration
 From project root, `cd repo_health/index/static`.  

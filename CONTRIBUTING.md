@@ -1,5 +1,19 @@
 #### No external contributions are currently being accepted because this is a project for a university course.
 
+For existing contributors, please use the following header documentation at the top of each file:
+
+```
+fileName.ext - (C) Copyright - 2017
+This software is copyrighted to contributors listed in CONTRIBUTIONS.md.
+
+SPDX-License-Identifier: MIT
+
+Author(s) of this file:
+  Your name or github username
+
+Brief description of the file.
+```
+
 #### Guidelines
 - Always checkout a branch for developing. Never push to master or dev.
 - Write tests for all code written.
