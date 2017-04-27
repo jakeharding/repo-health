@@ -6,11 +6,9 @@ The system is a web based user interface and retrieves data about a GitHub repos
 
 The intent is to provide the user with usable information about a GitHub repository so the user can make an informed decision about the health and sustainability of the repository and the community supporting it.
 
-The system has many parts.  The backend provides a connection to the database, serialization of the data, and serving the data to the client in JSON format. The web client uses the JSON data to render the visualization of the data.  Both parts are included in the source code repository for convenience, but the system is built so the separation of the frontend and backend can be easily achieved.
+The system has many parts.  The backend provides a connection to the database, serialization of the data, and serving the data to the client in JSON format. The web client uses the JSON data to render the visualization of the data.  Both parts are included in the source code repository for convenience, but the system is built so the separation of the frontend and backend can be easily achieved. Docker simplifies the deployment of the project for demonstration purposes.
 
 The current state of the system is in a proof of concept and is not ready for a production environment.  The proof of concept supplies basic statistics about a repository and leaves out complex data manipulation.
-
-Rendering of charts has been left out in this milestone but the data is still present in the user interface as a list of numbers.
 
 ## Development Environment
 Our development operating system is a Linux/Unix (Mac) environment and our database management system is MySQL. 
@@ -22,8 +20,8 @@ Our front end is using the node package manager (npm) to manage and keep our dep
 Docker is used to create an instance of the system as fast as possible.
 
 ## Posted Repository Issues
-Jake - 
-Benji - https://github.com/Dreizan/Repos-Health-Study
+- Jake - [GitHealth](https://github.com/Ashkeelun/GitHealth)
+- Benji - [Repos-Health-Study](https://github.com/Dreizan/Repos-Health-Study)
 
 ## Walk-through of system
 Our system consists of an API and a UI that work together. After deploying our software, when you go to the website, you should be asked to enter a github url (name/repo). After entering a url,
