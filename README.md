@@ -5,7 +5,7 @@
 
 This repository holds the proof of concept for the repository health and sustainability project for CSCI 4900 at the University of Nebraska at Omaha.  This repository will hold the backend and frontend source code to extract data from Github and ghtorrent and provide statistics about a selected repository.  Description of the backend and frontend source are provided.
 
-Please be aware this project is not ready for production use.    
+Please be aware this project is not ready for production use.
 
 ## Installation
 Docker is the preferred way to get an environment running. If you would like to not use Docker, please click [here](https://github.com/jakeharding/repo-health/blob/master/docs/Other%20Installation.md). Please note the Docker environment uses a development server and serves the backend application in a development state.  This is not safe for production use.
